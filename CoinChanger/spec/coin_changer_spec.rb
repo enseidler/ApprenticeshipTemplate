@@ -41,16 +41,6 @@ describe CoinChanger do
     end
   end
 
-  #Borrar
-  context 'when input is 11' do
-    it 'change should be 1 coin of 10 and another of 1' do
-      change = coin_changer.change_for(11)
-      expected_change = {10 => 1, 1 => 1}
-
-      expect(change).to eq(expected_change)
-    end
-  end
-
   context 'when input is 30' do
     it 'change should be 1 coin of 25 and another of 5' do
       change = coin_changer.change_for(30)
@@ -85,6 +75,12 @@ describe CoinChanger do
       expected_change = {100 => 33, 50 => 1, 25 => 1, 10 => 1, 1 => 2}
 
       expect(change).to eq(expected_change)
+    end
+  end
+
+  context 'when input is negative' do
+    it 'should raise an Invalid Input error' do
+      expect{coin_changer.change_for(-1)}.to raise_error('Invalid input! Should be positive.')
     end
   end
 
