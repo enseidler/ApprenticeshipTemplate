@@ -21,15 +21,9 @@ class CoinChanger
     change
   end
 
-  def correct_denomination(input)
-    @coin_denominations.detect { |denomination|
-      @coin_denominations.include? input - denomination
-    }
-  end
-
   def verify_input(input)
     if input < 0
-      raise 'Invalid input! Should be positive.'
+      raise 'Invalid Input! Should be positive.'
     end
   end
 
