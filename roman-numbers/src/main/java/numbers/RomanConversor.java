@@ -8,8 +8,10 @@ import org.apache.commons.lang.StringUtils;
 public class RomanConversor {
 
     public String integerToRoman(Integer number) {
-        if(number > 3)
+        if(number == 4)
             return "IV";
+        if(number == 5)
+            return "V";
         return StringUtils.repeat("I", number);
     }
 

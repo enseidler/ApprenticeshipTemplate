@@ -46,4 +46,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(4, "IV");
     }
 
+    @Test
+    public void conversionFrom5ToRomanShouldBeV() {
+        conversionFromIntegerToRomanShouldBe(5, "V");
+    }
+
 }
