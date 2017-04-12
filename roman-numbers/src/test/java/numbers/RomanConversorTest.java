@@ -75,9 +75,15 @@ public class RomanConversorTest {
     public void conversionFrom10ToRomanShouldBeX() {
         conversionFromIntegerToRomanShouldBe(10, "X");
     }
+
     @Test
     public void conversionFrom11ToRomanShouldBeXI() {
         conversionFromIntegerToRomanShouldBe(11, "XI");
+    }
+
+    @Test
+    public void conversionFrom12ToRomanShouldBeXII() {
+        conversionFromIntegerToRomanShouldBe(12, "XII");
     }
 
 }
