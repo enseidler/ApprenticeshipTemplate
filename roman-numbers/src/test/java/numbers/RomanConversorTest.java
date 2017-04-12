@@ -106,4 +106,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(40, "XL");
     }
 
+    @Test
+    public void conversionFrom41ToRomanShouldBeXLI() {
+        conversionFromIntegerToRomanShouldBe(41, "XLI");
+    }
+
 }
