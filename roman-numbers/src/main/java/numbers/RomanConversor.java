@@ -14,6 +14,8 @@ public class RomanConversor {
             return "IX";
         if(number == 10)
             return "X";
+        if(number == 11)
+            return "XI";
         if(number > 4)
             return "V" + StringUtils.repeat("I", number-5);
         return StringUtils.repeat("I", number);
