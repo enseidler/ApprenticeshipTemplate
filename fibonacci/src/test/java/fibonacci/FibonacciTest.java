@@ -42,31 +42,6 @@ public class FibonacciTest {
     }
 
     @Test
-    public void laPosicion5EnSecuenciaDeFibonacciDeberiaRetornar5() throws Exception {
-        laPosicionEnSecuenciaDeFibonacciDeberiaRetornar(5, 5);
-    }
-
-    @Test
-    public void laPosicion6EnSecuenciaDeFibonacciDeberiaRetornar8() throws Exception {
-        laPosicionEnSecuenciaDeFibonacciDeberiaRetornar(6, 8);
-    }
-
-    @Test
-    public void laPosicion7EnSecuenciaDeFibonacciDeberiaRetornar13() throws Exception {
-        laPosicionEnSecuenciaDeFibonacciDeberiaRetornar(7, 13);
-    }
-
-    @Test
-    public void laPosicion8EnSecuenciaDeFibonacciDeberiaRetornar21() throws Exception {
-        laPosicionEnSecuenciaDeFibonacciDeberiaRetornar(8, 21);
-    }
-
-    @Test
-    public void laPosicion9EnSecuenciaDeFibonacciDeberiaRetornar34() throws Exception {
-        laPosicionEnSecuenciaDeFibonacciDeberiaRetornar(9, 34);
-    }
-
-    @Test
     public void posicionNEnSecuenciaDeFibonacciDeberiaSerLaSumaDelFibonacciDeLasDosAnteriores() throws Exception {
         laPosicionEnSecuenciaDeFibonacciDeberiaRetornar(17, 1597);
     }
