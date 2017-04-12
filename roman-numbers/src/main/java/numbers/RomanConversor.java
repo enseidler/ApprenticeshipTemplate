@@ -12,8 +12,11 @@ public class RomanConversor {
             return "IV";
         if(number == 9)
             return "IX";
-        if(number > 39)
+        if(number == 50)
+            return "L";
+        if(number > 39) {
             return "XL" + integerToRoman(number - 40);
+        }
         if(number > 9)
             return "X" + integerToRoman(number - 10);
         if(number > 4)
