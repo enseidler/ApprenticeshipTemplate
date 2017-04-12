@@ -86,4 +86,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(12, "XII");
     }
 
+    @Test
+    public void conversionFrom13ToRomanShouldBeXIII() {
+        conversionFromIntegerToRomanShouldBe(13, "XIII");
+    }
+
 }
