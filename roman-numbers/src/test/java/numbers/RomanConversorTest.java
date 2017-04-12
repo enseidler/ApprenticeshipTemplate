@@ -96,4 +96,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(14, "XIV");
     }
 
+    @Test
+    public void conversionFrom15ToRomanShouldBeXV() {
+        conversionFromIntegerToRomanShouldBe(15, "XV");
+    }
+
 }
