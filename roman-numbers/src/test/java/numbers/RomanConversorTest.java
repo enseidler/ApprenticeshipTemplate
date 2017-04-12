@@ -56,4 +56,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(6, "VI");
     }
 
+    @Test
+    public void conversionFrom7ToRomanShouldBeVII() {
+        conversionFromIntegerToRomanShouldBe(7, "VII");
+    }
+
 }
