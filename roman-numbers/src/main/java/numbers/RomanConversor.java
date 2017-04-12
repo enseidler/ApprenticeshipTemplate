@@ -16,6 +16,8 @@ public class RomanConversor {
             return "VI";
         if(number == 7)
             return "VII";
+        if(number == 8)
+            return "VIII";
         return StringUtils.repeat("I", number);
     }
 

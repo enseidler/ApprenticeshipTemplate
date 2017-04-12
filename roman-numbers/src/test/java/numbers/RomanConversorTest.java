@@ -61,4 +61,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(7, "VII");
     }
 
+    @Test
+    public void conversionFrom8ToRomanShouldBeVIII() {
+        conversionFromIntegerToRomanShouldBe(8, "VIII");
+    }
+
 }
