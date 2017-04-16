@@ -2,12 +2,16 @@ package numbers;
 
 import org.apache.commons.lang.StringUtils;
 
+import errors.ImposibleInRomanException;
+
 /**
  * Created by ezequiel on 11/04/17.
  */
 public class RomanConversor {
 
-    public String integerToRoman(Integer number) {
+    public String integerToRoman(Integer number) throws Exception {
+    	verifyNumber(number);
+    	
         if(number == 4)
             return "IV";
         if(number == 9)
@@ -34,5 +38,10 @@ public class RomanConversor {
             return "V" + integerToRoman(number - 5);
         return StringUtils.repeat("I", number);
     }
+
+	private void verifyNumber(Integer number) throws Exception {
+		if(number < 0)
+			throw new ImposibleInRomanException("Negative numbers cannot be represented in roman numerals!");
+	}
 
 }
