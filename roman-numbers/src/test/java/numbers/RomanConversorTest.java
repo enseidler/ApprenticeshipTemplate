@@ -136,4 +136,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(100, "C");
     }
 
+    @Test
+    public void conversionFrom101ToRomanShouldBeCI() {
+        conversionFromIntegerToRomanShouldBe(101, "CI");
+    }
+    
 }
