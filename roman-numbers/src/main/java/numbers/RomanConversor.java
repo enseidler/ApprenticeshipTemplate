@@ -12,8 +12,8 @@ public class RomanConversor {
             return "IV";
         if(number == 9)
             return "IX";
-        if(number == 500)
-        	return "D";
+        if(number > 499)
+        	return "D" + integerToRoman(number - 500);
         if(number > 399)
         	return "CD" + integerToRoman(number - 400);
         if(number > 99)

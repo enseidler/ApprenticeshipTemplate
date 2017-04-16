@@ -156,4 +156,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(500, "D");
     }
     
+    @Test
+    public void conversionFrom501ToRomanShouldBeDI() {
+        conversionFromIntegerToRomanShouldBe(501, "DI");
+    }
+    
 }
