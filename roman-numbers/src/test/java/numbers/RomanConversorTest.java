@@ -120,5 +120,10 @@ public class RomanConversorTest {
     public void conversionFrom51ToRomanShouldBeLI() {
         conversionFromIntegerToRomanShouldBe(51, "LI");
     }
-
+    
+    @Test
+    public void conversionFrom90ToRomanShouldBeXC() {
+        conversionFromIntegerToRomanShouldBe(90, "XC");
+    }
+    
 }
