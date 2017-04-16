@@ -141,4 +141,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(101, "CI");
     }
     
+    @Test
+    public void conversionFrom400ToRomanShouldBeCD() {
+        conversionFromIntegerToRomanShouldBe(400, "CD");
+    }
+    
 }
