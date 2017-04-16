@@ -197,4 +197,11 @@ public class RomanConversorTest {
     	conversor.integerToRoman(-1);
     }
     
+    @Test
+    public void conversionFromNumberGreaterThan3999ToRomanShouldRaiseImposibleInRomanException() throws Exception {
+    	expectedException.expect(ImposibleInRomanException.class);
+    	expectedException.expectMessage("Numbers greater than 3999 cannot be represented in roman numerals!");
+    	conversor.integerToRoman(4000);
+    }
+    
 }
