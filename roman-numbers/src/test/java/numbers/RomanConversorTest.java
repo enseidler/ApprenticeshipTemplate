@@ -161,4 +161,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(501, "DI");
     }
     
+    @Test
+    public void conversionFrom900ToRomanShouldBeCM() {
+        conversionFromIntegerToRomanShouldBe(900, "CM");
+    }
+    
 }
