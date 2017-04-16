@@ -3,5 +3,13 @@
 *.iml
 *.iws
 
+# Eclipse
+RemoteSystemsTempFiles
+.classpath
+.project
+.settings
+.metadata
+.recommenders
+
 # Maven
 target/
