@@ -171,4 +171,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(901, "CMI");
     }
     
+    @Test
+    public void conversionFrom1000ToRomanShouldBeM() {
+        conversionFromIntegerToRomanShouldBe(1000, "M");
+    }
+    
 }
