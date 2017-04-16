@@ -126,4 +126,9 @@ public class RomanConversorTest {
         conversionFromIntegerToRomanShouldBe(90, "XC");
     }
     
+    @Test
+    public void conversionFrom91ToRomanShouldBeXCI() {
+        conversionFromIntegerToRomanShouldBe(91, "XCI");
+    }
+
 }
