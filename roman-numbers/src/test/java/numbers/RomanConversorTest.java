@@ -34,6 +34,11 @@ public class RomanConversorTest {
         assertEquals(expected, actual);
     }
 
+    public void conversionToRomanShouldRaiseImposibleInRomanWithMessageException(Integer number, String message) throws Exception {
+        expectedException.expect(ImposibleInRomanException.class);
+        expectedException.expectMessage(message);
+        conversor.integerToRoman(number);
+    }
 
     @Test
     public void conversionFrom1ToRomanShouldBeI() throws Exception{
@@ -192,16 +197,12 @@ public class RomanConversorTest {
     
     @Test
     public void conversionFromNegativeNumberToRomanShouldRaiseImposibleInRomanException() throws Exception {
-    	expectedException.expect(ImposibleInRomanException.class);
-    	expectedException.expectMessage("Negative numbers cannot be represented in roman numerals!");
-    	conversor.integerToRoman(-1);
+        conversionToRomanShouldRaiseImposibleInRomanWithMessageException(-1, "Negative numbers cannot be represented in roman numerals!");
     }
     
     @Test
     public void conversionFromNumberGreaterThan3999ToRomanShouldRaiseImposibleInRomanException() throws Exception {
-    	expectedException.expect(ImposibleInRomanException.class);
-    	expectedException.expectMessage("Numbers greater than 3999 cannot be represented in roman numerals!");
-    	conversor.integerToRoman(4000);
+    	conversionToRomanShouldRaiseImposibleInRomanWithMessageException(4000, "Numbers greater than 3999 cannot be represented in roman numerals!");
     }
-    
+
 }
