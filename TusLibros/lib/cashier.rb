@@ -4,10 +4,11 @@ class Cashier
 
   @date_provider
 
-  def initialize(a_date_provider)
+  def initialize(a_date_provider, a_merchant_processor)
     @total_sales = 0
     @sold_books = []
     @date_provider = a_date_provider
+    @merchant_proccesor = a_merchant_processor
   end
 
   def checkout(a_cart, a_credit_card)
@@ -15,6 +16,7 @@ class Cashier
     verify_card(a_credit_card)
 
     total = total_price(a_cart.books, a_cart.catalog)
+    debit_from(total, a_credit_card)
     register_sale(a_cart, total)
     total
   end
@@ -54,6 +56,10 @@ class Cashier
 
   def sold_book?(a_book)
     @sold_books.include? a_book
+  end
+
+  def debit_from(an_amount, a_valid_card)
+    @merchant_proccesor.debit_from(an_amount, a_valid_card)
   end
 
 end
