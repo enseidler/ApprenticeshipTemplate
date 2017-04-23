@@ -42,4 +42,11 @@ describe 'Poker Rules' do
     end
   end
 
+  context 'given a poker hand with highest card Jack' do
+    another_poker_hand = ['T', '6', '4', 'J', '8']
+    it 'should return J when ask for highest card' do
+      expect(poker_rules.highest_card(another_poker_hand)).to eq 'J'
+    end
+  end
+
 end
