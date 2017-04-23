@@ -33,4 +33,13 @@ describe 'Poker Rules' do
     end
   end
 
+  context 'given any poker hand with highest card Queen in any order' do
+    a_poker_hand = ['T', 'Q', '3', '5', '8']
+    another_poker_hand = ['2', '5', '4', 'Q', 'T']
+    it 'should return Q when ask for highest card' do
+      expect(poker_rules.highest_card(a_poker_hand)).to eq 'Q'
+      expect(poker_rules.highest_card(another_poker_hand)).to eq 'Q'
+    end
+  end
+
 end
