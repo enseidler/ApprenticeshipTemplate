@@ -64,4 +64,12 @@ public class TennisScoreTest {
         Assert.assertEquals(TennisPoint.ADVANTAGE, tennisScore.points());
     }
 
+    @Test
+    public void cuandoGanaUnPuntoYEstaEnVentajaDebeCambiarA0() {
+        scoreMany(3, rivalTennisScore);
+        scoreMany(4, tennisScore);
+        tennisScore.score();
+        Assert.assertEquals(TennisPoint.ZERO, tennisScore.points());
+    }
+
 }
