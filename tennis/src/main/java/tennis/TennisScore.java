@@ -2,11 +2,11 @@ package tennis;
 
 public class TennisScore {
 
-    private Integer points;
     private TennisScore rivalTennisScore;
+    private TennisPoint points;
 
     public TennisScore() {
-        this.points = 0;
+        this.points = TennisPoint.ZERO;
     }
 
     public void matchAgainst(TennisScore rivalTennisScore) {
@@ -14,14 +14,11 @@ public class TennisScore {
     }
 
     public TennisPoint points() {
-        return TennisPoint.values()[points];
+        return points;
     }
 
     public void score() {
-        if((points() == TennisPoint.FOURTY) && (points() != rivalTennisScore.points()))
-            points = 0;
-        else
-            points += 1;
+        points = points.scoreAgainst(rivalTennisScore.points());
     }
 
 }
