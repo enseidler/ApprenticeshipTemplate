@@ -21,4 +21,13 @@ public class TennisScoreTest {
         Assert.assertEquals(expected, tennisScore.points());
     }
 
+    @Test
+    public void cuandoMeteUnPuntoYEstaEnScore15DebeCambiarA30() {
+        TennisScore tennisScore = new TennisScore();
+        Integer expected = 30;
+        tennisScore.score();
+        tennisScore.score();
+        Assert.assertEquals(expected, tennisScore.points());
+    }
+
 }

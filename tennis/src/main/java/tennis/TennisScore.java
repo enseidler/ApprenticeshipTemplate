@@ -13,6 +13,6 @@ public class TennisScore {
     }
 
     public void score() {
-        points = 15;
+        points += 15;
     }
 }
