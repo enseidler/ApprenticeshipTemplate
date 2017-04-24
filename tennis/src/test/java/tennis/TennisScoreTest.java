@@ -30,34 +30,34 @@ public class TennisScoreTest {
     }
 
     @Test
-    public void cuandoMeteUnPuntoYEstaEnScore0DebeCambiarA15() {
+    public void cuandoGanaUnPuntoYEstaEnScore0DebeCambiarA15() {
         tennisScore.score();
         Assert.assertEquals(TennisPoint.FIFTEEN, tennisScore.points());
     }
 
     @Test
-    public void cuandoMeteUnPuntoYEstaEnScore15DebeCambiarA30() {
+    public void cuandoGanaUnPuntoYEstaEnScore15DebeCambiarA30() {
         scoreMany(1, tennisScore);
         tennisScore.score();
         Assert.assertEquals(TennisPoint.THIRTY, tennisScore.points());
     }
 
     @Test
-    public void cuandoMeteUnPuntoYEstaEnScore30DebeCambiarA40() {
+    public void cuandoGanaUnPuntoYEstaEnScore30DebeCambiarA40() {
         scoreMany(2, tennisScore);
         tennisScore.score();
         Assert.assertEquals(TennisPoint.FOURTY, tennisScore.points());
     }
 
     @Test
-    public void cuandoMeteUnPuntoContraUnJugadorConMenosDe40PuntosYEstaEnScore40DebeCambiarA0() {
+    public void cuandoGanaUnPuntoContraUnJugadorConMenosDe40PuntosYEstaEnScore40DebeCambiarA0() {
         scoreMany(3, tennisScore);
         tennisScore.score();
         Assert.assertEquals(TennisPoint.ZERO, tennisScore.points());
     }
 
     @Test
-    public void cuandoMeteUnPuntoContraUnJugadorCon40PuntosYEstaEnScore40DebeCambiarAVentaja() {
+    public void cuandoGanaUnPuntoContraUnJugadorCon40PuntosYEstaEnScore40DebeCambiarAVentaja() {
         scoreMany(3, tennisScore);
         scoreMany(3, rivalTennisScore);
         tennisScore.score();
