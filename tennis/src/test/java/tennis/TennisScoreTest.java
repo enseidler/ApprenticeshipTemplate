@@ -85,4 +85,11 @@ public class TennisScoreTest {
         Assert.assertEquals(TennisPoint.FIFTEEN, tennisScore.points());
     }
 
+    @Test
+    public void cuandoPierdeUnPuntoYEstaEnScoreMenorAVentajaDebeSeguirIgual() {
+        scoreMany(3, tennisScore);
+        tennisScore.lostPoint();
+        Assert.assertEquals(TennisPoint.FOURTY, tennisScore.points());
+    }
+
 }
