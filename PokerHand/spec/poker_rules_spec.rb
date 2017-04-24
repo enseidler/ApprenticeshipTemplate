@@ -6,7 +6,7 @@ describe 'Poker Rules' do
   let(:poker_rules) { PokerRules.new }
 
   context 'given a poker hand with highest card Ace' do
-    a_poker_hand = ['8', '2', 'A', '5', 'T']
+    a_poker_hand = ['8', '2', 'A', '5', '2']
     it 'should return A when ask for highest card' do
       expect(poker_rules.highest_card(a_poker_hand)).to eq 'A'
     end
@@ -46,6 +46,13 @@ describe 'Poker Rules' do
     another_poker_hand = ['T', '6', '4', 'J', '8']
     it 'should return J when ask for highest card' do
       expect(poker_rules.highest_card(another_poker_hand)).to eq 'J'
+    end
+  end
+
+  context 'given a poker hand with highest card 10' do
+    another_poker_hand = ['T', '6', '4', '2', '8']
+    it 'should return T when ask for highest card' do
+      expect(poker_rules.highest_card(another_poker_hand)).to eq 'T'
     end
   end
 

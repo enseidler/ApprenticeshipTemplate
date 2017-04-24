@@ -10,6 +10,9 @@ class PokerRules
     if a_poker_hand.include? 'J'
       return 'J'
     end
+    if a_poker_hand.include? 'T'
+      return 'T'
+    end
     'A'
   end
 
