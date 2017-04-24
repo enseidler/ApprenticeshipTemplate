@@ -14,10 +14,12 @@ public class TennisScore {
     }
 
     public Integer points() {
+        if(points > 3)
+            points = 0;
         return possiblePoints.get(points);
     }
 
-    public void score() {
+    public void scoreAgainst(TennisScore rivalTennisScore) {
         points += 1;
     }
 }
