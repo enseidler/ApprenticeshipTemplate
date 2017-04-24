@@ -4,28 +4,28 @@ public enum TennisPoint {
 
     ZERO() {
         @Override
-        public TennisPoint scoreAgainst(TennisPoint tennisPoint) {
+        public TennisPoint wonPointAgainst(TennisPoint tennisPoint) {
             return FIFTEEN;
         }
     },
 
     FIFTEEN() {
         @Override
-        public TennisPoint scoreAgainst(TennisPoint tennisPoint) {
+        public TennisPoint wonPointAgainst(TennisPoint tennisPoint) {
             return THIRTY;
         }
     },
 
     THIRTY() {
         @Override
-        public TennisPoint scoreAgainst(TennisPoint tennisPoint) {
+        public TennisPoint wonPointAgainst(TennisPoint tennisPoint) {
             return FOURTY;
         }
     },
 
     FOURTY() {
         @Override
-        public TennisPoint scoreAgainst(TennisPoint tennisPoint) {
+        public TennisPoint wonPointAgainst(TennisPoint tennisPoint) {
             if (tennisPoint == FOURTY)
                 return ADVANTAGE;
             return ZERO;
@@ -34,7 +34,7 @@ public enum TennisPoint {
 
     ADVANTAGE() {
         @Override
-        public TennisPoint scoreAgainst(TennisPoint tennisPoint) {
+        public TennisPoint wonPointAgainst(TennisPoint tennisPoint) {
             return ZERO;
         }
 
@@ -44,7 +44,7 @@ public enum TennisPoint {
         }
     };
 
-    public abstract TennisPoint scoreAgainst(TennisPoint tennisPoint);
+    public abstract TennisPoint wonPointAgainst(TennisPoint tennisPoint);
 
     public TennisPoint lostPoint() {
         return this;
