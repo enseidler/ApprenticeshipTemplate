@@ -1,25 +1,27 @@
 package tennis;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class TennisScore {
 
     private Integer points;
-    private List<Integer> possiblePoints;
+    private TennisScore rivalTennisScore;
 
     public TennisScore() {
-        points = 0;
-        possiblePoints = Arrays.asList(0, 15, 30, 40);
+        this.points = 0;
     }
 
-    public Integer points() {
-        if(points > 3)
+    public void matchAgainst(TennisScore rivalTennisScore) {
+        this.rivalTennisScore = rivalTennisScore;
+    }
+
+    public TennisPoint points() {
+        return TennisPoint.values()[points];
+    }
+
+    public void score() {
+        if((points() == TennisPoint.FOURTY) && (points() != rivalTennisScore.points()))
             points = 0;
-        return possiblePoints.get(points);
+        else
+            points += 1;
     }
 
-    public void scoreAgainst(TennisScore rivalTennisScore) {
-        points += 1;
-    }
 }
