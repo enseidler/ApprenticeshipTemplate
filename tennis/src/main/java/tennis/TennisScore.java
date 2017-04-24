@@ -22,6 +22,6 @@ public class TennisScore {
     }
 
     public void lostPoint() {
-
+        points = points.lostPoint();
     }
 }

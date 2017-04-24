@@ -37,8 +37,16 @@ public enum TennisPoint {
         public TennisPoint scoreAgainst(TennisPoint tennisPoint) {
             return ZERO;
         }
+
+        @Override
+        public TennisPoint lostPoint() {
+            return FOURTY;
+        }
     };
 
     public abstract TennisPoint scoreAgainst(TennisPoint tennisPoint);
 
+    public TennisPoint lostPoint() {
+        return this;
+    }
 }
