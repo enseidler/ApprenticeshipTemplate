@@ -14,6 +14,6 @@ public class TennisSetScore {
     }
 
     public void wonGame() {
-        games = 1;
+        games += 1;
     }
 }
