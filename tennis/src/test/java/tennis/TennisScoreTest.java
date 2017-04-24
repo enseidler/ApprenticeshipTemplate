@@ -72,4 +72,10 @@ public class TennisScoreTest {
         Assert.assertEquals(TennisPoint.ZERO, tennisScore.points());
     }
 
+    @Test
+    public void cuandoPierdeUnPuntoYEstaEnScore0DebeSeguirIgual() {
+        tennisScore.lostPoint();
+        Assert.assertEquals(TennisPoint.ZERO, tennisScore.points());
+    }
+
 }

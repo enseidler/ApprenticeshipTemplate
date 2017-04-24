@@ -21,4 +21,7 @@ public class TennisScore {
         points = points.scoreAgainst(rivalTennisScore.points());
     }
 
+    public void lostPoint() {
+
+    }
 }
