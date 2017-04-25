@@ -62,4 +62,13 @@ public class TennisSetScoreTest {
         Assert.assertEquals(expected, tennisSetScore.games());
     }
 
+    @Test
+    public void cuandoGanaUnGameTeniendo5GamesGanadosContraUnRivalCon5GamesGanadosDebeSumarseUnGame() {
+        wonGames(5, tennisSetScore);
+        wonGames(5, rivalTennisSetScore);
+        tennisSetScore.wonGame();
+        Integer expected = 6;
+        Assert.assertEquals(expected, tennisSetScore.games());
+    }
+
 }
