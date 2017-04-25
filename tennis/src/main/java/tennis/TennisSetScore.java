@@ -19,7 +19,7 @@ public class TennisSetScore {
     }
 
     public void wonGame() {
-        if (games == 5 && games > this.rivalTennisSetScore.games())
+        if (games >= 5 && games > this.rivalTennisSetScore.games())
             games = 0;
         else
             games += 1;
