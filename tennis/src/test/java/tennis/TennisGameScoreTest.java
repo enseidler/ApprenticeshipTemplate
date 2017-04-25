@@ -14,13 +14,11 @@ public class TennisGameScoreTest {
     public void setUp() {
        tennisGameScore = new TennisGameScore();
        rivalTennisGameScore = new TennisGameScore();
-       tennisGameScore.matchAgainst(rivalTennisGameScore);
-       rivalTennisGameScore.matchAgainst(tennisGameScore);
     }
 
-    public void scoreMany(Integer many, TennisGameScore tennisGameScore) {
+    public void scoreMany(Integer many, TennisGameScore tennisGameScore, TennisGameScore rivalTennisGameScore) {
         for (int i = 0; i < many; i++) {
-            tennisGameScore.wonPoint();
+            tennisGameScore.wonPoint(rivalTennisGameScore);
         }
     }
 
@@ -31,44 +29,44 @@ public class TennisGameScoreTest {
 
     @Test
     public void cuandoGanaUnPuntoYEstaEnScore0DebeCambiarA15() {
-        tennisGameScore.wonPoint();
+        tennisGameScore.wonPoint(rivalTennisGameScore);
         Assert.assertEquals(TennisPoint.FIFTEEN, tennisGameScore.points());
     }
 
     @Test
     public void cuandoGanaUnPuntoYEstaEnScore15DebeCambiarA30() {
-        scoreMany(1, tennisGameScore);
-        tennisGameScore.wonPoint();
+        scoreMany(1, tennisGameScore, rivalTennisGameScore);
+        tennisGameScore.wonPoint(rivalTennisGameScore);
         Assert.assertEquals(TennisPoint.THIRTY, tennisGameScore.points());
     }
 
     @Test
     public void cuandoGanaUnPuntoYEstaEnScore30DebeCambiarA40() {
-        scoreMany(2, tennisGameScore);
-        tennisGameScore.wonPoint();
+        scoreMany(2, tennisGameScore, rivalTennisGameScore);
+        tennisGameScore.wonPoint(rivalTennisGameScore);
         Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
     }
 
     @Test
     public void cuandoGanaUnPuntoContraUnJugadorConMenosDe40PuntosYEstaEnScore40DebeCambiarA0() {
-        scoreMany(3, tennisGameScore);
-        tennisGameScore.wonPoint();
+        scoreMany(3, tennisGameScore, rivalTennisGameScore);
+        tennisGameScore.wonPoint(rivalTennisGameScore);
         Assert.assertEquals(TennisPoint.ZERO, tennisGameScore.points());
     }
 
     @Test
     public void cuandoGanaUnPuntoContraUnJugadorCon40PuntosYEstaEnScore40DebeCambiarAVentaja() {
-        scoreMany(3, tennisGameScore);
-        scoreMany(3, rivalTennisGameScore);
-        tennisGameScore.wonPoint();
+        scoreMany(3, tennisGameScore, rivalTennisGameScore);
+        scoreMany(3, rivalTennisGameScore, rivalTennisGameScore);
+        tennisGameScore.wonPoint(rivalTennisGameScore);
         Assert.assertEquals(TennisPoint.ADVANTAGE, tennisGameScore.points());
     }
 
     @Test
     public void cuandoGanaUnPuntoYEstaEnVentajaDebeCambiarA0() {
-        scoreMany(3, rivalTennisGameScore);
-        scoreMany(4, tennisGameScore);
-        tennisGameScore.wonPoint();
+        scoreMany(3, rivalTennisGameScore, rivalTennisGameScore);
+        scoreMany(4, tennisGameScore, rivalTennisGameScore);
+        tennisGameScore.wonPoint(rivalTennisGameScore);
         Assert.assertEquals(TennisPoint.ZERO, tennisGameScore.points());
     }
 
@@ -80,22 +78,22 @@ public class TennisGameScoreTest {
 
     @Test
     public void cuandoPierdeUnPuntoYEstaEnScore15DebeSeguirIgual() {
-        scoreMany(1, tennisGameScore);
+        scoreMany(1, tennisGameScore, rivalTennisGameScore);
         tennisGameScore.lostPoint();
         Assert.assertEquals(TennisPoint.FIFTEEN, tennisGameScore.points());
     }
 
     @Test
     public void cuandoPierdeUnPuntoYEstaEnScoreMenorAVentajaDebeSeguirIgual() {
-        scoreMany(3, tennisGameScore);
+        scoreMany(3, tennisGameScore, rivalTennisGameScore);
         tennisGameScore.lostPoint();
         Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
     }
 
     @Test
     public void cuandoPierdeUnPuntoYEstaEnVentajaDebeCambiarA40() {
-        scoreMany(3, rivalTennisGameScore);
-        scoreMany(4, tennisGameScore);
+        scoreMany(3, rivalTennisGameScore, rivalTennisGameScore);
+        scoreMany(4, tennisGameScore, rivalTennisGameScore);
         tennisGameScore.lostPoint();
         Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
     }
