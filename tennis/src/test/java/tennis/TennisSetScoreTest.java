@@ -30,4 +30,16 @@ public class TennisSetScoreTest {
         Assert.assertEquals(expected, tennisSetScore.games());
     }
 
+    @Test
+    public void cuandoGanaUnGametTeniendoMenosDe5GamesGanadosDebeSumarseUnGame() {
+        TennisSetScore tennisSetScore = new TennisSetScore();
+        tennisSetScore.wonGame();
+        tennisSetScore.wonGame();
+        tennisSetScore.wonGame();
+        tennisSetScore.wonGame();
+        tennisSetScore.wonGame();
+        Integer five_games_expected = 5;
+        Assert.assertEquals(five_games_expected, tennisSetScore.games());
+    }
+
 }
