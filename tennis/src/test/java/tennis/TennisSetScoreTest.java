@@ -2,9 +2,23 @@ package tennis;
 
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TennisSetScoreTest {
+
+    private TennisSetScore tennisSetScore;
+
+    @Before
+    public void setUp() {
+        tennisSetScore = new TennisSetScore();
+    }
+
+    public void wonGames(Integer many, TennisSetScore tennisSetScore) {
+        for (int i = 0; i < many; i++) {
+            tennisSetScore.wonGame();
+        }
+    }
 
     @Test
     public void cuandoEmpiezaElSetTiene0Games() {
@@ -24,22 +38,19 @@ public class TennisSetScoreTest {
     @Test
     public void cuandoGanaUnGameYTieneUnGameGanadoDebeTener2Game() {
         TennisSetScore tennisSetScore = new TennisSetScore();
-        tennisSetScore.wonGame();
+        wonGames(1, tennisSetScore);
         tennisSetScore.wonGame();
         Integer expected = 2;
         Assert.assertEquals(expected, tennisSetScore.games());
     }
 
     @Test
-    public void cuandoGanaUnGametTeniendoMenosDe5GamesGanadosDebeSumarseUnGame() {
+    public void cuandoGanaUnGameTeniendoMenosDe5GamesGanadosDebeSumarseUnGame() {
         TennisSetScore tennisSetScore = new TennisSetScore();
+        wonGames(4, tennisSetScore);
         tennisSetScore.wonGame();
-        tennisSetScore.wonGame();
-        tennisSetScore.wonGame();
-        tennisSetScore.wonGame();
-        tennisSetScore.wonGame();
-        Integer five_games_expected = 5;
-        Assert.assertEquals(five_games_expected, tennisSetScore.games());
+        Integer expected = 5;
+        Assert.assertEquals(expected, tennisSetScore.games());
     }
 
 }
