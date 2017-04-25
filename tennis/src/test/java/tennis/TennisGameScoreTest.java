@@ -46,7 +46,7 @@ public class TennisGameScoreTest {
     public void cuandoGanaUnPuntoYEstaEnScore30DebeCambiarA40() {
         scoreMany(2, tennisGameScore);
         tennisGameScore.wonPoint();
-        Assert.assertEquals(TennisPoint.FOURTY, tennisGameScore.points());
+        Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class TennisGameScoreTest {
     public void cuandoPierdeUnPuntoYEstaEnScoreMenorAVentajaDebeSeguirIgual() {
         scoreMany(3, tennisGameScore);
         tennisGameScore.lostPoint();
-        Assert.assertEquals(TennisPoint.FOURTY, tennisGameScore.points());
+        Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class TennisGameScoreTest {
         scoreMany(3, rivalTennisGameScore);
         scoreMany(4, tennisGameScore);
         tennisGameScore.lostPoint();
-        Assert.assertEquals(TennisPoint.FOURTY, tennisGameScore.points());
+        Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
     }
 
 }

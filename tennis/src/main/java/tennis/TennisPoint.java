@@ -19,14 +19,14 @@ public enum TennisPoint {
     THIRTY() {
         @Override
         public TennisPoint wonPointAgainst(TennisPoint tennisPoint) {
-            return FOURTY;
+            return FORTY;
         }
     },
 
-    FOURTY() {
+    FORTY() {
         @Override
         public TennisPoint wonPointAgainst(TennisPoint tennisPoint) {
-            if (tennisPoint == FOURTY)
+            if (tennisPoint == FORTY)
                 return ADVANTAGE;
             return ZERO;
         }
@@ -40,7 +40,7 @@ public enum TennisPoint {
 
         @Override
         public TennisPoint lostPoint() {
-            return FOURTY;
+            return FORTY;
         }
     };
 
