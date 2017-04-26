@@ -8,94 +8,69 @@ import org.junit.Test;
 public class TennisGameScoreTest {
 
     private TennisGameScore tennisGameScore;
-    private TennisGameScore rivalTennisGameScore;
 
     @Before
     public void setUp() {
        tennisGameScore = new TennisGameScore();
-       rivalTennisGameScore = new TennisGameScore();
     }
 
-    public void scoreMany(Integer many, TennisGameScore tennisGameScore, TennisGameScore rivalTennisGameScore) {
+    public void player1WonManyPoints(Integer many) {
         for (int i = 0; i < many; i++) {
-            tennisGameScore.wonPoint(rivalTennisGameScore);
+            tennisGameScore.player1WonPoint();
+        }
+    }
+
+    public void player2WonManyPoints(Integer many) {
+        for (int i = 0; i < many; i++) {
+            tennisGameScore.player2WonPoint();
         }
     }
 
     @Test
-    public void tennisScoreEmpiezaCon0() {
-       Assert.assertEquals(TennisPoint.ZERO, tennisGameScore.points());
+    public void gameEmpiezaConAmbosJugadoresEn0() {
+       Assert.assertTrue(tennisGameScore.goes(TennisPoint.LOVE, TennisPoint.LOVE));
     }
 
     @Test
-    public void cuandoGanaUnPuntoYEstaEnScore0DebeCambiarA15() {
-        tennisGameScore.wonPoint(rivalTennisGameScore);
-        Assert.assertEquals(TennisPoint.FIFTEEN, tennisGameScore.points());
+    public void cuandoJugador1GanaUnPuntoYAmbosEstaEn0DebeCambiarA15_0() {
+        tennisGameScore.player1WonPoint();
+        Assert.assertTrue(tennisGameScore.goes(TennisPoint.FIFTEEN, TennisPoint.LOVE));
     }
 
     @Test
-    public void cuandoGanaUnPuntoYEstaEnScore15DebeCambiarA30() {
-        scoreMany(1, tennisGameScore, rivalTennisGameScore);
-        tennisGameScore.wonPoint(rivalTennisGameScore);
-        Assert.assertEquals(TennisPoint.THIRTY, tennisGameScore.points());
+    public void cuandoJugador1GanaUnPuntoYEstan15_0DebeCambiarA30_0() {
+        player1WonManyPoints(1);
+        tennisGameScore.player1WonPoint();
+        Assert.assertTrue(tennisGameScore.goes(TennisPoint.THIRTY, TennisPoint.LOVE));
+    }
+    @Test
+    public void cuandoJugador1GanaUnPuntoYEstan30_0DebeCambiarA40_0() {
+        player1WonManyPoints(2);
+        tennisGameScore.player1WonPoint();
+        Assert.assertTrue(tennisGameScore.goes(TennisPoint.FORTY, TennisPoint.LOVE));
     }
 
     @Test
-    public void cuandoGanaUnPuntoYEstaEnScore30DebeCambiarA40() {
-        scoreMany(2, tennisGameScore, rivalTennisGameScore);
-        tennisGameScore.wonPoint(rivalTennisGameScore);
-        Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
+    public void cuandoJugador1GanaUnPuntoYEstan40_0DebeCambiarA0_0() {
+        player1WonManyPoints(3);
+        tennisGameScore.player1WonPoint();
+        Assert.assertTrue(tennisGameScore.goes(TennisPoint.LOVE, TennisPoint.LOVE));
     }
 
     @Test
-    public void cuandoGanaUnPuntoContraUnJugadorConMenosDe40PuntosYEstaEnScore40DebeCambiarA0() {
-        scoreMany(3, tennisGameScore, rivalTennisGameScore);
-        tennisGameScore.wonPoint(rivalTennisGameScore);
-        Assert.assertEquals(TennisPoint.ZERO, tennisGameScore.points());
+    public void cuandoJugador1GanaUnPuntoYEstan40_40DebeCambiarAVentaja_40() {
+        player1WonManyPoints(3);
+        player2WonManyPoints(3);
+        tennisGameScore.player1WonPoint();
+        Assert.assertTrue(tennisGameScore.goes(TennisPoint.ADVANTAGE, TennisPoint.FORTY));
     }
 
     @Test
-    public void cuandoGanaUnPuntoContraUnJugadorCon40PuntosYEstaEnScore40DebeCambiarAVentaja() {
-        scoreMany(3, tennisGameScore, rivalTennisGameScore);
-        scoreMany(3, rivalTennisGameScore, rivalTennisGameScore);
-        tennisGameScore.wonPoint(rivalTennisGameScore);
-        Assert.assertEquals(TennisPoint.ADVANTAGE, tennisGameScore.points());
-    }
-
-    @Test
-    public void cuandoGanaUnPuntoYEstaEnVentajaDebeCambiarA0() {
-        scoreMany(3, rivalTennisGameScore, rivalTennisGameScore);
-        scoreMany(4, tennisGameScore, rivalTennisGameScore);
-        tennisGameScore.wonPoint(rivalTennisGameScore);
-        Assert.assertEquals(TennisPoint.ZERO, tennisGameScore.points());
-    }
-
-    @Test
-    public void cuandoPierdeUnPuntoYEstaEnScore0DebeSeguirIgual() {
-        tennisGameScore.lostPoint();
-        Assert.assertEquals(TennisPoint.ZERO, tennisGameScore.points());
-    }
-
-    @Test
-    public void cuandoPierdeUnPuntoYEstaEnScore15DebeSeguirIgual() {
-        scoreMany(1, tennisGameScore, rivalTennisGameScore);
-        tennisGameScore.lostPoint();
-        Assert.assertEquals(TennisPoint.FIFTEEN, tennisGameScore.points());
-    }
-
-    @Test
-    public void cuandoPierdeUnPuntoYEstaEnScoreMenorAVentajaDebeSeguirIgual() {
-        scoreMany(3, tennisGameScore, rivalTennisGameScore);
-        tennisGameScore.lostPoint();
-        Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
-    }
-
-    @Test
-    public void cuandoPierdeUnPuntoYEstaEnVentajaDebeCambiarA40() {
-        scoreMany(3, rivalTennisGameScore, rivalTennisGameScore);
-        scoreMany(4, tennisGameScore, rivalTennisGameScore);
-        tennisGameScore.lostPoint();
-        Assert.assertEquals(TennisPoint.FORTY, tennisGameScore.points());
+    public void cuandoJugador1GanaUnPuntoYEstanVentaja_40DebeCambiarA0_0() {
+        player2WonManyPoints(3);
+        player1WonManyPoints(4);
+        tennisGameScore.player1WonPoint();
+        Assert.assertTrue(tennisGameScore.goes(TennisPoint.LOVE, TennisPoint.LOVE));
     }
 
 }
