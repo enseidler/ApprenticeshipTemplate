@@ -54,23 +54,30 @@ public class TennisGameScoreTest {
     public void cuandoJugador1GanaUnPuntoYEstan40_0DebeCambiarA0_0() {
         player1WonManyPoints(3);
         tennisGameScore.player1WonPoint();
-        Assert.assertTrue(tennisGameScore.goes(TennisPoint.LOVE, TennisPoint.LOVE));
+        Assert.assertTrue(tennisGameScore.deuce());
     }
 
     @Test
-    public void cuandoJugador1GanaUnPuntoYEstan40_40DebeCambiarAVentaja_40() {
+    public void cuandoJugador1GanaUnPuntoYEstan40_40HayVentajaParaElJugador1() {
         player1WonManyPoints(3);
         player2WonManyPoints(3);
         tennisGameScore.player1WonPoint();
-        Assert.assertTrue(tennisGameScore.goes(TennisPoint.ADVANTAGE, TennisPoint.FORTY));
+        Assert.assertTrue(tennisGameScore.advantagePlayer1());
     }
 
     @Test
-    public void cuandoJugador1GanaUnPuntoYEstanVentaja_40DebeCambiarA0_0() {
+    public void cuandoJugador2GanaUnPuntoYEstan40_40HayVentajaParaElJugador2() {
+        player1WonManyPoints(3);
+        player2WonManyPoints(3);
+        tennisGameScore.player2WonPoint();
+        Assert.assertTrue(tennisGameScore.advantagePlayer2());
+    }
+
+    @Test
+    public void cuandoJugador1GanaUnPuntoYEstanVentaja_40TerminaElGame() {
         player2WonManyPoints(3);
         player1WonManyPoints(4);
         tennisGameScore.player1WonPoint();
-        Assert.assertTrue(tennisGameScore.goes(TennisPoint.LOVE, TennisPoint.LOVE));
     }
 
 }

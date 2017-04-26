@@ -2,7 +2,6 @@ package tennis;
 
 public class TennisGameScore {
 
-    private TennisPoint points;
     private TennisPoint pointsPlayer1;
     private TennisPoint pointsPlayer2;
 
@@ -23,6 +22,18 @@ public class TennisGameScore {
     public void player2WonPoint() {
         pointsPlayer1 = pointsPlayer1.lostPointAgainst(pointsPlayer2);
         pointsPlayer2 = pointsPlayer2.wonPointAgainst(pointsPlayer1);
+    }
+
+    public Boolean deuce() {
+        return goes(TennisPoint.LOVE, TennisPoint.LOVE);
+    }
+
+    public Boolean advantagePlayer1() {
+        return pointsPlayer1 == TennisPoint.ADVANTAGE;
+    }
+
+    public Boolean advantagePlayer2() {
+        return pointsPlayer2 == TennisPoint.ADVANTAGE;
     }
 
 }
