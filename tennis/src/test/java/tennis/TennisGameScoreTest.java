@@ -28,7 +28,7 @@ public class TennisGameScoreTest {
 
     @Test
     public void gameEmpiezaConAmbosJugadoresEn0() {
-       Assert.assertTrue(tennisGameScore.goes(TennisPoint.LOVE, TennisPoint.LOVE));
+       Assert.assertTrue(tennisGameScore.loveAll());
     }
 
     @Test

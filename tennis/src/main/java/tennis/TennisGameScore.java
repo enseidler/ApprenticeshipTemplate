@@ -44,4 +44,7 @@ public class TennisGameScore {
         return goes(TennisPoint.THIRTY, TennisPoint.THIRTY);
     }
 
+    public Boolean loveAll() {
+        return goes(TennisPoint.LOVE, TennisPoint.LOVE);
+    }
 }
