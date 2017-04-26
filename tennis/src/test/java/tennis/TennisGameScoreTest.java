@@ -51,8 +51,9 @@ public class TennisGameScoreTest {
     }
 
     @Test
-    public void cuandoJugador1GanaUnPuntoYEstan40_0DebeCambiarA0_0() {
-        player1WonManyPoints(3);
+    public void cuandoJugador1GanaUnPuntoYEstan30_40QuedanEnDeuce() {
+        player1WonManyPoints(2);
+        player2WonManyPoints(3);
         tennisGameScore.player1WonPoint();
         Assert.assertTrue(tennisGameScore.deuce());
     }
@@ -78,6 +79,20 @@ public class TennisGameScoreTest {
         player2WonManyPoints(3);
         player1WonManyPoints(4);
         tennisGameScore.player1WonPoint();
+    }
+
+    @Test
+    public void cuandoJugadorAmbosJugadoresTienen15PuntosEstan15All() {
+        player1WonManyPoints(1);
+        player2WonManyPoints(1);
+        Assert.assertTrue(tennisGameScore.fifteenAll());
+    }
+
+    @Test
+    public void cuandoJugadorAmbosJugadoresTienen30PuntosEstan30All() {
+        player1WonManyPoints(2);
+        player2WonManyPoints(2);
+        Assert.assertTrue(tennisGameScore.thirtyAll());
     }
 
 }

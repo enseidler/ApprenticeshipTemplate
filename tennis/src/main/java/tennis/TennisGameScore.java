@@ -25,7 +25,7 @@ public class TennisGameScore {
     }
 
     public Boolean deuce() {
-        return goes(TennisPoint.LOVE, TennisPoint.LOVE);
+        return goes(TennisPoint.FORTY, TennisPoint.FORTY);
     }
 
     public Boolean advantagePlayer1() {
@@ -34,6 +34,14 @@ public class TennisGameScore {
 
     public Boolean advantagePlayer2() {
         return pointsPlayer2 == TennisPoint.ADVANTAGE;
+    }
+
+    public Boolean fifteenAll() {
+        return goes(TennisPoint.FIFTEEN, TennisPoint.FIFTEEN);
+    }
+
+    public Boolean thirtyAll() {
+        return goes(TennisPoint.THIRTY, TennisPoint.THIRTY);
     }
 
 }
