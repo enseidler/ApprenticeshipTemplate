@@ -16,77 +16,74 @@ public class TennisSetScoreTest {
         rivalTennisSetScore = new TennisSetScore();
     }
 
-    public void wonGames(Integer many, TennisSetScore tennisSetScore, TennisSetScore rivalTennisSetScore) {
+    public void player1WonManyGames(Integer many) {
         for (int i = 0; i < many; i++) {
-            tennisSetScore.wonGame(rivalTennisSetScore);
+            tennisSetScore.player1WonGame();
+        }
+    }
+
+    public void player2WonManyGames(Integer many) {
+        for (int i = 0; i < many; i++) {
+            tennisSetScore.player2WonGame();
         }
     }
 
     @Test
-    public void cuandoEmpiezaElSetTiene0Games() {
-        Integer expected = 0;
-        Assert.assertEquals(expected, tennisSetScore.games());
+    public void cuandoEmpiezaElSetAmbosJugadoresEstanEn0Games() {
+        Assert.assertTrue(tennisSetScore.goes(0, 0));
     }
 
     @Test
-    public void cuandoGanaUnGameYEstaEn0DebeTener1Game() {
-        tennisSetScore.wonGame(rivalTennisSetScore);
-        Integer expected = 1;
-        Assert.assertEquals(expected, tennisSetScore.games());
+    public void cuandoJugador1GanaUnGameYEstan0_0CambiaA1_0() {
+        tennisSetScore.player1WonGame();
+        Assert.assertTrue(tennisSetScore.goes(1,0));
+    }
+    @Test
+    public void cuandoJugador1GanaUnGameYEstan1_0CambiaA2_0() {
+        player1WonManyGames(1);
+        tennisSetScore.player1WonGame();
+        Assert.assertTrue(tennisSetScore.goes(2, 0));
     }
 
     @Test
-    public void cuandoGanaUnGameYTieneUnGameGanadoDebeTener2Game() {
-        wonGames(1, tennisSetScore, rivalTennisSetScore);
-        tennisSetScore.wonGame(rivalTennisSetScore);
-        Integer expected = 2;
-        Assert.assertEquals(expected, tennisSetScore.games());
+    public void cuandoJugador1GanaUnGameYEstanNMenorA5_0CambiaANMas1_0() {
+        player1WonManyGames(4);
+        tennisSetScore.player1WonGame();
+        Assert.assertTrue(tennisSetScore.goes(5, 0));
     }
 
     @Test
-    public void cuandoGanaUnGameTeniendoMenosDe5GamesGanadosDebeSumarseUnGame() {
-        wonGames(4, tennisSetScore, rivalTennisSetScore);
-        tennisSetScore.wonGame(rivalTennisSetScore);
-        Integer expected = 5;
-        Assert.assertEquals(expected, tennisSetScore.games());
+    public void cuandoJugador1GanaUnGameYEstan5_4CambiaA0_0() {
+        player1WonManyGames(5);
+        player2WonManyGames(4);
+        tennisSetScore.player1WonGame();
+        Assert.assertTrue(tennisSetScore.goes(0, 0));
     }
 
     @Test
-    public void cuandoGanaUnGameTeniendo5GamesGanadosContraUnRivalConMenosDe5GamesGanadosDebeVolverA0Games() {
-        wonGames(5, tennisSetScore, rivalTennisSetScore);
-        wonGames(4, rivalTennisSetScore, rivalTennisSetScore);
-        tennisSetScore.wonGame(rivalTennisSetScore);
-        Integer expected = 0;
-        Assert.assertEquals(expected, tennisSetScore.games());
+    public void cuandoJugador1GanaUnGameYEstan5_5CambiaA6_5() {
+        player1WonManyGames(5);
+        player2WonManyGames(5);
+        tennisSetScore.player1WonGame();
+        Assert.assertTrue(tennisSetScore.goes(6, 5));
     }
 
     @Test
-    public void cuandoGanaUnGameTeniendo5GamesGanadosContraUnRivalCon5GamesGanadosDebeSumarseUnGame() {
-        wonGames(5, tennisSetScore, rivalTennisSetScore);
-        wonGames(5, rivalTennisSetScore, rivalTennisSetScore);
-        tennisSetScore.wonGame(rivalTennisSetScore);
-        Integer expected = 6;
-        Assert.assertEquals(expected, tennisSetScore.games());
+    public void cuandoJugador1YEstanAmbosConMasDe5GamesYDiferenciaMinimaDe1CambiaA0_0() {
+        player1WonManyGames(5);
+        player2WonManyGames(6);
+        player1WonManyGames(2);
+        tennisSetScore.player1WonGame();
+        Assert.assertTrue(tennisSetScore.goes(0, 0));
     }
 
     @Test
-    public void cuandoGanaUnGameTeniendoMasDe5GamesGanadosContraUnRivalConMenosGamesGanadosDebeVolverA0Games() {
-        wonGames(5, tennisSetScore, rivalTennisSetScore);
-        wonGames(6, rivalTennisSetScore, rivalTennisSetScore);
-        wonGames(2, tennisSetScore, rivalTennisSetScore);
-        tennisSetScore.wonGame(rivalTennisSetScore);
-        Integer expected = 0;
-        Assert.assertEquals(expected, tennisSetScore.games());
-    }
-
-    @Test
-    public void cuandoGanaUnGameYAmbosTienenLaMismaCantidadMayorA5GamesGanadosDebeSumarseUnGame() {
-        wonGames(5, tennisSetScore, rivalTennisSetScore);
-        wonGames(6, rivalTennisSetScore, rivalTennisSetScore);
-        wonGames(1, tennisSetScore, rivalTennisSetScore);
-        tennisSetScore.wonGame(rivalTennisSetScore);
-        Integer expected = 7;
-        Assert.assertEquals(expected, tennisSetScore.games());
+    public void cuandoJugador1GanaUnGameYAmbosTienenLaMismaCantidadMayorA5SeSumaUnGameAlJugador1() {
+        player1WonManyGames(5);
+        player2WonManyGames(6);
+        player1WonManyGames(1);
+        tennisSetScore.player1WonGame();
+        Assert.assertTrue(tennisSetScore.goes(7, 6));
     }
 
 }

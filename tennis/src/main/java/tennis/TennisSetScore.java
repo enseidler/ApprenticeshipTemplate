@@ -3,21 +3,33 @@ package tennis;
 
 public class TennisSetScore {
 
-    private Integer games;
+    private Integer gamesPlayer1;
+    private Integer gamesPlayer2;
 
     public TennisSetScore() {
-        games = 0;
+        gamesPlayer1 = 0;
+        gamesPlayer2 = 0;
     }
 
-    public Integer games() {
-        return games;
+
+    public void player1WonGame() {
+        if (gamesPlayer1 >= 5 && gamesPlayer1 > gamesPlayer2) {
+            gamesPlayer1 = 0;
+            gamesPlayer2 = 0;
+        } else
+            gamesPlayer1 += 1;
     }
 
-    public void wonGame(TennisSetScore rivalTennisSetScore) {
-        if (games >= 5 && games > rivalTennisSetScore.games())
-            games = 0;
-        else
-            games += 1;
+    public void player2WonGame() {
+        if (gamesPlayer2 >= 5 && gamesPlayer2 > gamesPlayer1) {
+            gamesPlayer2 = 0;
+            gamesPlayer1 = 0;
+        } else
+            gamesPlayer2 += 1;
+    }
+
+    public Boolean goes(Integer gamesPlayer1, Integer gamesPlayer2) {
+        return this.gamesPlayer1 == gamesPlayer1 && this.gamesPlayer2 == gamesPlayer2;
     }
 
 }
