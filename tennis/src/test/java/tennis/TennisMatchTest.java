@@ -7,6 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import tennis.errors.FinishedMatchException;
+import tennis.errors.NotFinishedMatchException;
 
 public class TennisMatchTest {
 
@@ -20,7 +21,7 @@ public class TennisMatchTest {
         tennisMatch = new TennisMatch();
     }
 
-    public void player1WonManyGames(Integer many) throws FinishedMatchException {
+    public void player1WonManyGames(Integer many) throws Exception {
         for (int i = 0; i < many; i++) {
             tennisMatch.player1WonPoint();
             tennisMatch.player1WonPoint();
@@ -29,7 +30,7 @@ public class TennisMatchTest {
         }
     }
 
-    public void player2WonManyGames(Integer many) throws FinishedMatchException {
+    public void player2WonManyGames(Integer many) throws Exception {
         for (int i = 0; i < many; i++) {
             tennisMatch.player2WonPoint();
             tennisMatch.player2WonPoint();
@@ -45,34 +46,34 @@ public class TennisMatchTest {
     }
 
     @Test
-    public void cuandoUnJugadorGanaUnGameCambiaA1_0YSeReiniciaElGame() throws FinishedMatchException {
+    public void cuandoUnJugadorGanaUnGameCambiaA1_0YSeReiniciaElGame() throws Exception {
         player1WonManyGames(1);
         Assert.assertTrue(tennisMatch.gameGoes(TennisPoint.LOVE, TennisPoint.LOVE));
         Assert.assertTrue((tennisMatch.setGoes(1, 0)));
     }
 
     @Test
-    public void cuandoUnJugadorGana5GamesCambiaA5_0() throws FinishedMatchException {
+    public void cuandoUnJugadorGana5GamesCambiaA5_0() throws Exception {
         player1WonManyGames(5);
         Assert.assertTrue(tennisMatch.setGoes(5, 0));
     }
 
     @Test
-    public void cuandoUnJugadorGana6GamesGanaUnSet() throws FinishedMatchException {
+    public void cuandoUnJugadorGana6GamesGanaUnSet() throws Exception {
         player1WonManyGames(6);
         Assert.assertTrue(tennisMatch.goes(1, 0));
         Assert.assertTrue(tennisMatch.setGoes(0, 0));
     }
 
     @Test
-    public void cuandoUnJugadorGana3SetsTerminaElPartidoYNoPuedenHacerseMasPuntos() throws FinishedMatchException {
+    public void cuandoUnJugadorGana3SetsTerminaElPartidoYNoPuedenHacerseMasPuntos() throws Exception {
         player1WonManyGames(18);
         thrown.expect(FinishedMatchException.class);
         tennisMatch.player1WonPoint();
     }
 
     @Test
-    public void cuandoUnJugadorGanaUnSetYEsta1SetA2CambiaA2_2() throws FinishedMatchException {
+    public void cuandoUnJugadorGanaUnSetYEsta1SetA2CambiaA2_2() throws Exception {
         player1WonManyGames(6);
         player2WonManyGames(12);
         player1WonManyGames(6);
@@ -80,7 +81,7 @@ public class TennisMatchTest {
     }
 
     @Test
-    public void cuandoUnJugadorGanaUnSetYEstan2SetIgualesCambiaA3_2YTerminaElPartido() throws FinishedMatchException {
+    public void cuandoUnJugadorGanaUnSetYEstan2SetIgualesCambiaA3_2YTerminaElPartido() throws Exception {
         player1WonManyGames(12);
         player2WonManyGames(12);
         player1WonManyGames(6);
@@ -90,13 +91,26 @@ public class TennisMatchTest {
     }
 
     @Test
-    public void cuandoUnJugadorGanaUnSetYEsta2SetsA1CambiaA3_1YTerminaElPartido() throws FinishedMatchException {
+    public void cuandoUnJugadorGanaUnSetYEsta2SetsA1CambiaA3_1YTerminaElPartido() throws Exception {
         player1WonManyGames(12);
         player2WonManyGames(6);
         player1WonManyGames(6);
         Assert.assertTrue(tennisMatch.goes(3, 1));
         thrown.expect(FinishedMatchException.class);
         tennisMatch.player1WonPoint();
+    }
+
+    @Test
+    public void cuandoUnPartidoTerminaHayUnGanador() throws Exception {
+        player1WonManyGames(18);
+        Assert.assertEquals("Player 1", tennisMatch.winner());
+        Assert.assertNotEquals("Player 2", tennisMatch.winner());
+    }
+
+    @Test
+    public void cuandoElPartidoNoTerminoNoHayGanadorAun() throws Exception {
+        thrown.expect(NotFinishedMatchException.class);
+        tennisMatch.winner();
     }
 
 }

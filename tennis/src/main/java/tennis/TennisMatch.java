@@ -2,6 +2,7 @@ package tennis;
 
 
 import tennis.errors.FinishedMatchException;
+import tennis.errors.NotFinishedMatchException;
 
 public class TennisMatch {
 
@@ -46,8 +47,12 @@ public class TennisMatch {
     }
 
     private void verifyEndedMatch() throws FinishedMatchException {
-        if (setsPlayer1 == 3 || setsPlayer2 == 3)
+        if (endedMatch())
             throw new FinishedMatchException();
+    }
+
+    private boolean endedMatch() {
+        return setsPlayer1 == 3 || setsPlayer2 == 3;
     }
 
     private void player1WonSet() {
@@ -62,4 +67,11 @@ public class TennisMatch {
         return this.setsPlayer1 == setsPlayer1 && this.setsPlayer2 == setsPlayer2;
     }
 
+    public String winner() throws NotFinishedMatchException {
+        if (!endedMatch())
+            throw new NotFinishedMatchException();
+        if (setsPlayer1 == 3)
+            return "Player 1";
+        return "Player 2";
+    }
 }
