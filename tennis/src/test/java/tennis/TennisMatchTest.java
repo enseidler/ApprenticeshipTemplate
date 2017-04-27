@@ -67,6 +67,9 @@ public class TennisMatchTest {
     @Test
     public void cuandoUnJugadorGana3SetsTerminaElPartidoYNoPuedenHacerseMasPuntos() throws FinishedMatchException {
         player1WonManyGames(18);
+        thrown.expect(FinishedMatchException.class);
+        tennisMatch.player1WonPoint();
+    }
 
 
 }
