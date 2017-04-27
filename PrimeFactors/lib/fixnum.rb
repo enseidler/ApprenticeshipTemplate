@@ -2,11 +2,8 @@
 class Fixnum
 
   def primes
-    if eql? 2
-      return [2]
-    end
-    if eql? 3
-      return [3]
+    if between?(2, 3)
+      return [self]
     end
     if eql? 4
       return [2, 2]
