@@ -7,4 +7,8 @@ describe 'PrimeFactors' do
     expect(1.primes).to eq []
   end
 
+  it 'for 2 return 2' do
+    expect(2.primes).to eq [2]
+  end
+
 end
