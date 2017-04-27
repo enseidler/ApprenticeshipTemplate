@@ -38,12 +38,15 @@ public class TennisMatch {
     public void player2WonPoint() throws FinishedMatchException {
         verifyEndedMatch();
         gameScore.player2WonPoint();
-        if (gameScore.loveAll())
+        if (gameScore.loveAll()) {
             setScore.player2WonGame();
+            if (setScore.goes(0, 0))
+                player2WonSet();
+        }
     }
 
     private void verifyEndedMatch() throws FinishedMatchException {
-        if ((Math.abs(setsPlayer1 - setsPlayer2) > 1) && (setsPlayer1 + setsPlayer2 >= 3))
+        if (setsPlayer1 == 3 || setsPlayer2 == 3)
             throw new FinishedMatchException();
     }
 

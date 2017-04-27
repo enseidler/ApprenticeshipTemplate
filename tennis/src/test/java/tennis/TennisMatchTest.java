@@ -71,5 +71,32 @@ public class TennisMatchTest {
         tennisMatch.player1WonPoint();
     }
 
+    @Test
+    public void cuandoUnJugadorGanaUnSetYEsta1SetA2CambiaA2_2() throws FinishedMatchException {
+        player1WonManyGames(6);
+        player2WonManyGames(12);
+        player1WonManyGames(6);
+        Assert.assertTrue(tennisMatch.goes(2, 2));
+    }
+
+    @Test
+    public void cuandoUnJugadorGanaUnSetYEstan2SetIgualesCambiaA3_2YTerminaElPartido() throws FinishedMatchException {
+        player1WonManyGames(12);
+        player2WonManyGames(12);
+        player1WonManyGames(6);
+        Assert.assertTrue(tennisMatch.goes(3, 2));
+        thrown.expect(FinishedMatchException.class);
+        tennisMatch.player1WonPoint();
+    }
+
+    @Test
+    public void cuandoUnJugadorGanaUnSetYEsta2SetsA1CambiaA3_1YTerminaElPartido() throws FinishedMatchException {
+        player1WonManyGames(12);
+        player2WonManyGames(6);
+        player1WonManyGames(6);
+        Assert.assertTrue(tennisMatch.goes(3, 1));
+        thrown.expect(FinishedMatchException.class);
+        tennisMatch.player1WonPoint();
+    }
 
 }
