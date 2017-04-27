@@ -1,12 +1,12 @@
 package tennis;
 
 
-public class TennisSetScore {
+public class TennisSet {
 
     private Integer gamesPlayer1;
     private Integer gamesPlayer2;
 
-    public TennisSetScore() {
+    public TennisSet() {
         gamesPlayer1 = 0;
         gamesPlayer2 = 0;
     }

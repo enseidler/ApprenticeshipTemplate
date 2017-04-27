@@ -1,11 +1,11 @@
 package tennis;
 
-public class TennisGameScore {
+public class TennisGame {
 
     private TennisPoint pointsPlayer1;
     private TennisPoint pointsPlayer2;
 
-    public TennisGameScore() {
+    public TennisGame() {
         this.pointsPlayer1 = TennisPoint.LOVE;
         this.pointsPlayer2 = TennisPoint.LOVE;
     }

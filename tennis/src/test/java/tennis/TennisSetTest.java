@@ -5,67 +5,67 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TennisSetScoreTest {
+public class TennisSetTest {
 
-    private TennisSetScore tennisSetScore;
-    private TennisSetScore rivalTennisSetScore;
+    private TennisSet tennisSet;
+    private TennisSet rivalTennisSet;
 
     @Before
     public void setUp() {
-        tennisSetScore = new TennisSetScore();
-        rivalTennisSetScore = new TennisSetScore();
+        tennisSet = new TennisSet();
+        rivalTennisSet = new TennisSet();
     }
 
     public void player1WonManyGames(Integer many) {
         for (int i = 0; i < many; i++) {
-            tennisSetScore.player1WonGame();
+            tennisSet.player1WonGame();
         }
     }
 
     public void player2WonManyGames(Integer many) {
         for (int i = 0; i < many; i++) {
-            tennisSetScore.player2WonGame();
+            tennisSet.player2WonGame();
         }
     }
 
     @Test
     public void cuandoEmpiezaElSetAmbosJugadoresEstanEn0Games() {
-        Assert.assertTrue(tennisSetScore.goes(0, 0));
+        Assert.assertTrue(tennisSet.goes(0, 0));
     }
 
     @Test
     public void cuandoJugador1GanaUnGameYEstan0_0CambiaA1_0() {
-        tennisSetScore.player1WonGame();
-        Assert.assertTrue(tennisSetScore.goes(1,0));
+        tennisSet.player1WonGame();
+        Assert.assertTrue(tennisSet.goes(1,0));
     }
     @Test
     public void cuandoJugador1GanaUnGameYEstan1_0CambiaA2_0() {
         player1WonManyGames(1);
-        tennisSetScore.player1WonGame();
-        Assert.assertTrue(tennisSetScore.goes(2, 0));
+        tennisSet.player1WonGame();
+        Assert.assertTrue(tennisSet.goes(2, 0));
     }
 
     @Test
     public void cuandoJugador1GanaUnGameYEstanNMenorA5_0CambiaANMas1_0() {
         player1WonManyGames(4);
-        tennisSetScore.player1WonGame();
-        Assert.assertTrue(tennisSetScore.goes(5, 0));
+        tennisSet.player1WonGame();
+        Assert.assertTrue(tennisSet.goes(5, 0));
     }
 
     @Test
     public void cuandoJugador1GanaUnGameYEstan5_4CambiaA0_0() {
         player1WonManyGames(5);
         player2WonManyGames(4);
-        tennisSetScore.player1WonGame();
-        Assert.assertTrue(tennisSetScore.goes(0, 0));
+        tennisSet.player1WonGame();
+        Assert.assertTrue(tennisSet.goes(0, 0));
     }
 
     @Test
     public void cuandoJugador1GanaUnGameYEstan5_5CambiaA6_5() {
         player1WonManyGames(5);
         player2WonManyGames(5);
-        tennisSetScore.player1WonGame();
-        Assert.assertTrue(tennisSetScore.goes(6, 5));
+        tennisSet.player1WonGame();
+        Assert.assertTrue(tennisSet.goes(6, 5));
     }
 
     @Test
@@ -73,8 +73,8 @@ public class TennisSetScoreTest {
         player1WonManyGames(5);
         player2WonManyGames(6);
         player1WonManyGames(2);
-        tennisSetScore.player1WonGame();
-        Assert.assertTrue(tennisSetScore.goes(0, 0));
+        tennisSet.player1WonGame();
+        Assert.assertTrue(tennisSet.goes(0, 0));
     }
 
     @Test
@@ -82,8 +82,8 @@ public class TennisSetScoreTest {
         player1WonManyGames(5);
         player2WonManyGames(6);
         player1WonManyGames(1);
-        tennisSetScore.player1WonGame();
-        Assert.assertTrue(tennisSetScore.goes(7, 6));
+        tennisSet.player1WonGame();
+        Assert.assertTrue(tennisSet.goes(7, 6));
     }
 
 }
