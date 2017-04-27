@@ -15,4 +15,8 @@ describe 'PrimeFactors' do
     expect(3.primes).to eq [3]
   end
 
+  it 'prime factors for 4 return 2 2' do
+    expect(4.primes).to eq [2, 2]
+  end
+
 end
