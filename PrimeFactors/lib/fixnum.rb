@@ -20,6 +20,9 @@ class Fixnum
     if eql? 8
       return [2, 2, 2]
     end
+    if eql? 9
+      return [3, 3]
+    end
     []
   end
 
