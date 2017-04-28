@@ -24,7 +24,15 @@ class Fixnum
   end
 
   def prime?
-    !eql?(1) && ([2, 3, 5].include?(self) || ((modulo(2) + modulo(3) + modulo(5)) > 0))
+    !eql?(1) && (not_minimum_divisor? || only_divisible_by_self?)
+  end
+
+  def not_minimum_divisor?
+    [2, 3, 5].include?(self)
+  end
+
+  def only_divisible_by_self?
+    (modulo(2) + modulo(3) + modulo(5)) > 0
   end
 
 end
