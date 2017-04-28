@@ -47,4 +47,10 @@ describe 'PrimeFactors' do
     expect(11.primes).to eq [11]
   end
 
+  it 'prime factors for prime number return only the same number' do
+    expect(37.primes).to eq [37]
+    expect(163.primes).to eq [163]
+    expect(683.primes).to eq [683]
+  end
+
 end
