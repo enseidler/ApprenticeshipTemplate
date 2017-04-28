@@ -31,4 +31,8 @@ describe 'PrimeFactors' do
     expect(7.primes).to eq [7]
   end
 
+  it 'prime factors for 8 return 2 2 2' do
+    expect(8.primes).to eq [2, 2, 2]
+  end
+
 end

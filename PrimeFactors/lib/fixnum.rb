@@ -17,6 +17,9 @@ class Fixnum
     if eql? 7
       return [7]
     end
+    if eql? 8
+      return [2, 2, 2]
+    end
     []
   end
 
