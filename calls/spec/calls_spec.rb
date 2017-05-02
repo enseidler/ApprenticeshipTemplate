@@ -3,10 +3,18 @@ require_relative '../lib/phone_biller'
 
 describe 'Phone Biller' do
 
-  it 'una llamada nacional de 1 minuto cuesta 30 centavos' do
-    phone_biller = PhoneBiller.new;
-    a_local_call = 1
-    expect(phone_biller.call_cost(a_local_call)).to eq 0.30
+  let(:phone_biller) { PhoneBiller.new }
+
+  context 'cuando la llamada es nacional' do
+    it '1 minuto cuesta 30 centavos' do
+      a_national_call = 1
+      expect(phone_biller.call_cost(a_national_call)).to eq 0.30
+    end
+
+    it '2 minutos cuestan 60 centavos' do
+      a_national_call = 2
+      expect(phone_biller.call_cost(a_national_call)).to eq 0.60
+    end
   end
 
 end
