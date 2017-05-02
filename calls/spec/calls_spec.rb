@@ -15,6 +15,11 @@ describe 'Phone Biller' do
       a_national_call = 2
       expect(phone_biller.call_cost(a_national_call)).to eq 0.60
     end
+
+    it 'cuesta 30 centavos por cada minuto' do
+      a_national_call = 15
+      expect(phone_biller.call_cost(a_national_call)).to eq 4.50
+    end
   end
 
 end
