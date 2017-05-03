@@ -1,12 +1,15 @@
 
 class Llamada
 
-  def initialize(duracion_en_minutos)
-
+  def initialize(una_duracion_en_minutos)
+    @duracion_en_minutos = una_duracion_en_minutos
   end
 
   def costo
-    0.30
+    if @duracion_en_minutos == 1
+      return 0.30
+    end
+    0.60
   end
 
 end

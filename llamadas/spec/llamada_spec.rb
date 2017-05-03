@@ -7,4 +7,8 @@ describe 'Llamada' do
     expect(Llamada.new(1).costo).to eq 0.30 # dinero
   end
 
+  it 'una llamada de 2 minuto cuesta 60 centavos' do
+    expect(Llamada.new(2).costo).to eq 0.60 # dinero
+  end
+
 end
