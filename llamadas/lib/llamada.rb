@@ -6,10 +6,7 @@ class Llamada
   end
 
   def costo
-    if @duracion_en_minutos == 1
-      return 0.30
-    end
-    0.60
+    0.30 * @duracion_en_minutos
   end
 
 end
