@@ -1,7 +1,9 @@
 
 class Llamada
 
-  def initialize(a_call_interval)
+  def initialize(a_call_interval, un_numero_telefonico, otro_numero_telefonico)
+    @numero_origen = un_numero_telefonico
+    @numero_destino = otro_numero_telefonico
     @intervalo_de_llamada = a_call_interval
   end
 
@@ -11,6 +13,10 @@ class Llamada
 
   def fin_de_semana?
     @intervalo_de_llamada.last.saturday?
+  end
+
+  def nacional?
+    true
   end
 
 end
