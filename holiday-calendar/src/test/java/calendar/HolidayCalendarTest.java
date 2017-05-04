@@ -47,4 +47,15 @@ public class HolidayCalendarTest {
         Assert.assertTrue(holidayCalendar.isHoliday(aFirstOfMay));
     }
 
+    @Test
+    public void test08_moreThanOneDayOfMonthCanBeHoliday() {
+        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        LocalDate aFirstOfMay = LocalDate.of(2017, 5, 1);
+        LocalDate aTwentyFiveOfMay = LocalDate.of(2017, 5, 25);
+        holidayCalendar.markDayOfMonthAsHoliday(MonthDay.of(5, 1));
+        holidayCalendar.markDayOfMonthAsHoliday(MonthDay.of(5, 25));
+        Assert.assertTrue(holidayCalendar.isHoliday(aFirstOfMay));
+        Assert.assertTrue(holidayCalendar.isHoliday(aTwentyFiveOfMay));
+    }
+
 }
