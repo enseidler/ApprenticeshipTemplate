@@ -11,18 +11,17 @@ class Llamada
     if nacional?
       return 0.30 * @duracion_en_minutos
     end
-    if sudamerica?
+    if @numero_destino.sudamerica?
       return 0.50 * @duracion_en_minutos
     end
-    0.70 * @duracion_en_minutos
+    if @numero_destino.europa? || @numero_destino.norte_america?
+      return 0.70 * @duracion_en_minutos
+    end
+    1.50 * @duracion_en_minutos
   end
 
   def nacional?
     @numero_origen.mismo_pais_distinta_area? @numero_destino
-  end
-
-  def sudamerica?
-    @numero_destino.sudamerica?
   end
 
 end

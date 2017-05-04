@@ -43,4 +43,13 @@ describe 'Llamada' do
     end
   end
 
+  context 'cuando la llamada es a un pais del resto del mundo' do
+    it 'cuesta 1.50 pesos por minuto' do
+      una_llamada_a_asia = Llamada.new(10,
+                                       factory.numero_bsas,
+                                       factory.numero_china)
+      expect(una_llamada_a_asia.costo).to eq 15.00 # dinero
+    end
+  end
+
 end
