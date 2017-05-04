@@ -14,11 +14,20 @@ describe 'Llamada' do
   end
 
   context 'cuando la llamada es a Europa' do
-    it 'cuesta 70 centavos por minutos' do
+    it 'cuesta 70 centavos por minuto' do
       una_llamada_a_europa = Llamada.new(20,
                                          NumeroTelefonico.new(54, 11, 11111111),
                                          NumeroTelefonico.new(34, 93, 22222222))
       expect(una_llamada_a_europa.costo).to eq 14.00 # dinero
+    end
+  end
+
+  context 'cuando la llamada es a Norte America' do
+    it 'cuesta 70 centavos por minuto' do
+      una_llamada_a_norte_america = Llamada.new(20,
+                                         NumeroTelefonico.new(54, 11, 11111111),
+                                         NumeroTelefonico.new(1, 201, 22222222))
+      expect(una_llamada_a_norte_america.costo).to eq 14.00 # dinero
     end
   end
 
