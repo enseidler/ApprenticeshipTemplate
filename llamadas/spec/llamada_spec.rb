@@ -1,6 +1,7 @@
 require 'rspec'
 require_relative '../lib/llamada'
 require_relative '../lib/numero_telefonico'
+require_relative '../lib/factory_de_numeros_telefonicos'
 
 describe 'Llamada' do
 
@@ -38,7 +39,7 @@ describe 'Llamada' do
       una_llamada_a_sudamerica = Llamada.new(15,
                                              factory.numero_bsas,
                                              factory.numero_colombia)
-      expect(una_llamada_a_sudamerica.costo).to eq 7.00 # dinero
+      expect(una_llamada_a_sudamerica.costo).to eq 7.50 # dinero
     end
   end
 

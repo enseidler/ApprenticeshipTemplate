@@ -11,6 +11,9 @@ class Llamada
     if nacional?
       return 0.30 * @duracion_en_minutos
     end
+    if sudamerica?
+      return 0.50 * @duracion_en_minutos
+    end
     0.70 * @duracion_en_minutos
   end
 
@@ -18,5 +21,8 @@ class Llamada
     @numero_origen.mismo_pais_distinta_area? @numero_destino
   end
 
+  def sudamerica?
+    @numero_destino.sudamerica?
+  end
 
 end
