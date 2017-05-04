@@ -1,18 +1,25 @@
 require 'rspec'
 require_relative '../lib/llamada'
+require_relative '../lib/numero_telefonico'
 
 describe 'Llamada' do
 
-  it 'una llamada de 1 minuto cuesta 30 centavos' do
-    expect(Llamada.new(1).costo).to eq 0.30 # dinero
+  context 'cuando la llamada es nacional' do
+    it 'cuesta 30 centavos por minuto' do
+      una_llamada_nacional = Llamada.new(14,
+                                         NumeroTelefonico.new(54, 11, 11111111),
+                                         NumeroTelefonico.new(54, 223, 22222222))
+      expect(una_llamada_nacional.costo).to eq 4.20 # dinero
+    end
   end
 
-  it 'una llamada de 2 minuto cuesta 60 centavos' do
-    expect(Llamada.new(2).costo).to eq 0.60 # dinero
-  end
-
-  it 'una llamada cuesta 30 centavos por minuto' do
-    expect(Llamada.new(14).costo).to eq 4.20 # dinero
+  context 'cuando la llamada es a Europa' do
+    it 'cuesta 70 centavos por minutos' do
+      una_llamada_a_europa = Llamada.new(20,
+                                         NumeroTelefonico.new(54, 11, 11111111),
+                                         NumeroTelefonico.new(34, 93, 22222222))
+      expect(una_llamada_a_europa.costo).to eq 14.00 # dinero
+    end
   end
 
 end
