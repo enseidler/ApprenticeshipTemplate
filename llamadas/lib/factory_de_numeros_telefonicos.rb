@@ -22,7 +22,7 @@ class FactoryDeNumerosTelefonicos
   end
 
   def numero_china
-    NumeroTelefonico.new(81, 85, 11111111)
+    NumeroTelefonico.new(81, 300, 11111111)
   end
 
 end

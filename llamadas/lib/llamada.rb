@@ -1,3 +1,4 @@
+require_relative '../lib/facturador_de_llamada'
 
 class Llamada
 
@@ -8,20 +9,31 @@ class Llamada
   end
 
   def costo
-    if nacional?
-      return 0.30 * @duracion_en_minutos
-    end
-    if @numero_destino.sudamerica?
-      return 0.50 * @duracion_en_minutos
-    end
-    if @numero_destino.europa? || @numero_destino.norte_america?
-      return 0.70 * @duracion_en_minutos
-    end
-    1.50 * @duracion_en_minutos
+    FacturadorDeLlamada.new.costo_de_llamada(self)
+  end
+
+  def duracion_en_minutos
+    @duracion_en_minutos
   end
 
   def nacional?
     @numero_origen.mismo_pais_distinta_area? @numero_destino
+  end
+
+  def internacional?
+    @numero_origen.distinto_pais? @numero_destino
+  end
+
+  def sudamerica?
+    @numero_destino.sudamerica?
+  end
+
+  def norte_america?
+    @numero_destino.norte_america?
+  end
+
+  def europa?
+    @numero_destino.europa?
   end
 
 end
