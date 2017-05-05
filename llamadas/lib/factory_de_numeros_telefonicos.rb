@@ -1,3 +1,4 @@
+require_relative '../lib/numero_telefonico'
 
 class FactoryDeNumerosTelefonicos
 

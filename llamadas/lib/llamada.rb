@@ -8,10 +8,6 @@ class Llamada
     @numero_destino = otro_numero_telefonico
   end
 
-  def costo
-    FacturadorDeLlamada.new.costo_de_llamada(self)
-  end
-
   def duracion_en_minutos
     @duracion_en_minutos
   end

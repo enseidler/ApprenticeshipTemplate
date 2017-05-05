@@ -1,10 +1,9 @@
 require 'rspec'
 require_relative '../lib/llamada'
-require_relative '../lib/numero_telefonico'
 require_relative '../lib/factory_de_numeros_telefonicos'
 require_relative '../lib/facturador_de_llamada'
 
-describe 'Llamada' do
+describe 'Facturador de Llamada' do
 
   let(:factory) { FactoryDeNumerosTelefonicos.new }
   let(:facturador_de_llamada) { FacturadorDeLlamada.new }
@@ -40,7 +39,7 @@ describe 'Llamada' do
       expect(facturador_de_llamada.costo_de_llamada(una_llamada_a_sudamerica)).to eq 7.50 # dinero
     end
 
-    it 'cuesta 1.50 pesos el minuto al resto del mundo' do
+    it 'cuesta 1.50 pesos el minuto a el resto del mundo' do
       una_llamada_a_asia = Llamada.new(10,
                                        factory.numero_bsas,
                                        factory.numero_china)
