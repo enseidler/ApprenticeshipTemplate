@@ -27,6 +27,10 @@ class NumeroTelefonico
     (@codigo_de_pais == otro_numero.codigo_de_pais) && (@codigo_de_area != otro_numero.codigo_de_area)
   end
 
+  def mismo_pais_misma_area?(otro_numero)
+    (@codigo_de_pais == otro_numero.codigo_de_pais) && (@codigo_de_area == otro_numero.codigo_de_area)
+  end
+
   def distinto_pais?(otro_numero)
     @codigo_de_pais != otro_numero.codigo_de_pais
   end

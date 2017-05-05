@@ -2,18 +2,22 @@ require_relative '../lib/facturador_de_llamada'
 
 class Llamada
 
-  def initialize(una_duracion_en_minutos, un_numero_telefonico, otro_numero_telefonico)
-    @duracion_en_minutos = una_duracion_en_minutos
+  def initialize(un_intervalo_de_llamada, un_numero_telefonico, otro_numero_telefonico)
+    @intervalo_de_llamada = un_intervalo_de_llamada
     @numero_origen = un_numero_telefonico
     @numero_destino = otro_numero_telefonico
   end
 
   def duracion_en_minutos
-    @duracion_en_minutos
+    (@intervalo_de_llamada.last - @intervalo_de_llamada.first) / 60
   end
 
   def nacional?
     @numero_origen.mismo_pais_distinta_area? @numero_destino
+  end
+
+  def local?
+    @numero_origen.mismo_pais_misma_area? @numero_destino
   end
 
   def internacional?

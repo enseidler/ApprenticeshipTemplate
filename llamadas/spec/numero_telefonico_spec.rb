@@ -1,10 +1,10 @@
 require 'rspec'
 require_relative '../lib/numero_telefonico'
-require_relative '../lib/factory_de_numeros_telefonicos'
+require_relative '../lib/factory_llamadas'
 
 describe 'Numero Telefonico' do
 
-  let(:factory) { FactoryDeNumerosTelefonicos.new }
+  let(:factory) { FactoryLlamadas.new }
 
   it 'cuando el codigo de pais pertenece a un pais de Sudamerica es un numero de Sudamerica' do
     expect(factory.numero_bsas.sudamerica?).to be_truthy

@@ -1,10 +1,15 @@
 require_relative '../lib/facturador_de_llamada_nacional'
 require_relative '../lib/facturador_de_llamada_internacional'
+require_relative '../lib/facturador_de_llamada_local'
 
 class FacturadorDeLlamada
 
   def initialize
-    @facturadores_de_llamadas = [FacturadorDeLlamadaNacional, FacturadorDeLlamadaInternacional]
+    @facturadores_de_llamadas = [
+        FacturadorDeLlamadaNacional,
+        FacturadorDeLlamadaInternacional,
+        FacturadorDeLlamadaLocal
+    ]
   end
 
   def facturador_para_llamada(una_llamada)
