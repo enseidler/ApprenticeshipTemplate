@@ -2,6 +2,8 @@ require_relative '../lib/numero_telefonico'
 
 class FactoryLlamadas
 
+  # Numeros telefonicos #
+
   def numero_bsas
     NumeroTelefonico.new(54, 11, 11111111)
   end
@@ -26,8 +28,15 @@ class FactoryLlamadas
     NumeroTelefonico.new(81, 300, 11111111)
   end
 
+
+  # Intervalos de llamada #
+
   def un_intervalo_de_10_minutos
     Range.new(Time.new(2017, 4, 29, 12, 00), Time.new(2017, 4, 29, 12, 10))
+  end
+
+  def un_intervalo_de_fin_de_semana_de_30_minutos
+    Range.new(Time.new(2017, 4, 29, 12, 00), Time.new(2017, 4, 29, 12, 30))
   end
 
 end

@@ -50,8 +50,7 @@ describe 'Facturador de Llamada' do
 
   context 'cuando la llamada es local' do
     it 'cuesta 10 centavos el minuto en fin de semana' do
-      intervalo_de_llamada = Range.new(Time.new(2017, 4, 29, 12, 00), Time.new(2017, 4, 29, 12, 30))
-      una_llamada_local_de_fin_de_semana = Llamada.new(intervalo_de_llamada,
+      una_llamada_local_de_fin_de_semana = Llamada.new(factory.un_intervalo_de_fin_de_semana_de_30_minutos,
                                                        factory.numero_bsas,
                                                        factory.numero_bsas)
       expect(facturador_de_llamada.costo_de_llamada(una_llamada_local_de_fin_de_semana)).to eq 3.00 # dinero
