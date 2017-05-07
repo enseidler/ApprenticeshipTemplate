@@ -1,3 +1,4 @@
+require 'time'
 require_relative '../lib/numero_telefonico'
 
 class FactoryLlamadas
@@ -37,6 +38,10 @@ class FactoryLlamadas
 
   def un_intervalo_de_fin_de_semana_de_30_minutos
     Range.new(Time.new(2017, 4, 29, 12, 00), Time.new(2017, 4, 29, 12, 30))
+  end
+
+  def un_intervalo_de_dia_habil_hora_pico_de_30_minutos
+    Range.new(Time.new(2017, 5, 3, 16, 30), Time.new(2017, 5, 3, 17, 00))
   end
 
 end

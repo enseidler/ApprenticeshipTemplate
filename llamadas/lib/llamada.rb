@@ -36,4 +36,12 @@ class Llamada
     @numero_destino.europa?
   end
 
+  def dia_habil?
+    !@intervalo_de_llamada.first.saturday? && !@intervalo_de_llamada.first.sunday?
+  end
+
+  def hora_pico?
+    (@intervalo_de_llamada.first.hour > 8) && (@intervalo_de_llamada.last.hour < 20)
+  end
+
 end

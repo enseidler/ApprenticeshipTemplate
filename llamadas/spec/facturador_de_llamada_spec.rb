@@ -1,5 +1,4 @@
 require 'rspec'
-require 'time'
 require_relative '../lib/llamada'
 require_relative '../lib/factory_llamadas'
 require_relative '../lib/facturador_de_llamada'
@@ -54,6 +53,13 @@ describe 'Facturador de Llamada' do
                                                        factory.numero_bsas,
                                                        factory.numero_bsas)
       expect(facturador_de_llamada.costo_de_llamada(una_llamada_local_de_fin_de_semana)).to eq 3.00 # dinero
+    end
+
+    it 'cuesta 20 centavos el minuto en dias habiles y hora pico (8 a 20)' do
+      una_llamada_local_de_fin_de_semana = Llamada.new(factory.un_intervalo_de_dia_habil_hora_pico_de_30_minutos,
+                                                       factory.numero_bsas,
+                                                       factory.numero_bsas)
+      expect(facturador_de_llamada.costo_de_llamada(una_llamada_local_de_fin_de_semana)).to eq 6.00 # dinero
     end
   end
 
