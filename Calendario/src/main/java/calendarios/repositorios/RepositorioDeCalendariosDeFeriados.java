@@ -1,6 +1,6 @@
-package repositorios;
+package calendarios.repositorios;
 
-import modelo.CalendarioDeFeriados;
+import calendarios.modelo.CalendarioDeFeriados;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

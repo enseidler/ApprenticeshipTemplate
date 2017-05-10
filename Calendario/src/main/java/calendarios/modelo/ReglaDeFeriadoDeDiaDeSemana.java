@@ -1,4 +1,4 @@
-package modelo;
+package calendarios.modelo;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;

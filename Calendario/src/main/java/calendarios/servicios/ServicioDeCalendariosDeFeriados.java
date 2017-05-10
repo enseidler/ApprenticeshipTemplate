@@ -1,11 +1,11 @@
-package servicios;
+package calendarios.servicios;
 
 
-import modelo.CalendarioDeFeriados;
+import calendarios.modelo.CalendarioDeFeriados;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositorios.RepositorioDeCalendariosDeFeriados;
+import calendarios.repositorios.RepositorioDeCalendariosDeFeriados;
 
 import java.util.List;
 

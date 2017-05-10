@@ -1,4 +1,4 @@
-package modelo;
+package calendarios.modelo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
