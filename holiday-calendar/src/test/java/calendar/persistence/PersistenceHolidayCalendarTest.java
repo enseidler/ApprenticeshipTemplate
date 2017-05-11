@@ -1,9 +1,7 @@
 package calendar.persistence;
 
-import calendar.model.HolidayCalendar;
-import calendar.model.HolidayRuleDate;
-import calendar.model.HolidayRuleDayOfMonth;
-import calendar.model.HolidayRuleDayOfWeek;
+import calendar.model.*;
+import calendar.model.utils.DateInterval;
 import calendar.services.HolidayCalendarService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -70,6 +68,26 @@ public class PersistenceHolidayCalendarTest {
 
         assertTrue(persistedHolidayCalendar.isHoliday(aHolidayDate));
         assertFalse(persistedHolidayCalendar.isHoliday(aNonHolidayDate));
+    }
+
+    @Test
+    public void persistingAHolidayCalendarWithAHolidayRuleWithInterval() {
+        HolidayCalendar holidayCalendar = new HolidayCalendar();
+
+        LocalDate start = LocalDate.of(2015, 5, 7);
+        LocalDate finish = LocalDate.of(2019, 5, 7);
+        DateInterval interval = DateInterval.fromDateToDate(start, finish);
+
+        holidayCalendar.addHolidayRule(new HolidayRuleWithInterval(new HolidayRuleDayOfWeek(DayOfWeek.MONDAY), interval));
+
+        LocalDate aMondayInsideInterval = LocalDate.of(2017, 3, 20);
+        LocalDate aMondayOutsideInterval = LocalDate.of(2014, 6, 16);
+
+        Long id = holidayCalendarService.save(holidayCalendar);
+        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
+
+        assertTrue(persistedHolidayCalendar.isHoliday(aMondayInsideInterval));
+        assertFalse(persistedHolidayCalendar.isHoliday(aMondayOutsideInterval));
     }
 
 }
