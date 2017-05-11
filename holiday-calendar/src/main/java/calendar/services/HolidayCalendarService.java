@@ -18,7 +18,6 @@ public class HolidayCalendarService {
 
     @Transactional
     public Long save(HolidayCalendar aHolidayCalendar) {
-        holidayCalendarRepository.findOne(Example.of(aHolidayCalendar));
         return holidayCalendarRepository.save(aHolidayCalendar).getId();
     }
 

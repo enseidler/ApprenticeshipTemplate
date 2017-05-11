@@ -1,6 +1,7 @@
 package calendar.persistence;
 
 import calendar.model.HolidayCalendar;
+import calendar.model.HolidayRuleDate;
 import calendar.model.HolidayRuleDayOfMonth;
 import calendar.model.HolidayRuleDayOfWeek;
 import calendar.services.HolidayCalendarService;
@@ -54,6 +55,21 @@ public class PersistenceHolidayCalendarTest {
 
         assertTrue(persistedHolidayCalendar.isHoliday(aMayFirst));
         assertFalse(persistedHolidayCalendar.isHoliday(aMaySeventh));
+    }
+
+    @Test
+    public void persistingAHolidayCalendarWithAHolidayRuleDate() {
+        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        holidayCalendar.addHolidayRule(new HolidayRuleDate(LocalDate.of(2017, 7, 10)));
+
+        LocalDate aHolidayDate = LocalDate.of(2017, 7, 10);
+        LocalDate aNonHolidayDate = LocalDate.of(2017, 5, 17);
+
+        Long id = holidayCalendarService.save(holidayCalendar);
+        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
+
+        assertTrue(persistedHolidayCalendar.isHoliday(aHolidayDate));
+        assertFalse(persistedHolidayCalendar.isHoliday(aNonHolidayDate));
     }
 
 }
