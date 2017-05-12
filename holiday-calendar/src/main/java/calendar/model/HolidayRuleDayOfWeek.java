@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-@Entity
+
 public class HolidayRuleDayOfWeek extends HolidayRule {
 
     private DayOfWeek dayOfWeekHoliday;

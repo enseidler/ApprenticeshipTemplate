@@ -1,15 +1,12 @@
 package calendar.model;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.MonthDay;
 
-@Entity
+
 public class HolidayRuleDayOfMonth extends HolidayRule {
 
     private MonthDay dayOfMonthHoliday;
-
-    public HolidayRuleDayOfMonth() {}
 
     public HolidayRuleDayOfMonth(MonthDay aDayOfMonth) {
         dayOfMonthHoliday = aDayOfMonth;
@@ -17,10 +14,6 @@ public class HolidayRuleDayOfMonth extends HolidayRule {
 
     public MonthDay getDayOfMonthHoliday() {
         return dayOfMonthHoliday;
-    }
-
-    private void setDayOfMonthHoliday(MonthDay aDayOfMonth) {
-        this.dayOfMonthHoliday = aDayOfMonth;
     }
 
     @Override

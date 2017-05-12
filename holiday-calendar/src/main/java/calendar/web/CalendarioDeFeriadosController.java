@@ -1,6 +1,7 @@
 package calendar.web;
 
 import calendar.model.HolidayCalendar;
+import calendar.persistence.PersistentHolidayCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import calendar.rest.AddRequest;
-import calendar.services.HolidayCalendarService;
+import calendar.services.PersistentHolidayCalendarService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -18,11 +19,11 @@ import java.util.List;
 @Controller
 public class CalendarioDeFeriadosController {
 
-    private HolidayCalendarService servicio;
+    private PersistentHolidayCalendarService servicio;
 
     @Autowired
-    public CalendarioDeFeriadosController(HolidayCalendarService aHolidayCalendarService) {
-        this.servicio = aHolidayCalendarService;
+    public CalendarioDeFeriadosController(PersistentHolidayCalendarService aPersistentHolidayCalendarService) {
+        this.servicio = aPersistentHolidayCalendarService;
     }
 
     @RequestMapping(Endpoints.HOME)
@@ -39,7 +40,7 @@ public class CalendarioDeFeriadosController {
 
     @RequestMapping(value = Endpoints.OBTENER_CALENDARIOS, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    List<HolidayCalendar> obtener(){
+    List<PersistentHolidayCalendar> obtener(){
         return servicio.findAll();
     }
 

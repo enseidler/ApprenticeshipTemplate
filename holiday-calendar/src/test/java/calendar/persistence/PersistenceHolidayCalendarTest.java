@@ -2,7 +2,7 @@ package calendar.persistence;
 
 import calendar.model.*;
 import calendar.model.utils.DateInterval;
-import calendar.services.HolidayCalendarService;
+import calendar.services.PersistentHolidayCalendarService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 public class PersistenceHolidayCalendarTest {
 
     @Autowired
-    private HolidayCalendarService holidayCalendarService;
+    private PersistentHolidayCalendarService persistentHolidayCalendarService;
 
     @Test
     public void persistingAHolidayCalendarWithAHolidayRuleDayOfWeek() {
@@ -33,8 +33,10 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aFriday = LocalDate.of(2017, 5, 12);
         LocalDate aSaturday = LocalDate.of(2017, 5, 13);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
-        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
+        Long id = persistentHolidayCalendarService.save(holidayCalendar).id;
+        PersistentHolidayCalendar persistentHolidayCalendar = persistentHolidayCalendarService.findById(id);
+
+        HolidayCalendar persistedHolidayCalendar = persistentHolidayCalendar.toHolidayCalendar();
 
         assertTrue(persistedHolidayCalendar.isHoliday(aFriday));
         assertFalse(persistedHolidayCalendar.isHoliday(aSaturday));
@@ -48,8 +50,10 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aMayFirst = LocalDate.of(2017, 5, 1);
         LocalDate aMaySeventh = LocalDate.of(2017, 5, 7);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
-        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
+        Long id = persistentHolidayCalendarService.save(holidayCalendar).id;
+        PersistentHolidayCalendar persistentHolidayCalendar = persistentHolidayCalendarService.findById(id);
+
+        HolidayCalendar persistedHolidayCalendar = persistentHolidayCalendar.toHolidayCalendar();
 
         assertTrue(persistedHolidayCalendar.isHoliday(aMayFirst));
         assertFalse(persistedHolidayCalendar.isHoliday(aMaySeventh));
@@ -63,8 +67,10 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aHolidayDate = LocalDate.of(2017, 7, 10);
         LocalDate aNonHolidayDate = LocalDate.of(2017, 5, 17);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
-        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
+        Long id = persistentHolidayCalendarService.save(holidayCalendar).id;
+        PersistentHolidayCalendar persistentHolidayCalendar = persistentHolidayCalendarService.findById(id);
+
+        HolidayCalendar persistedHolidayCalendar = persistentHolidayCalendar.toHolidayCalendar();
 
         assertTrue(persistedHolidayCalendar.isHoliday(aHolidayDate));
         assertFalse(persistedHolidayCalendar.isHoliday(aNonHolidayDate));
@@ -83,8 +89,10 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aMondayInsideInterval = LocalDate.of(2017, 3, 20);
         LocalDate aMondayOutsideInterval = LocalDate.of(2014, 6, 16);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
-        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
+        Long id = persistentHolidayCalendarService.save(holidayCalendar).id;
+        PersistentHolidayCalendar persistentHolidayCalendar = persistentHolidayCalendarService.findById(id);
+
+        HolidayCalendar persistedHolidayCalendar = persistentHolidayCalendar.toHolidayCalendar();
 
         assertTrue(persistedHolidayCalendar.isHoliday(aMondayInsideInterval));
         assertFalse(persistedHolidayCalendar.isHoliday(aMondayOutsideInterval));

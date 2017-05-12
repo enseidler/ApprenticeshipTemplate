@@ -1,9 +1,8 @@
 package calendar.model;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
+
 public class HolidayRuleDate extends HolidayRule {
 
     private LocalDate date;
@@ -16,10 +15,6 @@ public class HolidayRuleDate extends HolidayRule {
 
     public LocalDate getDate() {
         return date;
-    }
-
-    private void setDate(LocalDate aDate) {
-        this.date = aDate;
     }
 
     @Override

@@ -1,17 +1,9 @@
 package calendar.model.utils;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity
-public class DateInterval {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class DateInterval {
 
     private LocalDate start;
 
@@ -27,28 +19,12 @@ public class DateInterval {
         end = anEnd;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public LocalDate getStart() {
         return start;
     }
 
-    public void setStart(LocalDate aStart) {
-        this.start = aStart;
-    }
-
     public LocalDate getEnd() {
         return end;
-    }
-
-    public void setEnd(LocalDate anEnd) {
-        this.end = anEnd;
     }
 
     public static DateInterval fromDateToDate(LocalDate aStart, LocalDate anEnd){
