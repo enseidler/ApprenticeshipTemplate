@@ -28,22 +28,21 @@ public class MonthDayUserType implements UserType {
     }
 
     @Override
-    public boolean equals(Object o, Object o1) throws HibernateException {
-        return o.equals(o1);
+    public boolean equals(Object anObject, Object anotherObject) throws HibernateException {
+        return anObject.equals(anotherObject);
     }
 
     @Override
-    public int hashCode(Object o) throws HibernateException {
-        assert (o != null);
-        return o.hashCode();
+    public int hashCode(Object anObject) throws HibernateException {
+        assert (anObject != null);
+        return anObject.hashCode();
     }
 
     @Override
-    public Object nullSafeGet(ResultSet resultSet, String[] strings, SessionImplementor sessionImplementor, Object o) throws HibernateException, SQLException {
+    public Object nullSafeGet(ResultSet resultSet, String[] strings, SessionImplementor sessionImplementor, Object anObject) throws HibernateException, SQLException {
         String monthDayValue = StandardBasicTypes.STRING.nullSafeGet(resultSet, strings[0], sessionImplementor);
-        if (monthDayValue == null) {
+        if (monthDayValue == null)
             return null;
-        }
         String month = StringUtils.split(monthDayValue, "-")[0];
         String day = StringUtils.split(monthDayValue, "-")[1];
         MonthDay monthDay = MonthDay.of(Integer.valueOf(month), Integer.valueOf(day));
@@ -51,17 +50,17 @@ public class MonthDayUserType implements UserType {
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement preparedStatement, Object o, int i, SessionImplementor sessionImplementor) throws HibernateException, SQLException {
-        MonthDay monthDay = (MonthDay) o;
+    public void nullSafeSet(PreparedStatement preparedStatement, Object anObject, int index, SessionImplementor sessionImplementor) throws HibernateException, SQLException {
+        MonthDay monthDay = (MonthDay) anObject;
         String monthDayValue = monthDay.getMonthValue() + "-" + monthDay.getDayOfMonth();
         StandardBasicTypes.STRING.nullSafeSet(preparedStatement,
-                (monthDayValue != null) ? monthDayValue : null , i, sessionImplementor);
+                (monthDayValue != null) ? monthDayValue : null , index, sessionImplementor);
     }
 
     // TODO
     @Override
-    public Object deepCopy(Object o) throws HibernateException {
-        return o;
+    public Object deepCopy(Object anObject) throws HibernateException {
+        return anObject;
     }
 
     @Override
@@ -70,17 +69,18 @@ public class MonthDayUserType implements UserType {
     }
 
     @Override
-    public Serializable disassemble(Object o) throws HibernateException {
+    public Serializable disassemble(Object anObject) throws HibernateException {
         return null;
     }
 
     @Override
-    public Object assemble(Serializable serializable, Object o) throws HibernateException {
+    public Object assemble(Serializable serializable, Object anObject) throws HibernateException {
         return serializable;
     }
 
     @Override
-    public Object replace(Object o, Object o1, Object o2) throws HibernateException {
+    public Object replace(Object anObject, Object anotherObject, Object wtfObject) throws HibernateException {
         return null;
     }
+
 }
