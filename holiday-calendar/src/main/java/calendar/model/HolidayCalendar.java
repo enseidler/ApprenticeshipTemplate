@@ -10,8 +10,10 @@ public class HolidayCalendar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "holiday_calendar_id")
     private Long id;
 
+    @JoinColumn(name = "holiday_calendar_id")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<HolidayRule> holidayRules;
 

@@ -1,5 +1,7 @@
 package calendar.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.MonthDay;
@@ -7,6 +9,7 @@ import java.time.MonthDay;
 @Entity
 public class HolidayRuleDayOfMonth extends HolidayRule {
 
+    @Type(type = "calendar.model.utils.MonthDayUserType")
     private MonthDay dayOfMonthHoliday;
 
     public HolidayRuleDayOfMonth() {}

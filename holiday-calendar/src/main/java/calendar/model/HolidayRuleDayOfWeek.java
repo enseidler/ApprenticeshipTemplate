@@ -1,5 +1,7 @@
 package calendar.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -7,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 public class HolidayRuleDayOfWeek extends HolidayRule {
 
+    @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeekHoliday;
 
     public HolidayRuleDayOfWeek() {}

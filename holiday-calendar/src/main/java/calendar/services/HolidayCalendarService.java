@@ -28,4 +28,5 @@ public class HolidayCalendarService {
     public HolidayCalendar findById(Long id) {
         return holidayCalendarRepository.findOne(id);
     }
+
 }

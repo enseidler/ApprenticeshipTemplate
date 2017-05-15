@@ -1,5 +1,7 @@
 package calendar.model.utils;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +15,10 @@ public class DateInterval {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Type(type = "java.time.LocalDate")
     private LocalDate start;
 
+    @Type(type = "java.time.LocalDate")
     private LocalDate end;
 
     public DateInterval() {}

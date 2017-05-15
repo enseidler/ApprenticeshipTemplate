@@ -1,6 +1,9 @@
 package calendar.web;
 
 import calendar.model.HolidayCalendar;
+import calendar.model.HolidayRuleDate;
+import calendar.model.HolidayRuleDayOfMonth;
+import calendar.model.HolidayRuleDayOfWeek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,9 @@ import calendar.services.HolidayCalendarService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.MonthDay;
 import java.util.List;
 
 @Controller
@@ -28,6 +34,12 @@ public class CalendarioDeFeriadosController {
     @RequestMapping(Endpoints.HOME)
     String home(Model model) {
         model.addAttribute("calendarios", obtener());
+        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        holidayCalendar.addHolidayRule(new HolidayRuleDate(LocalDate.now()));
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.FRIDAY));
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(5, 1)));
+        servicio.save(holidayCalendar);
+
         return "index";
     }
 
