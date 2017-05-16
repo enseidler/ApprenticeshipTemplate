@@ -20,21 +20,11 @@ import java.util.List;
 @Controller
 public class HolidayCalendarController {
 
-    private HolidayCalendarService service;
-
     @Autowired
-    public HolidayCalendarController(HolidayCalendarService aHolidayCalendarService) {
-        this.service = aHolidayCalendarService;
-    }
+    private HolidayCalendarService service;
 
     @RequestMapping(Endpoints.HOME)
     public String home(Model model) {
-        HolidayCalendar holidayCalendar = new HolidayCalendar();
-        holidayCalendar.addHolidayRule(new HolidayRuleDate(LocalDate.now()));
-        holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.FRIDAY));
-        holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(5, 1)));
-        service.save(holidayCalendar);
-
         return "index";
     }
 
