@@ -36,7 +36,7 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
 
     @Test
     public void whenAClientRequestsAllCalendars() throws Exception {
-        mockClient.perform(get(Endpoints.ALL_CALENDARS))
+        mockClient.perform(get("/calendarios"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().json(
@@ -44,12 +44,20 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
     }
 
     @Test
-    public void whenAClientRequestsAllCalendarsMatchingAKeyWord() throws Exception {
-        mockClient.perform(get(Endpoints.ALL_CALENDARS + "?nombre=GEN"))
+    public void whenAClientRequestsAllCalendarsWhoseNameMatchsAKeyWord() throws Exception {
+        mockClient.perform(get("/calendarios?nombre=GEN"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(content().json(
                         "[" + argentinaCalendar + "]", true));
+    }
+
+    @Test
+    public void whenAClientRequestsACalendarByItsID() throws Exception {
+        mockClient.perform(get("/calendarios/2"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().json(uruguayCalendar, true));
     }
 
 }
