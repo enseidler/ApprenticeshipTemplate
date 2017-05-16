@@ -133,4 +133,10 @@ public class HolidayCalendarTest {
         Assert.assertEquals("nombre", holidayCalendar.name());
     }
 
+    @Test
+    public void test18AHolidayCalendarNameCanBeChanged() {
+        holidayCalendar.changeName("otro nombre");
+        Assert.assertEquals("otro nombre", holidayCalendar.name());
+    }
+
 }

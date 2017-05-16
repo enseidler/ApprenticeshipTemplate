@@ -8,11 +8,12 @@ import java.util.List;
 @Entity
 public class HolidayCalendar {
 
-    private final String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "holiday_calendar_id")
     private Long id;
+
+    private String name;
 
     @JoinColumn(name = "holiday_calendar_id")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -49,5 +50,9 @@ public class HolidayCalendar {
 
     public String name() {
         return name;
+    }
+
+    public void changeName(String otherName) {
+        name = otherName;
     }
 }
