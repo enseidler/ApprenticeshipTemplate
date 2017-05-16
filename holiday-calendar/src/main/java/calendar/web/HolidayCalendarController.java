@@ -31,8 +31,8 @@ public class HolidayCalendarController {
 
     @RequestMapping(value = Endpoints.ALL_CALENDARS, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public List<HolidayCalendar> allCalendars() {
-        return service.findAll();
+    public List<HolidayCalendar> allCalendars(@RequestParam(value = "nombre", required=false) String aName) {
+        return (aName != null) ? service.findByNameContaining(aName) : service.findAll();
     }
 
     @RequestMapping(value = Endpoints.GET_CALENDAR, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

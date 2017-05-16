@@ -43,4 +43,13 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
                         "[" + argentinaCalendar + "," + uruguayCalendar + "]", true));
     }
 
+    @Test
+    public void whenAClientRequestsAllCalendarsMatchingAKeyWord() throws Exception {
+        mockClient.perform(get(Endpoints.ALL_CALENDARS + "?nombre=GEN"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().json(
+                        "[" + argentinaCalendar + "]", true));
+    }
+
 }
