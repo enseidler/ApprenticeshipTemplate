@@ -1,22 +1,11 @@
 package calendar.web;
 
 import calendar.model.HolidayCalendar;
-import calendar.repositories.HolidayCalendarRepository;
 import calendar.services.HolidayCalendarService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Arrays;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -30,8 +19,8 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
 
     @Before
     public void setUp() {
-        holidayCalendarService.save(new HolidayCalendar());
-        holidayCalendarService.save(new HolidayCalendar());
+        holidayCalendarService.save(new HolidayCalendar("nombre"));
+        holidayCalendarService.save(new HolidayCalendar("nombre"));
     }
 
     @Test

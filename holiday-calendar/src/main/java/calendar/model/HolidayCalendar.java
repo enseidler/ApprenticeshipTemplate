@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class HolidayCalendar {
 
+    private final String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "holiday_calendar_id")
@@ -17,7 +18,8 @@ public class HolidayCalendar {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<HolidayRule> holidayRules;
 
-    public HolidayCalendar() {
+    public HolidayCalendar(String aName) {
+        name = aName;
         holidayRules = new ArrayList<>();
     }
 
@@ -43,5 +45,9 @@ public class HolidayCalendar {
 
     public void addHolidayRule(HolidayRule aHolidayRule) {
         holidayRules.add(aHolidayRule);
+    }
+
+    public String name() {
+        return name;
     }
 }

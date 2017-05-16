@@ -14,7 +14,7 @@ public class HolidayCalendarTest {
 
     @Before
     public void setUp(){
-        holidayCalendar = new HolidayCalendar();
+        holidayCalendar = new HolidayCalendar("nombre");
     }
 
     @Test
@@ -126,6 +126,11 @@ public class HolidayCalendarTest {
         DateInterval interval = DateInterval.fromDateToDate(start, finish);
         holidayCalendar.addHolidayRule(new HolidayRuleWithInterval(aHolidayRule,interval));
         Assert.assertFalse(holidayCalendar.isHoliday(aMaggiesBirthday));
+    }
+
+    @Test
+    public void test17AHolidayCalendarHasName() {
+        Assert.assertEquals("nombre", holidayCalendar.name());
     }
 
 }

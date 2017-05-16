@@ -1,9 +1,6 @@
 package calendar.web;
 
 import calendar.model.HolidayCalendar;
-import calendar.model.HolidayRuleDate;
-import calendar.model.HolidayRuleDayOfMonth;
-import calendar.model.HolidayRuleDayOfWeek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,9 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import calendar.rest.AddRequest;
 import calendar.services.HolidayCalendarService;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.MonthDay;
 import java.util.List;
 
 @Controller
@@ -31,7 +25,7 @@ public class HolidayCalendarController {
     @RequestMapping(value = Endpoints.ADD_CALENDAR, method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
     String addCalendar(AddRequest request){
-        service.save(new HolidayCalendar());
+        service.save(new HolidayCalendar("nombre"));
         return "SUCCESS!";
     }
 

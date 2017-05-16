@@ -27,7 +27,7 @@ public class PersistenceHolidayCalendarTest {
 
     @Test
     public void persistingAHolidayCalendarWithAHolidayRuleDayOfWeek() {
-        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        HolidayCalendar holidayCalendar = new HolidayCalendar("nombre");
         holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.FRIDAY));
 
         LocalDate aFriday = LocalDate.of(2017, 5, 12);
@@ -42,7 +42,7 @@ public class PersistenceHolidayCalendarTest {
 
     @Test
     public void persistingAHolidayCalendarWithAHolidayRuleDayOfMonth() {
-        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        HolidayCalendar holidayCalendar = new HolidayCalendar("nombre");
         holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(5, 1)));
 
         LocalDate aMayFirst = LocalDate.of(2017, 5, 1);
@@ -57,7 +57,7 @@ public class PersistenceHolidayCalendarTest {
 
     @Test
     public void persistingAHolidayCalendarWithAHolidayRuleDate() {
-        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        HolidayCalendar holidayCalendar = new HolidayCalendar("nombre");
         holidayCalendar.addHolidayRule(new HolidayRuleDate(LocalDate.of(2017, 7, 10)));
 
         LocalDate aHolidayDate = LocalDate.of(2017, 7, 10);
@@ -72,7 +72,7 @@ public class PersistenceHolidayCalendarTest {
 
     @Test
     public void persistingAHolidayCalendarWithAHolidayRuleWithInterval() {
-        HolidayCalendar holidayCalendar = new HolidayCalendar();
+        HolidayCalendar holidayCalendar = new HolidayCalendar("nombre");
 
         LocalDate start = LocalDate.of(2015, 5, 7);
         LocalDate finish = LocalDate.of(2019, 5, 7);
