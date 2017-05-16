@@ -2,6 +2,8 @@ package calendar.web;
 
 import calendar.model.HolidayCalendar;
 import calendar.services.HolidayCalendarService;
+import com.google.gson.Gson;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,19 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
     @Autowired
     private HolidayCalendarService holidayCalendarService;
 
+    private Gson gson = new Gson();
+
+    private String argentinaCalendar;
+
+    private String uruguayCalendar;
+
     @Before
     public void setUp() {
-        holidayCalendarService.save(new HolidayCalendar("nombre"));
-        holidayCalendarService.save(new HolidayCalendar("nombre"));
+        holidayCalendarService.save(new HolidayCalendar("Argentina"));
+        holidayCalendarService.save(new HolidayCalendar("Uruguay"));
+
+        argentinaCalendar = gson.toJson(holidayCalendarService.findById(1l));
+        uruguayCalendar = gson.toJson(holidayCalendarService.findById(2l));
     }
 
     @Test
@@ -28,7 +39,8 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
         mockClient.perform(get(Endpoints.ALL_CALENDARS))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(content().json("[{id: 1, holidayRules: []},{id: 2, holidayRules: []}]"));
+                .andExpect(content().json(
+                        "[" + argentinaCalendar + "," + uruguayCalendar + "]", true));
     }
 
 }

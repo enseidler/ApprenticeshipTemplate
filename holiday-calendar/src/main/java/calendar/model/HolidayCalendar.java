@@ -13,6 +13,7 @@ public class HolidayCalendar {
     @Column(name = "holiday_calendar_id")
     private Long id;
 
+    @Column
     private String name;
 
     @JoinColumn(name = "holiday_calendar_id")
@@ -36,6 +37,14 @@ public class HolidayCalendar {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String aName) {
+        this.name = aName;
     }
 
     private void setHolidayRules(List<HolidayRule> someHolidayRules) {

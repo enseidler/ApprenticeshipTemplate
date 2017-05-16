@@ -31,7 +31,7 @@ public class HolidayCalendarController {
 
     @RequestMapping(value = Endpoints.ALL_CALENDARS, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public List<HolidayCalendar> allCalendars(){
+    public List<HolidayCalendar> allCalendars() {
         return service.findAll();
     }
 
