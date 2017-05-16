@@ -19,6 +19,8 @@ public class HolidayCalendar {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<HolidayRule> holidayRules;
 
+    public HolidayCalendar() {}
+
     public HolidayCalendar(String aName) {
         name = aName;
         holidayRules = new ArrayList<>();
