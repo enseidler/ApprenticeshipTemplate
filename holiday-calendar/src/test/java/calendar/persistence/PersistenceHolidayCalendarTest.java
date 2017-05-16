@@ -91,4 +91,14 @@ public class PersistenceHolidayCalendarTest {
         assertFalse(persistedHolidayCalendar.isHoliday(aMondayOutsideInterval));
     }
 
+    @Test
+    public void aHolidayCalendarCanBeFoundByItsName(){
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+
+        holidayCalendarService.save(holidayCalendar);
+        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findByNameContaining("GEN").get(0);
+
+        assertEquals("Argentina", persistedHolidayCalendar.name());
+    }
+
 }

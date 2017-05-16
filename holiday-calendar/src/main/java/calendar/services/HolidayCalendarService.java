@@ -3,7 +3,6 @@ package calendar.services;
 
 import calendar.model.HolidayCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import calendar.repositories.HolidayCalendarRepository;
@@ -27,6 +26,10 @@ public class HolidayCalendarService {
 
     public HolidayCalendar findById(Long id) {
         return holidayCalendarRepository.findOne(id);
+    }
+
+    public List<HolidayCalendar> findByNameContaining(String aName){
+        return holidayCalendarRepository.findByNameContainingIgnoreCase(aName);
     }
 
 }
