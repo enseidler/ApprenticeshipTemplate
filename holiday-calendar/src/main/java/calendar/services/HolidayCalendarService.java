@@ -32,4 +32,11 @@ public class HolidayCalendarService {
         return holidayCalendarRepository.findByNameContainingIgnoreCase(aName);
     }
 
+    public Boolean existsWithName(String aName) {
+        return !findByNameContaining(aName).isEmpty();
+    }
+
+    public void clear() {
+        holidayCalendarRepository.deleteAll();
+    }
 }

@@ -93,12 +93,12 @@ public class PersistenceHolidayCalendarTest {
 
     @Test
     public void aHolidayCalendarCanBeFoundByItsName(){
-        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Alemania");
 
         holidayCalendarService.save(holidayCalendar);
-        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findByNameContaining("GEN").get(0);
+        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findByNameContaining("MAN").get(0);
 
-        assertEquals("Argentina", persistedHolidayCalendar.name());
+        assertEquals("Alemania", persistedHolidayCalendar.name());
     }
 
 }
