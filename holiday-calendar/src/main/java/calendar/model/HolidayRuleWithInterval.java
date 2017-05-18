@@ -1,11 +1,13 @@
 package calendar.model;
 
 import calendar.model.utils.DateInterval;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@JsonTypeName("HolidayRuleWithInterval")
 public class HolidayRuleWithInterval extends HolidayRule {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

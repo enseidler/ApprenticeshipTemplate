@@ -1,9 +1,12 @@
 package calendar.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
+@JsonTypeName("HolidayRuleDate")
 public class HolidayRuleDate extends HolidayRule {
 
     private LocalDate date;

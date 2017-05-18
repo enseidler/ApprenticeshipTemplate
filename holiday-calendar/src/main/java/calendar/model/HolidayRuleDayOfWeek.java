@@ -1,5 +1,6 @@
 package calendar.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 @Entity
+@JsonTypeName("HolidayRuleDayOfWeek")
 public class HolidayRuleDayOfWeek extends HolidayRule {
 
     @Enumerated(EnumType.STRING)

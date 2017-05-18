@@ -1,10 +1,22 @@
 package calendar.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME,
+        include=JsonTypeInfo.As.PROPERTY,
+        property="type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value=HolidayRuleDayOfWeek.class, name="HolidayRuleDayOfWeek"),
+        @JsonSubTypes.Type(value=HolidayRuleDayOfMonth.class, name="HolidayRuleDayOfMonth"),
+        @JsonSubTypes.Type(value=HolidayRuleDate.class, name="HolidayRuleDate"),
+        @JsonSubTypes.Type(value=HolidayRuleWithInterval.class, name="HolidayRuleWithInterval")
+})
 public abstract class HolidayRule {
 
     @Id

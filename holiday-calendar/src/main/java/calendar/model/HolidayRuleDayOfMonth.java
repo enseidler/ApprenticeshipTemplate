@@ -1,5 +1,6 @@
 package calendar.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.time.MonthDay;
 
 @Entity
+@JsonTypeName("HolidayRuleDayOfMonth")
 public class HolidayRuleDayOfMonth extends HolidayRule {
 
     @Type(type = "calendar.model.utils.MonthDayUserType")
