@@ -39,4 +39,8 @@ public class HolidayCalendarService {
     public void clear() {
         holidayCalendarRepository.deleteAll();
     }
+
+    public void update(Long id, HolidayCalendar newHolidayCalendar) {
+        //TODO
+    }
 }

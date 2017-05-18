@@ -15,6 +15,7 @@ import java.util.Arrays;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -96,6 +97,18 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
         mockClient.perform(post("/calendarios")
                     .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                     .content(objectMapper.writeValueAsString(newHolidayCalendar)))
+                .andExpect(status().isOk())
+                .andExpect(content().string("SUCCESS!"));
+    }
+
+    @Test
+    public void whenAClientPutsACalendarWithHolidayRulesItReplacesTheHolidayRules() throws Exception{
+        HolidayCalendar newHolidayCalendar = new HolidayCalendar("Chile");
+        newHolidayCalendar.addHolidayRule(factory.defaultHolidayRuleDayOfWeek());
+        
+        mockClient.perform(put("/calendarios/1")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(objectMapper.writeValueAsString(newHolidayCalendar)))
                 .andExpect(status().isOk())
                 .andExpect(content().string("SUCCESS!"));
     }

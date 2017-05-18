@@ -1,7 +1,6 @@
 package calendar.web;
 
 import calendar.model.HolidayCalendar;
-import calendar.model.HolidayRuleDayOfMonth;
 import calendar.services.HolidayCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.MonthDay;
 import java.util.List;
 
 @Controller
@@ -37,7 +35,14 @@ public class HolidayCalendarController {
         return "SUCCESS!";
     }
 
-    @RequestMapping(value = Endpoints.GET_CALENDAR, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = Endpoints.AT_CALENDAR, method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public String updateCalendar(@PathVariable Long id, @RequestBody HolidayCalendar newHolidayCalendar) {
+        holidayCalendarService.update(id, newHolidayCalendar);
+        return "SUCCESS!";
+    }
+
+    @RequestMapping(value = Endpoints.AT_CALENDAR, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public HolidayCalendar getCalendar(@PathVariable Long id) {
         return holidayCalendarService.findById(id);
