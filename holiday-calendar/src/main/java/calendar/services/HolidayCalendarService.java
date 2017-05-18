@@ -45,4 +45,5 @@ public class HolidayCalendarService {
         holidayCalendar.setHolidayRules(newHolidayCalendar.getHolidayRules());
         this.save(holidayCalendar);
     }
+
 }

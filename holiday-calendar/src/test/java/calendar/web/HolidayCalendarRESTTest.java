@@ -2,6 +2,8 @@ package calendar.web;
 
 import calendar.factories.HolidayCalendarTestFactory;
 import calendar.model.HolidayCalendar;
+import calendar.model.HolidayRuleDayOfMonth;
+import calendar.model.HolidayRuleDayOfWeek;
 import calendar.repositories.HolidayCalendarRepository;
 import calendar.services.HolidayCalendarService;
 import org.junit.After;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
+import java.time.DayOfWeek;
+import java.time.MonthDay;
 import java.util.Arrays;
 
 import static org.mockito.BDDMockito.given;
@@ -19,6 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -119,6 +124,20 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.holidayRules[0]").exists());
+    }
+
+    @Test
+    public void whenAClientRequestsAllHolidayDatesForACalendarBetweenTwoDates() throws Exception{
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.SUNDAY));
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(1,5)));
+        Long id = holidayCalendarService.save(holidayCalendar);
+
+        mockClient.perform(get("/calendarios/" + id + "/feriados?desde=2016-01-01&hasta=2016-01-05"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$[0]").value("2016-01-03"))
+                .andExpect(jsonPath("$[1]").value("2016-01-05"));
     }
 
 }

@@ -5,8 +5,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.MonthDay;
+import java.util.Arrays;
+import java.util.List;
 
 public class HolidayCalendarTest {
 
@@ -137,6 +140,23 @@ public class HolidayCalendarTest {
     public void test18AHolidayCalendarNameCanBeChanged() {
         holidayCalendar.changeName("otro nombre");
         Assert.assertEquals("otro nombre", holidayCalendar.name());
+    }
+
+    @Test
+    public void test19AHolidayCalendarReturnsEveryHolidayDateInADateInterval() {
+        LocalDate start = LocalDate.of(2016, 1, 1);
+        LocalDate end = LocalDate.of(2016, 1, 5);
+        DateInterval interval = DateInterval.fromDateToDate(start, end);
+
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.SUNDAY));
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(1, 1)));
+
+        List<LocalDate> expected = Arrays.asList(
+                LocalDate.of(2016, 1, 1),
+                LocalDate.of(2016, 1, 3)
+        );
+
+        Assert.assertEquals(expected, holidayCalendar.holidayDatesBetween(interval));
     }
 
 }

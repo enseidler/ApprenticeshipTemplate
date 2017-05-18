@@ -1,9 +1,12 @@
 package calendar.model;
 
+import calendar.model.utils.DateInterval;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class HolidayCalendar {
@@ -65,5 +68,9 @@ public class HolidayCalendar {
 
     public void changeName(String otherName) {
         name = otherName;
+    }
+
+    public List<LocalDate> holidayDatesBetween(DateInterval interval) {
+        return interval.containedDates().stream().filter(date -> isHoliday(date)).collect(Collectors.toList());
     }
 }

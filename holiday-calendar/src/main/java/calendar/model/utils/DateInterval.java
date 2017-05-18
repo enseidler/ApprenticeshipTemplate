@@ -1,12 +1,20 @@
 package calendar.model.utils;
 
+import org.apache.tomcat.jni.Local;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 @Entity
 public class DateInterval {
@@ -61,5 +69,12 @@ public class DateInterval {
 
     public Boolean contains(LocalDate aDate) {
         return aDate.isAfter(start) && aDate.isBefore(end) || aDate.equals(start) || aDate.equals(end);
+    }
+
+    public List<LocalDate> containedDates() {
+
+        Long numOfDays = ChronoUnit.DAYS.between(start, end);
+        List<LocalDate> dates = Stream.iterate(start, date -> date.plusDays(1)).limit(numOfDays+1).collect(Collectors.toList());
+        return dates;
     }
 }
