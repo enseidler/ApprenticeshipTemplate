@@ -3,6 +3,7 @@ package calendar.persistence;
 import calendar.model.*;
 import calendar.model.utils.DateInterval;
 import calendar.services.HolidayCalendarService;
+import net.sf.cglib.core.Local;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,22 @@ public class PersistenceHolidayCalendarTest {
         HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findByNameContaining("MAN").get(0);
 
         assertEquals("Alemania", persistedHolidayCalendar.name());
+    }
+
+    @Test
+    public void aHolidayCalendarCanBeUpdated(){
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Alemania");
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.SATURDAY));
+        Long id = holidayCalendarService.save(holidayCalendar);
+
+        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
+        persistedHolidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.SUNDAY));
+
+        holidayCalendarService.update(id, persistedHolidayCalendar);
+        HolidayCalendar updatedHolidayCalendar = holidayCalendarService.findById(id);
+        LocalDate aSunday = LocalDate.of(2017, 5, 21);
+
+        assertTrue(updatedHolidayCalendar.isHoliday(aSunday));
     }
 
 }

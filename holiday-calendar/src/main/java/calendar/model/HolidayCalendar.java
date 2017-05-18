@@ -47,7 +47,7 @@ public class HolidayCalendar {
         this.name = aName;
     }
 
-    private void setHolidayRules(List<HolidayRule> someHolidayRules) {
+    public void setHolidayRules(List<HolidayRule> someHolidayRules) {
         this.holidayRules = someHolidayRules;
     }
 

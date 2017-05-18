@@ -41,6 +41,8 @@ public class HolidayCalendarService {
     }
 
     public void update(Long id, HolidayCalendar newHolidayCalendar) {
-        //TODO
+        HolidayCalendar holidayCalendar = this.findById(id);
+        holidayCalendar.setHolidayRules(newHolidayCalendar.getHolidayRules());
+        this.save(holidayCalendar);
     }
 }
