@@ -54,7 +54,10 @@ public class HolidayCalendarController {
     @ResponseBody
     public List<LocalDate> getHolidayDatesDuring(@PathVariable Long id, @RequestParam(value = "desde", required=false) String start, @RequestParam(value = "hasta", required=false) String end) {
         HolidayCalendar holidayCalendar = holidayCalendarService.findById(id);
-        DateInterval interval = DateInterval.fromDateToDate(LocalDate.parse(start), LocalDate.parse(end));
+        LocalDate startDate = (start == null) ? LocalDate.of(LocalDate.now().getYear(), 1, 1) : LocalDate.parse(start);
+        LocalDate endDate = (end == null) ? LocalDate.of(LocalDate.now().getYear(), 12, 31) : LocalDate.parse(end);
+        DateInterval interval = DateInterval.fromDateToDate(startDate, endDate);
+
         return holidayCalendar.holidayDatesBetween(interval);
     }
 

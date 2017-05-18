@@ -2,6 +2,7 @@ package calendar.web;
 
 import calendar.factories.HolidayCalendarTestFactory;
 import calendar.model.HolidayCalendar;
+import calendar.model.HolidayRuleDate;
 import calendar.model.HolidayRuleDayOfMonth;
 import calendar.model.HolidayRuleDayOfWeek;
 import calendar.repositories.HolidayCalendarRepository;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.Arrays;
 
@@ -138,6 +140,20 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0]").value("2016-01-03"))
                 .andExpect(jsonPath("$[1]").value("2016-01-05"));
+    }
+
+    @Test
+    public void whenAClientRequestsAllHolidayDatesForACalendarWithoutSpecificDates() throws Exception{
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+        holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(1,5)));
+        holidayCalendar.addHolidayRule(new HolidayRuleDate(LocalDate.of(2017, 10, 16)));
+        Long id = holidayCalendarService.save(holidayCalendar);
+
+        mockClient.perform(get("/calendarios/" + id + "/feriados"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$[0]").value("2017-01-05"))
+                .andExpect(jsonPath("$[1]").value("2017-10-16"));
     }
 
 }
