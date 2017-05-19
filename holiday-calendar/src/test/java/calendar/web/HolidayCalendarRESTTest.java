@@ -134,15 +134,52 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
     }
 
     @Test
-    public void whenAClientPostsAHolidayRuleForAHolidayCalendar() throws Exception{
+    public void whenAClientPostsAHolidayRuleDayOfWeekForAHolidayCalendar() throws Exception{
         HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
         Long id = holidayCalendarService.save(holidayCalendar).getId();
 
-        HolidayRuleDayOfMonth holidayRule = new HolidayRuleDayOfMonth(MonthDay.of(5,1));
+        mockClient.perform(post("/calendarios/" + id + "/reglas_de_feriado")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(objectMapper.writeValueAsString(factory.defaultHolidayRuleDayOfWeek())))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Argentina"))
+                .andExpect(jsonPath("$.holidayRules[0]").exists());
+    }
+
+    @Test
+    public void whenAClientPostsAHolidayRuleDayOfMonthForAHolidayCalendar() throws Exception{
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
 
         mockClient.perform(post("/calendarios/" + id + "/reglas_de_feriado")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(objectMapper.writeValueAsString(holidayRule)))
+                .content(objectMapper.writeValueAsString(factory.defaultHolidayRuleDayOfMonth())))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Argentina"))
+                .andExpect(jsonPath("$.holidayRules[0]").exists());
+    }
+
+    @Test
+    public void whenAClientPostsAHolidayRuleDateForAHolidayCalendar() throws Exception{
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
+
+        mockClient.perform(post("/calendarios/" + id + "/reglas_de_feriado")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(objectMapper.writeValueAsString(factory.defaultHolidayRuleDate())))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Argentina"))
+                .andExpect(jsonPath("$.holidayRules[0]").exists());
+    }
+
+    @Test
+    public void whenAClientPostsAHolidayRuleWithIntervalForAHolidayCalendar() throws Exception{
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
+
+        mockClient.perform(post("/calendarios/" + id + "/reglas_de_feriado")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(objectMapper.writeValueAsString(factory.defaultHolidayRuleWithInterval())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Argentina"))
                 .andExpect(jsonPath("$.holidayRules[0]").exists());
