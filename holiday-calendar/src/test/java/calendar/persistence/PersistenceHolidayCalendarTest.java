@@ -118,4 +118,17 @@ public class PersistenceHolidayCalendarTest {
         assertTrue(updatedHolidayCalendar.isHoliday(aSunday));
     }
 
+    @Test
+    public void aHolidayRuleCanBeAddedToAHolidayCalendar(){
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Alemania");
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
+        HolidayRuleDayOfMonth newHolidayRule = new HolidayRuleDayOfMonth(MonthDay.of(5,1));
+
+        HolidayCalendar persistedHolidayCalendar = holidayCalendarService.addHolidayRuleToCalendar(id, newHolidayRule);
+
+        LocalDate aFirstOfMay = LocalDate.of(2010, 5,1);
+
+        assertTrue(persistedHolidayCalendar.isHoliday(aFirstOfMay));
+    }
+
 }

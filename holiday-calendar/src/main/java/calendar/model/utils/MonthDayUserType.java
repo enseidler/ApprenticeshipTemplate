@@ -55,13 +55,20 @@ public class MonthDayUserType implements UserType {
         MonthDay monthDay = (MonthDay) anObject;
         String monthDayValue = monthDay.getMonthValue() + "-" + monthDay.getDayOfMonth();
         StandardBasicTypes.STRING.nullSafeSet(preparedStatement,
-                (monthDayValue != null) ? monthDayValue : null , index, sessionImplementor);
+                monthDayValue, index, sessionImplementor);
     }
 
     // TODO
     @Override
     public Object deepCopy(Object anObject) throws HibernateException {
-        return anObject;
+        if(anObject==null)
+            return null;
+        else{
+            MonthDay existObj=(MonthDay)anObject;
+            MonthDay newObj = MonthDay.of(existObj.getMonthValue(), existObj.getDayOfMonth());
+
+            return newObj;
+        }
     }
 
     @Override
@@ -71,6 +78,10 @@ public class MonthDayUserType implements UserType {
 
     @Override
     public Serializable disassemble(Object anObject) throws HibernateException {
+        Object  deepCopy=deepCopy(anObject);
+
+        if(!(deepCopy instanceof Serializable))
+            return (Serializable)deepCopy;
         return null;
     }
 
@@ -80,8 +91,8 @@ public class MonthDayUserType implements UserType {
     }
 
     @Override
-    public Object replace(Object anObject, Object anotherObject, Object wtfObject) throws HibernateException {
-        return null;
+    public Object replace(Object original, Object anotherObject, Object wtfObject) throws HibernateException {
+        return deepCopy(original);
     }
 
 }

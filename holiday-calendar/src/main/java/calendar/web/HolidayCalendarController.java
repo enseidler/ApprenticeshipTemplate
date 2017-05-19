@@ -1,6 +1,7 @@
 package calendar.web;
 
 import calendar.model.HolidayCalendar;
+import calendar.model.HolidayRule;
 import calendar.model.utils.DateInterval;
 import calendar.services.HolidayCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 @Controller
 public class HolidayCalendarController {
@@ -53,13 +58,25 @@ public class HolidayCalendarController {
     @ResponseBody
     public List<LocalDate> getHolidayDatesDuring(@PathVariable Long id, @RequestParam(value = "desde", required=false) String start, @RequestParam(value = "hasta", required=false) String end) {
         HolidayCalendar holidayCalendar = holidayCalendarService.findById(id);
-        LocalDate startDate = (start == null) ? LocalDate.of(LocalDate.now().getYear(), 1, 1) : LocalDate.parse(start);
-        LocalDate endDate = (end == null) ? LocalDate.of(LocalDate.now().getYear(), 12, 31) : LocalDate.parse(end);
-        DateInterval interval = DateInterval.fromDateToDate(startDate, endDate);
+
+        String firstDayOfYear = LocalDate.now().with(firstDayOfYear()).toString();
+        String lastDayOfYear = LocalDate.now().with(lastDayOfYear()).toString();
+
+        Optional<String> startDate = Optional.ofNullable(start);
+        Optional<String> endDate = Optional.ofNullable(end);
+
+        DateInterval interval = DateInterval.fromDateToDate(
+                LocalDate.parse(startDate.orElse(firstDayOfYear)),
+                LocalDate.parse(endDate.orElse(lastDayOfYear))
+        );
 
         return holidayCalendar.holidayDatesBetween(interval);
     }
 
-
+    @RequestMapping(value = Endpoints.ADD_HOLIDAY_RULE, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public HolidayCalendar addHolidayRule(@PathVariable Long id, @RequestBody HolidayRule newHolidayRule) {
+        return holidayCalendarService.addHolidayRuleToCalendar(id, newHolidayRule);
+    }
 
 }

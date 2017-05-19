@@ -24,7 +24,7 @@ public class HolidayRuleDayOfMonth extends HolidayRule {
         return dayOfMonthHoliday;
     }
 
-    private void setDayOfMonthHoliday(MonthDay aDayOfMonth) {
+    public void setDayOfMonthHoliday(MonthDay aDayOfMonth) {
         this.dayOfMonthHoliday = aDayOfMonth;
     }
 

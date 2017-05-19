@@ -2,6 +2,7 @@ package calendar.services;
 
 
 import calendar.model.HolidayCalendar;
+import calendar.model.HolidayRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +47,10 @@ public class HolidayCalendarService {
         return this.save(holidayCalendar);
     }
 
+    public HolidayCalendar addHolidayRuleToCalendar(Long id, HolidayRule newHolidayRule) {
+        HolidayCalendar holidayCalendar = findById(id);
+        holidayCalendar.addHolidayRule(newHolidayRule);
 
-
+        return save(holidayCalendar);
+    }
 }

@@ -133,4 +133,19 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
                 .andExpect(jsonPath("$[1]").value("2017-10-16"));
     }
 
+    @Test
+    public void whenAClientPostsAHolidayRuleForAHolidayCalendar() throws Exception{
+        HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
+
+        HolidayRuleDayOfMonth holidayRule = new HolidayRuleDayOfMonth(MonthDay.of(5,1));
+
+        mockClient.perform(post("/calendarios/" + id + "/reglas_de_feriado")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(objectMapper.writeValueAsString(holidayRule)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Argentina"))
+                .andExpect(jsonPath("$.holidayRules[0]").exists());
+    }
+
 }
