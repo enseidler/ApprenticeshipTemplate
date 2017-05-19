@@ -13,3 +13,6 @@ RemoteSystemsTempFiles
 
 # Maven
 target/
+
+# Database
+/db
