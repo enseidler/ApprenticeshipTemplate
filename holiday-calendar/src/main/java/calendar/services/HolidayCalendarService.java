@@ -16,8 +16,8 @@ public class HolidayCalendarService {
     private HolidayCalendarRepository holidayCalendarRepository;
 
     @Transactional
-    public Long save(HolidayCalendar aHolidayCalendar) {
-        return holidayCalendarRepository.save(aHolidayCalendar).getId();
+    public HolidayCalendar save(HolidayCalendar aHolidayCalendar) {
+        return holidayCalendarRepository.save(aHolidayCalendar);
     }
 
     public List<HolidayCalendar> findAll() {
@@ -40,10 +40,12 @@ public class HolidayCalendarService {
         holidayCalendarRepository.deleteAll();
     }
 
-    public void update(Long id, HolidayCalendar newHolidayCalendar) {
+    public HolidayCalendar update(Long id, HolidayCalendar newHolidayCalendar) {
         HolidayCalendar holidayCalendar = this.findById(id);
-        holidayCalendar.setHolidayRules(newHolidayCalendar.getHolidayRules());
-        this.save(holidayCalendar);
+        holidayCalendar.replaceHolidayRules(newHolidayCalendar.holidayRules());
+        return this.save(holidayCalendar);
     }
+
+
 
 }

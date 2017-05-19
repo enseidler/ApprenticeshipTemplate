@@ -35,7 +35,7 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aFriday = LocalDate.of(2017, 5, 12);
         LocalDate aSaturday = LocalDate.of(2017, 5, 13);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
         HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
 
         assertTrue(persistedHolidayCalendar.isHoliday(aFriday));
@@ -50,7 +50,7 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aMayFirst = LocalDate.of(2017, 5, 1);
         LocalDate aMaySeventh = LocalDate.of(2017, 5, 7);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
         HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
 
         assertTrue(persistedHolidayCalendar.isHoliday(aMayFirst));
@@ -65,7 +65,7 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aHolidayDate = LocalDate.of(2017, 7, 10);
         LocalDate aNonHolidayDate = LocalDate.of(2017, 5, 17);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
         HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
 
         assertTrue(persistedHolidayCalendar.isHoliday(aHolidayDate));
@@ -85,7 +85,7 @@ public class PersistenceHolidayCalendarTest {
         LocalDate aMondayInsideInterval = LocalDate.of(2017, 3, 20);
         LocalDate aMondayOutsideInterval = LocalDate.of(2014, 6, 16);
 
-        Long id = holidayCalendarService.save(holidayCalendar);
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
         HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
 
         assertTrue(persistedHolidayCalendar.isHoliday(aMondayInsideInterval));
@@ -106,7 +106,7 @@ public class PersistenceHolidayCalendarTest {
     public void aHolidayCalendarCanBeUpdated(){
         HolidayCalendar holidayCalendar = new HolidayCalendar("Alemania");
         holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.SATURDAY));
-        Long id = holidayCalendarService.save(holidayCalendar);
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
 
         HolidayCalendar persistedHolidayCalendar = holidayCalendarService.findById(id);
         persistedHolidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.SUNDAY));

@@ -32,9 +32,8 @@ public class HolidayCalendarController {
 
     @RequestMapping(value = Endpoints.ADD_CALENDAR, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String addCalendar(@RequestBody HolidayCalendar newHolidayCalendar) {
-        holidayCalendarService.save(newHolidayCalendar);
-        return "SUCCESS!";
+    public HolidayCalendar addCalendar(@RequestBody HolidayCalendar newHolidayCalendar) {
+        return holidayCalendarService.save(newHolidayCalendar);
     }
 
     @RequestMapping(value = Endpoints.GET_CALENDAR, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -45,9 +44,9 @@ public class HolidayCalendarController {
 
     @RequestMapping(value = Endpoints.UPDATE_CALENDAR, method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public String updateCalendar(@PathVariable Long id, @RequestBody HolidayCalendar newHolidayCalendar) {
+    public HolidayCalendar updateCalendar(@PathVariable Long id, @RequestBody HolidayCalendar newHolidayCalendar) {
         holidayCalendarService.update(id, newHolidayCalendar);
-        return "SUCCESS!";
+        return holidayCalendarService.findById(id);
     }
 
     @RequestMapping(value = Endpoints.HOLIDAYS_DURING, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

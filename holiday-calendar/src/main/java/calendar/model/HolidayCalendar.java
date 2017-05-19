@@ -30,27 +30,23 @@ public class HolidayCalendar {
         holidayRules = new ArrayList<>();
     }
 
-    public List<HolidayRule> getHolidayRules() {
-        return holidayRules;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String aName) {
-        this.name = aName;
+    public List<HolidayRule> getHolidayRules() {
+        return holidayRules;
     }
 
-    public void setHolidayRules(List<HolidayRule> someHolidayRules) {
+    public List<HolidayRule> holidayRules() {
+        return holidayRules;
+    }
+
+    public void replaceHolidayRules(List<HolidayRule> someHolidayRules) {
         this.holidayRules = someHolidayRules;
     }
 
@@ -71,6 +67,8 @@ public class HolidayCalendar {
     }
 
     public List<LocalDate> holidayDatesBetween(DateInterval interval) {
-        return interval.containedDates().stream().filter(date -> isHoliday(date)).collect(Collectors.toList());
+        return interval.containedDatesThatSatisfy(date -> isHoliday(date));
+
     }
+
 }

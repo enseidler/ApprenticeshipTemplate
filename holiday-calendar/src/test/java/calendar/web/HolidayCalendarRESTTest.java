@@ -5,27 +5,17 @@ import calendar.model.HolidayCalendar;
 import calendar.model.HolidayRuleDate;
 import calendar.model.HolidayRuleDayOfMonth;
 import calendar.model.HolidayRuleDayOfWeek;
-import calendar.repositories.HolidayCalendarRepository;
 import calendar.services.HolidayCalendarService;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.MonthDay;
-import java.util.Arrays;
 
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -66,7 +56,7 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
 
     @Test
     public void whenAClientRequestsACalendarByItsID() throws Exception {
-        Long id = holidayCalendarService.save(new HolidayCalendar("Uruguay"));
+        Long id = holidayCalendarService.save(new HolidayCalendar("Uruguay")).getId();
 
         mockClient.perform(get("/calendarios/" + id))
                 .andExpect(status().isOk())
@@ -82,12 +72,8 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
                     .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                     .content(objectMapper.writeValueAsString(newHolidayCalendar)))
                 .andExpect(status().isOk())
-                .andExpect(content().string("SUCCESS!"));
-
-        mockClient.perform(get("/calendarios?nombre=Chile"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$[0].name").value("Chile"));
+                .andExpect(jsonPath("$.name").value("Chile"))
+                .andExpect(jsonPath("$.holidayRules").isEmpty());
     }
 
     @Test
@@ -102,17 +88,13 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
                     .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                     .content(objectMapper.writeValueAsString(newHolidayCalendar)))
                 .andExpect(status().isOk())
-                .andExpect(content().string("SUCCESS!"));
-
-        mockClient.perform(get("/calendarios?nombre=Chile"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$[0].name").value("Chile"));
+                .andExpect(jsonPath("$.name").value("Chile"))
+                .andExpect(jsonPath("$.holidayRules.size()").value(4));
     }
 
     @Test
     public void whenAClientPutsACalendarWithHolidayRulesItReplacesTheHolidayRules() throws Exception{
-        Long id = holidayCalendarService.save(new HolidayCalendar("Uruguay"));
+        Long id = holidayCalendarService.save(new HolidayCalendar("Uruguay")).getId();
         HolidayCalendar newHolidayCalendar = holidayCalendarService.findById(id);
         newHolidayCalendar.addHolidayRule(factory.defaultHolidayRuleDayOfWeek());
 
@@ -120,11 +102,6 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(objectMapper.writeValueAsString(newHolidayCalendar)))
                 .andExpect(status().isOk())
-                .andExpect(content().string("SUCCESS!"));
-
-        mockClient.perform(get("/calendarios/" + id))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.holidayRules[0]").exists());
     }
 
@@ -133,7 +110,7 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
         HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
         holidayCalendar.addHolidayRule(new HolidayRuleDayOfWeek(DayOfWeek.SUNDAY));
         holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(1,5)));
-        Long id = holidayCalendarService.save(holidayCalendar);
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
 
         mockClient.perform(get("/calendarios/" + id + "/feriados?desde=2016-01-01&hasta=2016-01-05"))
                 .andExpect(status().isOk())
@@ -147,7 +124,7 @@ public class HolidayCalendarRESTTest extends RESTTestBase {
         HolidayCalendar holidayCalendar = new HolidayCalendar("Argentina");
         holidayCalendar.addHolidayRule(new HolidayRuleDayOfMonth(MonthDay.of(1,5)));
         holidayCalendar.addHolidayRule(new HolidayRuleDate(LocalDate.of(2017, 10, 16)));
-        Long id = holidayCalendarService.save(holidayCalendar);
+        Long id = holidayCalendarService.save(holidayCalendar).getId();
 
         mockClient.perform(get("/calendarios/" + id + "/feriados"))
                 .andExpect(status().isOk())
