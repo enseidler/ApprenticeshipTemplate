@@ -8,7 +8,7 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         get :calendars
         body = JSON.parse(response.body)
         expect(response).to be_success
-        expect(body['holiday_calendars']).to eq []
+        expect(body).to eq []
       end
     end
 
@@ -19,8 +19,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         get :calendars
         body = JSON.parse(response.body)
         expect(response).to be_success
-        expect(body['holiday_calendars'][0]['id']).to eq argentina_calendar.id
-        expect(body['holiday_calendars'][1]['id']).to eq mexico_calendar.id
+        expect(body[0]['id']).to eq argentina_calendar.id
+        expect(body[1]['id']).to eq mexico_calendar.id
       end
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         get :calendar, params: {id: argentina_calendar.id }
         body = JSON.parse(response.body)
         expect(response).to be_success
-        expect(body['holiday_calendar']['id']).to eq argentina_calendar.id
+        expect(body['id']).to eq argentina_calendar.id
 
       end
     end

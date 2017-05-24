@@ -1253,3 +1253,100 @@ Processing by HolidayCalendarsController#calendar as HTML
   [1m[36mHolidayRule Load (0.3ms)[0m  [1m[34mSELECT `holiday_rules`.* FROM `holiday_rules` WHERE `holiday_rules`.`holiday_calendar_id` = 41[0m
 Completed 200 OK in 5ms (Views: 2.0ms | ActiveRecord: 0.7ms)
   [1m[35m (30.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Argentina', '2017-05-24 14:53:14', '2017-05-24 14:53:14')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Mexico', '2017-05-24 14:53:14', '2017-05-24 14:53:14')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.3ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.3ms)
+  [1m[35m (91.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Argentina', '2017-05-24 14:54:16', '2017-05-24 14:54:16')[0m
+  [1m[35m (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Mexico', '2017-05-24 14:54:16', '2017-05-24 14:54:16')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.5ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.5ms)
+  [1m[35m (117.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Argentina', '2017-05-24 14:54:29', '2017-05-24 14:54:29')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Mexico', '2017-05-24 14:54:29', '2017-05-24 14:54:29')[0m
+  [1m[35m (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.5ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.5ms)
+  [1m[35m (73.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.4ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 200 OK in 7ms (Views: 1.5ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.4ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 200 OK in 7ms (Views: 1.5ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.4ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 200 OK in 6ms (Views: 1.4ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Argentina', '2017-05-24 16:17:33', '2017-05-24 16:17:33')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Mexico', '2017-05-24 16:17:33', '2017-05-24 16:17:33')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.2ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+  [1m[36mHolidayRule Load (0.5ms)[0m  [1m[34mSELECT `holiday_rules`.* FROM `holiday_rules` WHERE `holiday_rules`.`holiday_calendar_id` = 48[0m
+  [1m[36mHolidayRule Load (0.2ms)[0m  [1m[34mSELECT `holiday_rules`.* FROM `holiday_rules` WHERE `holiday_rules`.`holiday_calendar_id` = 49[0m
+Completed 200 OK in 54ms (Views: 15.2ms | ActiveRecord: 38.9ms)
+  [1m[35m (26.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `holiday_calendars` (`name`, `created_at`, `updated_at`) VALUES ('Argentina', '2017-05-24 16:17:34', '2017-05-24 16:17:34')[0m
+  [1m[35m (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by HolidayCalendarsController#calendar as HTML
+  Parameters: {"id"=>"50"}
+  [1m[36mHolidayCalendar Load (0.4ms)[0m  [1m[34mSELECT  `holiday_calendars`.* FROM `holiday_calendars` WHERE `holiday_calendars`.`id` = 50 LIMIT 1[0m
+  [1m[36mHolidayRule Load (0.3ms)[0m  [1m[34mSELECT `holiday_rules`.* FROM `holiday_rules` WHERE `holiday_rules`.`holiday_calendar_id` = 50[0m
+Completed 200 OK in 4ms (Views: 1.4ms | ActiveRecord: 0.7ms)
+  [1m[35m (30.8ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.4ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 200 OK in 7ms (Views: 2.1ms | ActiveRecord: 0.9ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Processing by HolidayCalendarsController#calendars as HTML
+  [1m[36mHolidayCalendar Load (0.4ms)[0m  [1m[34mSELECT `holiday_calendars`.* FROM `holiday_calendars`[0m
+Completed 200 OK in 7ms (Views: 1.5ms | ActiveRecord: 0.8ms)
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m

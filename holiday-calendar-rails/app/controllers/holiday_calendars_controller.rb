@@ -2,12 +2,14 @@ class HolidayCalendarsController < ApplicationController
 
   # GET /calendarios
   def calendars
-    render json: HolidayCalendar.all
+    calendars = HolidayCalendar.all
+    render json: calendars
   end
 
   # GET /calendarios/1
   def calendar
-    render json: HolidayCalendar.find(params[:id])
+    calendar = HolidayCalendar.find(params[:id])
+    render json: calendar
   end
 
 end
