@@ -10,26 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523165310) do
+ActiveRecord::Schema.define(version: 20170524120218) do
 
   create_table "holiday_calendars", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "holiday_rules"
-    t.integer "holiday_rule_id"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "holiday_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "day_of_week_holiday"
     t.integer "month"
     t.integer "day_of_month_holiday"
     t.date "date_holiday"
+    t.bigint "holiday_calendar_id"
+    t.bigint "holiday_rule_id"
     t.date "begins"
     t.date "ends"
-    t.bigint "holiday_rule_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["holiday_calendar_id"], name: "index_holiday_rules_on_holiday_calendar_id"
     t.index ["holiday_rule_id"], name: "index_holiday_rules_on_holiday_rule_id"
   end
 
