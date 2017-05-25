@@ -12,10 +12,14 @@ class HolidayCalendarsController < ApplicationController
     render json: calendar
   end
 
+  # POST /calendarios
   def create
+    rules = params[:holiday_rules].map do |rule|
+      HolidayRuleDeserializer.deserialize(rule)
+    end
     new_calendar = HolidayCalendar.create!(
       name: params[:name],
-      holiday_rules: params[:holiday_rules])
+      holiday_rules: rules)
     render json: new_calendar
   end
 

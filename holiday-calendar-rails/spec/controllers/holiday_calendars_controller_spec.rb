@@ -59,8 +59,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
   end
 
   describe 'POST #create' do
-    context '' do
-      it 'returns a success response with created calendar' do
+    context 'with a :name and :holiday_rules empty' do
+      it 'returns a success response with a calendar without rules' do
         json_body_request = {
             name: 'Argentina',
             holiday_rules: []
@@ -71,6 +71,25 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         expect(response).to be_success
         expect(body['name']).to eq 'Argentina'
         expect(body['holiday_rules']).to eq []
+      end
+    end
+
+    context 'with a :name and :holiday_rules with one rule' do
+      it 'returns a success response with a calendar with one rule' do
+        json_body_request = {
+            name: 'Argentina',
+            holiday_rules: [
+                {type: 'HolidayRuleDayOfWeek', day_of_week_holiday: 1}
+            ]
+        }
+        post :create, params: json_body_request, as: :json
+        body = JSON.parse(response.body)
+        created_calendar = HolidayCalendar.find body['id']
+
+        expect(response).to be_success
+        expect(body['name']).to eq 'Argentina'
+        expect(created_calendar.is_holiday? Date.new(2017, 5, 1)).to be_truthy
+        expect(created_calendar.is_holiday? Date.new(2017, 5, 2)).to be_falsey
       end
     end
   end
