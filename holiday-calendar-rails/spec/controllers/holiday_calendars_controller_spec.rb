@@ -74,22 +74,41 @@ RSpec.describe HolidayCalendarsController, type: :controller do
       end
     end
 
-    context 'with a :name and :holiday_rules with one rule' do
-      it 'returns a success response with a calendar with one rule' do
+    context 'with a :name and :holiday_rules with one HolidayRuleDayOfWeek' do
+      it 'returns a success response with a calendar with that rule' do
         json_body_request = {
             name: 'Argentina',
             holiday_rules: [
-                {type: 'HolidayRuleDayOfWeek', day_of_week_holiday: 1}
+                {type: 'HolidayRuleDayOfWeek', day_of_week_holiday: 3}
             ]
         }
         post :create, params: json_body_request, as: :json
         body = JSON.parse(response.body)
         created_calendar = HolidayCalendar.find body['id']
+        a_wednesday = Date.new(2017, 6, 21)
 
         expect(response).to be_success
         expect(body['name']).to eq 'Argentina'
-        expect(created_calendar.is_holiday? Date.new(2017, 5, 1)).to be_truthy
-        expect(created_calendar.is_holiday? Date.new(2017, 5, 2)).to be_falsey
+        expect(created_calendar.is_holiday? a_wednesday).to be_truthy
+      end
+    end
+
+    context 'with a :name and :holiday_rules with one HolidayRuleDayOfMonth' do
+      it 'returns a success response with a calendar with that rule' do
+        json_body_request = {
+            name: 'Argentina',
+            holiday_rules: [
+                {type: 'HolidayRuleDayOfMonth', month: 5, day_of_month_holiday: 1}
+            ]
+        }
+        post :create, params: json_body_request, as: :json
+        body = JSON.parse(response.body)
+        created_calendar = HolidayCalendar.find body['id']
+        a_may_first = Date.new(2017, 5, 1)
+
+        expect(response).to be_success
+        expect(body['name']).to eq 'Argentina'
+        expect(created_calendar.is_holiday? a_may_first).to be_truthy
       end
     end
   end
