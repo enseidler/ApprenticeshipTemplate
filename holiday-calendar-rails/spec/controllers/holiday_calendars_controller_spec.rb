@@ -111,6 +111,25 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         expect(created_calendar.is_holiday? a_may_first).to be_truthy
       end
     end
+
+    context 'with a :name and :holiday_rules with one HolidayRuleDate' do
+      it 'returns a success response with a calendar with that rule' do
+        json_body_request = {
+            name: 'Argentina',
+            holiday_rules: [
+                {type: 'HolidayRuleDate', date_holiday: '2017-01-01'}
+            ]
+        }
+        post :create, params: json_body_request, as: :json
+        body = JSON.parse(response.body)
+        created_calendar = HolidayCalendar.find body['id']
+        a_date_holiday = Date.new(2017, 1, 1)
+
+        expect(response).to be_success
+        expect(body['name']).to eq 'Argentina'
+        expect(created_calendar.is_holiday? a_date_holiday).to be_truthy
+      end
+    end
   end
 
 end
