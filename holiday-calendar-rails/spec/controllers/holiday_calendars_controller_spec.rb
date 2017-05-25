@@ -130,6 +130,32 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         expect(created_calendar.is_holiday? a_date_holiday).to be_truthy
       end
     end
+
+    context 'with a :name and :holiday_rules with one HolidayRuleWithPeriod' do
+      it 'returns a success response with a calendar with that rule' do
+        json_body_request = {
+            name: 'Argentina',
+            holiday_rules: [
+                {
+                    type: 'HolidayRuleWithPeriod',
+                    holiday_rule: {type: 'HolidayRuleDayOfMonth', month: 10, day_of_month_holiday: 16},
+                    begins: '2017-01-01',
+                    ends: '2017-12-31'
+                }
+            ]
+        }
+        post :create, params: json_body_request, as: :json
+        body = JSON.parse(response.body)
+        created_calendar = HolidayCalendar.find body['id']
+        a_october_sixteen_inside_period = Date.new(2017, 10, 16)
+        a_october_sixteen_outside_period = Date.new(2018, 10, 16)
+
+        expect(response).to be_success
+        expect(body['name']).to eq 'Argentina'
+        expect(created_calendar.is_holiday? a_october_sixteen_inside_period).to be_truthy
+        expect(created_calendar.is_holiday? a_october_sixteen_outside_period).to be_falsey
+      end
+    end
   end
 
 end
