@@ -302,7 +302,7 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 5, day_of_month_holiday: 1)
         HolidayCalendar.create! name: 'Uruguay'
 
-        get :where_is_holiday, params: {fecha: '2017-05-01'}, as: :json
+        get :where_is_holiday, params: {fecha: '2017-05-01'}
         body = JSON.parse(response.body)
 
         expect(response).to be_success
@@ -314,10 +314,10 @@ RSpec.describe HolidayCalendarsController, type: :controller do
     context 'without :fecha' do
       it 'returns a success response with all calendars that have today date as holiday' do
         a_calendar = HolidayCalendar.create! name: 'Argentina'
-        a_calendar.add_rule(HolidayRuleDayOfWeek.create! day_of_week_holiday: 5)
+        a_calendar.add_rule(HolidayRuleDayOfWeek.create! day_of_week_holiday: Date.today.cwday)
         another_calendar = HolidayCalendar.create! name: 'Uruguay'
-        another_calendar.add_rule(HolidayRuleDayOfWeek.create! day_of_week_holiday: 5)
-        HolidayCalendar.create! name: 'Uruguay'
+        another_calendar.add_rule(HolidayRuleDate.create! date_holiday: Date.today)
+        HolidayCalendar.create! name: 'Mexico'
 
         get :where_is_holiday
         body = JSON.parse(response.body)
