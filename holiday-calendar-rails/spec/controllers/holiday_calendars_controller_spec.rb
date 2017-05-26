@@ -158,4 +158,122 @@ RSpec.describe HolidayCalendarsController, type: :controller do
     end
   end
 
+  describe 'PUT #update' do
+    context 'with a :name and :holiday_rules with one HolidayRuleDate' do
+      it 'returns a success response with a calendar with that rule' do
+        calendar_to_update = HolidayCalendar.create! name: 'Groenlandia'
+
+        json_body_request = {
+            id: calendar_to_update.id,
+            name: 'Nuevo Nombre',
+            holiday_rules: [
+                {type: 'HolidayRuleDate', date_holiday: '2017-01-01'},
+                {type: 'HolidayRuleDayOfWeek', day_of_week_holiday: 1},
+            ]
+        }
+        put :update, params: json_body_request, as: :json
+        body = JSON.parse(response.body)
+        created_calendar = HolidayCalendar.find body['id']
+        a_date_holiday = Date.new(2017, 1, 1)
+        a_monday = Date.new(2017, 5, 1)
+
+        expect(response).to be_success
+        expect(body['name']).to eq 'Nuevo Nombre'
+        expect(body['holiday_rules'].size).to eq 2
+        expect(created_calendar.is_holiday? a_date_holiday).to be_truthy
+        expect(created_calendar.is_holiday? a_monday).to be_truthy
+      end
+    end
+  end
+
+  describe 'PUT #update' do
+    context 'with a :name and :holiday_rules' do
+      it 'returns a success response with the updated calendar' do
+        calendar_to_update = HolidayCalendar.create! name: 'Groenlandia'
+
+        json_body_request = {
+            id: calendar_to_update.id,
+            name: 'Nuevo Nombre',
+            holiday_rules: [
+                {type: 'HolidayRuleDate', date_holiday: '2017-01-01'},
+                {type: 'HolidayRuleDayOfWeek', day_of_week_holiday: 1},
+            ]
+        }
+        put :update, params: json_body_request, as: :json
+        body = JSON.parse(response.body)
+        created_calendar = HolidayCalendar.find body['id']
+        a_date_holiday = Date.new(2017, 1, 1)
+        a_monday = Date.new(2017, 5, 1)
+
+        expect(response).to be_success
+        expect(body['name']).to eq 'Nuevo Nombre'
+        expect(body['holiday_rules'].size).to eq 2
+        expect(created_calendar.is_holiday? a_date_holiday).to be_truthy
+        expect(created_calendar.is_holiday? a_monday).to be_truthy
+      end
+    end
+  end
+
+  describe 'GET #holidays' do
+    context 'with :desde and :hasta' do
+      it 'returns a success response with all holidays between :desde and :hasta' do
+        a_calendar = HolidayCalendar.create! name: 'Groenlandia'
+        a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 5, day_of_month_holiday: 1)
+        a_calendar.add_rule(HolidayRuleDate.create! date_holiday: '2018-10-16')
+
+        parameters = {
+            id: a_calendar.id,
+            desde: '2018-01-01',
+            hasta: '2018-12-31'
+        }
+        get :holidays, params: parameters
+        body = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(body).to eq ['2018-05-01', '2018-10-16']
+      end
+    end
+
+    context 'without :desde and :hasta' do
+      it 'returns a success response with all holidays on current year' do
+        a_calendar = HolidayCalendar.create! name: 'Groenlandia'
+        a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 5, day_of_month_holiday: 1)
+        a_calendar.add_rule(HolidayRuleDate.create! date_holiday: '2018-10-16')
+        a_calendar.add_rule(HolidayRuleDate.create! date_holiday: '2017-05-18')
+
+        get :holidays, params: {id: a_calendar.id}
+        body = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(body).to eq ['2017-05-01', '2017-05-18']
+      end
+    end
+
+    context 'with :desde and without :hasta' do
+      it 'returns a success response with all holidays on current year' do
+        a_calendar = HolidayCalendar.create! name: 'Groenlandia'
+        a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 7, day_of_month_holiday: 15)
+
+        get :holidays, params: {id: a_calendar.id, desde: '2016-01-01'}
+        body = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(body).to eq ['2016-07-15', '2017-07-15']
+      end
+    end
+
+    context 'without :desde and with :hasta' do
+      it 'returns a success response with all holidays on current year' do
+        a_calendar = HolidayCalendar.create! name: 'Groenlandia'
+        a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 5, day_of_month_holiday: 1)
+
+        get :holidays, params: {id: a_calendar.id, hasta: '2019-01-01'}
+        body = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(body).to eq ['2017-05-01', '2018-05-01']
+      end
+    end
+  end
+
 end

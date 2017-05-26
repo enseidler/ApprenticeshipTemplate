@@ -14,13 +14,30 @@ class HolidayCalendarsController < ApplicationController
 
   # POST /calendarios
   def create
-    rules = params[:holiday_rules].map do |rule|
-      HolidayRuleDeserializer.deserialize(rule)
-    end
     new_calendar = HolidayCalendar.create!(
       name: params[:name],
       holiday_rules: rules)
     render json: new_calendar
+  end
+
+  # PUT /calendarios/:id
+  def update
+    updated_calendar = HolidayCalendar.find params[:id]
+    updated_calendar.update! name: params[:name], holiday_rules: rules
+    render json: updated_calendar
+  end
+
+  # GET /calendarios/:id/feriados
+  def holidays
+    calendar = HolidayCalendar.find params[:id]
+    holidays = calendar.holidays(params[:desde], params[:hasta])
+    render json: holidays
+  end
+
+  def rules
+    params[:holiday_rules].map do |rule|
+      HolidayRuleDeserializer.deserialize(rule)
+    end
   end
 
 end

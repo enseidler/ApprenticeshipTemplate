@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   post '/calendarios', to: 'holiday_calendars#create'
 
+  put '/calendarios/:id', to: 'holiday_calendars#update'
+
+  get '/calendarios/:id/feriados', to: 'holiday_calendars#holidays'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
