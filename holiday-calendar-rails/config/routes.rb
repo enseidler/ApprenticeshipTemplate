@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   post '/calendarios/:id/reglas_de_feriado', to: 'holiday_calendars#add_rule'
 
+  get 'GET /caliendarios/es_feriado', to: 'holiday_calendars#where_is_holiday'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end

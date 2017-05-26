@@ -295,4 +295,39 @@ RSpec.describe HolidayCalendarsController, type: :controller do
     end
   end
 
+  describe 'GET #where_is_holiday' do
+    context 'with :fecha' do
+      it 'returns a success response with all calendars that have :fecha as holiday' do
+        a_calendar = HolidayCalendar.create! name: 'Argentina'
+        a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 5, day_of_month_holiday: 1)
+        HolidayCalendar.create! name: 'Uruguay'
+
+        get :where_is_holiday, params: {fecha: '2017-05-01'}, as: :json
+        body = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(body.size).to eq 1
+        expect(body[0]['name']).to eq 'Argentina'
+      end
+    end
+
+    context 'without :fecha' do
+      it 'returns a success response with all calendars that have today date as holiday' do
+        a_calendar = HolidayCalendar.create! name: 'Argentina'
+        a_calendar.add_rule(HolidayRuleDayOfWeek.create! day_of_week_holiday: 5)
+        another_calendar = HolidayCalendar.create! name: 'Uruguay'
+        another_calendar.add_rule(HolidayRuleDayOfWeek.create! day_of_week_holiday: 5)
+        HolidayCalendar.create! name: 'Uruguay'
+
+        get :where_is_holiday
+        body = JSON.parse(response.body)
+
+        expect(response).to be_success
+        expect(body.size).to eq 2
+        expect(body[0]['name']).to eq 'Argentina'
+        expect(body[1]['name']).to eq 'Uruguay'
+      end
+    end
+  end
+
 end
