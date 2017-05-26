@@ -42,7 +42,7 @@ class HolidayCalendarsController < ApplicationController
     render json: new_rule
   end
 
-  # GET /caliendarios/es_feriado
+  # GET /calendarios/es_feriado
   def where_is_holiday
     date = params[:fecha] ? Date.parse(params[:fecha]) : Date.today
     calendars = HolidayCalendar.all.select do |calendar|
@@ -50,8 +50,6 @@ class HolidayCalendarsController < ApplicationController
     end
     render json: calendars
   end
-
-
 
   def rules
     params[:holiday_rules].map do |rule|
