@@ -34,6 +34,16 @@ class HolidayCalendarsController < ApplicationController
     render json: holidays
   end
 
+  # POST /calendarios/:id/reglas_de_feriado
+  def add_rule
+    calendar = HolidayCalendar.find params[:id]
+    new_rule = HolidayRuleDeserializer.deserialize(params.except(:id))
+    calendar.add_rule(new_rule)
+    render json: new_rule
+  end
+
+
+
   def rules
     params[:holiday_rules].map do |rule|
       HolidayRuleDeserializer.deserialize(rule)

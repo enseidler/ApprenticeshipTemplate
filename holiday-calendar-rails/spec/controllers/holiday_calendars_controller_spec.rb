@@ -250,7 +250,7 @@ RSpec.describe HolidayCalendarsController, type: :controller do
     end
 
     context 'with :desde and without :hasta' do
-      it 'returns a success response with all holidays on current year' do
+      it 'returns a success response with all holidays from :desde to last day of current year' do
         a_calendar = HolidayCalendar.create! name: 'Groenlandia'
         a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 7, day_of_month_holiday: 15)
 
@@ -263,7 +263,7 @@ RSpec.describe HolidayCalendarsController, type: :controller do
     end
 
     context 'without :desde and with :hasta' do
-      it 'returns a success response with all holidays on current year' do
+      it 'returns a success response with all holidays from first day of current year to :hasta' do
         a_calendar = HolidayCalendar.create! name: 'Groenlandia'
         a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 5, day_of_month_holiday: 1)
 
@@ -272,6 +272,25 @@ RSpec.describe HolidayCalendarsController, type: :controller do
 
         expect(response).to be_success
         expect(body).to eq ['2017-05-01', '2018-05-01']
+      end
+    end
+  end
+
+  describe 'POST #add_rule' do
+    context 'with a holiday rule json' do
+      it 'returns a success response with created rule' do
+        a_calendar = HolidayCalendar.create! name: 'Italia'
+
+        json_body_request = {
+            id: a_calendar.id,
+            type: 'HolidayRuleDayOfWeek',
+            day_of_week_holiday: 3
+        }
+        post :add_rule, params: json_body_request, as: :json
+        a_wednesday = Date.new(2017, 5, 3)
+
+        expect(response).to be_success
+        expect(a_calendar.is_holiday? a_wednesday).to be_truthy
       end
     end
   end

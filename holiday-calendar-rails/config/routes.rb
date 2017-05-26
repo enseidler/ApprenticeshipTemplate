@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get '/calendarios/:id/feriados', to: 'holiday_calendars#holidays'
 
+  post '/calendarios/:id/reglas_de_feriado', to: 'holiday_calendars#add_rule'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
