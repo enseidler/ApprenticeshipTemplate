@@ -1,5 +1,9 @@
 require 'rails_helper'
 
+def json_response
+  JSON.parse(response.body)
+end
+
 RSpec.describe HolidayCalendarsController, type: :controller do
 
   describe 'GET #calendars' do
@@ -9,11 +13,9 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         mexico_calendar = HolidayCalendar.create! name: 'Mexico'
 
         get :calendars
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body[0]['id']).to eq argentina_calendar.id
-        expect(body[1]['id']).to eq mexico_calendar.id
+        expect(json_response[0]['id']).to eq argentina_calendar.id
+        expect(json_response[1]['id']).to eq mexico_calendar.id
       end
     end
 
@@ -24,11 +26,9 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         rusia_calendar = HolidayCalendar.create! name: 'Rusia'
 
         get :calendars, params: {nombre: 'a'}
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body[0]['id']).to eq argentina_calendar.id
-        expect(body[1]['id']).to eq rusia_calendar.id
+        expect(json_response[0]['id']).to eq argentina_calendar.id
+        expect(json_response[1]['id']).to eq rusia_calendar.id
       end
     end
 
@@ -38,10 +38,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         HolidayCalendar.create! name: 'Rusia'
 
         get :calendars, params: {nombre: 'mex'}
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body).to eq []
+        expect(json_response).to eq []
       end
     end
   end
@@ -51,9 +49,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
       it 'returns a success response with calendar which has :id' do
         argentina_calendar = HolidayCalendar.create! name: 'Argentina'
         get :calendar, params: {id: argentina_calendar.id}
-        body = JSON.parse(response.body)
         expect(response).to be_success
-        expect(body['id']).to eq argentina_calendar.id
+        expect(json_response['id']).to eq argentina_calendar.id
       end
     end
   end
@@ -66,11 +63,9 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             holiday_rules: []
         }
         post :create, params: json_body_request, as: :json
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body['name']).to eq 'Argentina'
-        expect(body['holiday_rules']).to eq []
+        expect(json_response['name']).to eq 'Argentina'
+        expect(json_response['holiday_rules']).to eq []
       end
     end
 
@@ -83,12 +78,11 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             ]
         }
         post :create, params: json_body_request, as: :json
-        body = JSON.parse(response.body)
-        created_calendar = HolidayCalendar.find body['id']
+        created_calendar = HolidayCalendar.find json_response['id']
         a_wednesday = Date.new(2017, 6, 21)
 
         expect(response).to be_success
-        expect(body['name']).to eq 'Argentina'
+        expect(json_response['name']).to eq 'Argentina'
         expect(created_calendar.is_holiday? a_wednesday).to be_truthy
       end
     end
@@ -102,12 +96,11 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             ]
         }
         post :create, params: json_body_request, as: :json
-        body = JSON.parse(response.body)
-        created_calendar = HolidayCalendar.find body['id']
+        created_calendar = HolidayCalendar.find json_response['id']
         a_may_first = Date.new(2017, 5, 1)
 
         expect(response).to be_success
-        expect(body['name']).to eq 'Argentina'
+        expect(json_response['name']).to eq 'Argentina'
         expect(created_calendar.is_holiday? a_may_first).to be_truthy
       end
     end
@@ -121,12 +114,11 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             ]
         }
         post :create, params: json_body_request, as: :json
-        body = JSON.parse(response.body)
-        created_calendar = HolidayCalendar.find body['id']
+        created_calendar = HolidayCalendar.find json_response['id']
         a_date_holiday = Date.new(2017, 1, 1)
 
         expect(response).to be_success
-        expect(body['name']).to eq 'Argentina'
+        expect(json_response['name']).to eq 'Argentina'
         expect(created_calendar.is_holiday? a_date_holiday).to be_truthy
       end
     end
@@ -145,13 +137,12 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             ]
         }
         post :create, params: json_body_request, as: :json
-        body = JSON.parse(response.body)
-        created_calendar = HolidayCalendar.find body['id']
+        created_calendar = HolidayCalendar.find json_response['id']
         a_october_sixteen_inside_period = Date.new(2017, 10, 16)
         a_october_sixteen_outside_period = Date.new(2018, 10, 16)
 
         expect(response).to be_success
-        expect(body['name']).to eq 'Argentina'
+        expect(json_response['name']).to eq 'Argentina'
         expect(created_calendar.is_holiday? a_october_sixteen_inside_period).to be_truthy
         expect(created_calendar.is_holiday? a_october_sixteen_outside_period).to be_falsey
       end
@@ -172,14 +163,13 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             ]
         }
         put :update, params: json_body_request, as: :json
-        body = JSON.parse(response.body)
-        created_calendar = HolidayCalendar.find body['id']
+        created_calendar = HolidayCalendar.find json_response['id']
         a_date_holiday = Date.new(2017, 1, 1)
         a_monday = Date.new(2017, 5, 1)
 
         expect(response).to be_success
-        expect(body['name']).to eq 'Nuevo Nombre'
-        expect(body['holiday_rules'].size).to eq 2
+        expect(json_response['name']).to eq 'Nuevo Nombre'
+        expect(json_response['holiday_rules'].size).to eq 2
         expect(created_calendar.is_holiday? a_date_holiday).to be_truthy
         expect(created_calendar.is_holiday? a_monday).to be_truthy
       end
@@ -200,14 +190,13 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             ]
         }
         put :update, params: json_body_request, as: :json
-        body = JSON.parse(response.body)
-        created_calendar = HolidayCalendar.find body['id']
+        created_calendar = HolidayCalendar.find json_response['id']
         a_date_holiday = Date.new(2017, 1, 1)
         a_monday = Date.new(2017, 5, 1)
 
         expect(response).to be_success
-        expect(body['name']).to eq 'Nuevo Nombre'
-        expect(body['holiday_rules'].size).to eq 2
+        expect(json_response['name']).to eq 'Nuevo Nombre'
+        expect(json_response['holiday_rules'].size).to eq 2
         expect(created_calendar.is_holiday? a_date_holiday).to be_truthy
         expect(created_calendar.is_holiday? a_monday).to be_truthy
       end
@@ -227,10 +216,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
             hasta: '2018-12-31'
         }
         get :holidays, params: parameters
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body).to eq ['2018-05-01', '2018-10-16']
+        expect(json_response).to eq ['2018-05-01', '2018-10-16']
       end
     end
 
@@ -242,10 +229,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         a_calendar.add_rule(HolidayRuleDate.create! date_holiday: '2017-05-18')
 
         get :holidays, params: {id: a_calendar.id}
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body).to eq ['2017-05-01', '2017-05-18']
+        expect(json_response).to eq ['2017-05-01', '2017-05-18']
       end
     end
 
@@ -255,10 +240,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 7, day_of_month_holiday: 15)
 
         get :holidays, params: {id: a_calendar.id, desde: '2016-01-01'}
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body).to eq ['2016-07-15', '2017-07-15']
+        expect(json_response).to eq ['2016-07-15', '2017-07-15']
       end
     end
 
@@ -268,10 +251,8 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         a_calendar.add_rule(HolidayRuleDayOfMonth.create! month: 5, day_of_month_holiday: 1)
 
         get :holidays, params: {id: a_calendar.id, hasta: '2019-01-01'}
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body).to eq ['2017-05-01', '2018-05-01']
+        expect(json_response).to eq ['2017-05-01', '2018-05-01']
       end
     end
   end
@@ -303,11 +284,9 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         HolidayCalendar.create! name: 'Uruguay'
 
         get :where_is_holiday, params: {fecha: '2017-05-01'}
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body.size).to eq 1
-        expect(body[0]['name']).to eq 'Argentina'
+        expect(json_response.size).to eq 1
+        expect(json_response[0]['name']).to eq 'Argentina'
       end
     end
 
@@ -320,12 +299,10 @@ RSpec.describe HolidayCalendarsController, type: :controller do
         HolidayCalendar.create! name: 'Mexico'
 
         get :where_is_holiday
-        body = JSON.parse(response.body)
-
         expect(response).to be_success
-        expect(body.size).to eq 2
-        expect(body[0]['name']).to eq 'Argentina'
-        expect(body[1]['name']).to eq 'Uruguay'
+        expect(json_response.size).to eq 2
+        expect(json_response[0]['name']).to eq 'Argentina'
+        expect(json_response[1]['name']).to eq 'Uruguay'
       end
     end
   end

@@ -15,7 +15,7 @@ class HolidayCalendarsController < ApplicationController
   # POST /calendarios
   def create
     new_calendar = HolidayCalendar.create!(
-      name: params[:name],
+      name: calendar_params[:name],
       holiday_rules: rules)
     render json: new_calendar
   end
@@ -23,7 +23,7 @@ class HolidayCalendarsController < ApplicationController
   # PUT /calendarios/:id
   def update
     updated_calendar = HolidayCalendar.find params[:id]
-    updated_calendar.update! name: params[:name], holiday_rules: rules
+    updated_calendar.update! name: calendar_params[:name], holiday_rules: rules
     render json: updated_calendar
   end
 
@@ -37,7 +37,7 @@ class HolidayCalendarsController < ApplicationController
   # POST /calendarios/:id/reglas_de_feriado
   def add_rule
     calendar = HolidayCalendar.find params[:id]
-    new_rule = HolidayRuleDeserializer.deserialize(params.except(:id))
+    new_rule = HolidayRuleDeserializer.deserialize(rule_params)
     calendar.add_rule(new_rule)
     render json: new_rule
   end
@@ -52,9 +52,41 @@ class HolidayCalendarsController < ApplicationController
   end
 
   def rules
-    params[:holiday_rules].map do |rule|
+    calendar_params[:holiday_rules].map do |rule|
       HolidayRuleDeserializer.deserialize(rule)
     end
   end
+
+
+  def calendar_params
+    params.permit(:name,
+                  {holiday_rules: [:type,
+                                   :day_of_week_holiday,
+                                   :month,
+                                   :day_of_month_holiday,
+                                   :date_holiday,
+                                   :begins,
+                                   :ends,
+                                   :holiday_rule => [:type,
+                                                     :day_of_week_holiday,
+                                                     :month,
+                                                     :day_of_month_holiday]]})
+  end
+
+  def rule_params
+    params.permit(:type,
+                  :day_of_week_holiday,
+                  :month,
+                  :day_of_month_holiday,
+                  :date_holiday,
+                  :begins,
+                  :ends,
+                  :holiday_rule => [
+                      :type,
+                      :day_of_week_holiday,
+                      :month,
+                      :day_of_month_holiday])
+  end
+
 
 end
