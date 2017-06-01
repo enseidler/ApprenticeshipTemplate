@@ -5,19 +5,15 @@ class App extends Component {
 
     static propTypes = {
         value: PropTypes.object.isRequired,
-        cambiar: PropTypes.func.isRequired,
-        calendario: PropTypes.func.isRequired
+        calendar: PropTypes.func.isRequired
     }
 
   render() {
-    const { value, cambiar, calendario} = this.props
+    const { value, calendar} = this.props
     return (
       <div>
           <h2>Calendarios de Feriados</h2>
-          <button onClick={cambiar}>
-              cambiar
-          </button>
-          <button onClick={calendario}>
+          <button onClick={calendar}>
               calendario
           </button>
           { value.name }
