@@ -1,25 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import App from './components/App';
-import { loadCalendar } from './actions/HolidayCalendarsActions'
+import { calendarStore, yearStore } from './stores'
+import { loadCalendar } from './actions/calendarActions'
 import registerServiceWorker from './registerServiceWorker';
-import reducers from './reducers';
+import * as types from './actions/actionTypes'
 
-const store = createStore(reducers, applyMiddleware(thunk));
+
 let rootElement = document.getElementById('root');
 
 // store.dispatch(loadCalendar());
 
 const render = () => ReactDOM.render(
     <App
-        calendar = {store.getState()}
-        loadCalendar = {() => store.dispatch(loadCalendar())}
+        calendar = {calendarStore.getState()}
+        loadCalendar = {() => calendarStore.dispatch(loadCalendar())}
+        year={yearStore.getState()}
+        incrementYear={() => yearStore.dispatch({
+            type: types.INCREMENT_YEAR}
+        )}
+        decrementYear={() => yearStore.dispatch({
+            type: types.DECREMENT_YEAR}
+        )}
     />,
     rootElement);
 
 render();
-store.subscribe(render);
+calendarStore.subscribe(render);
+yearStore.subscribe(render);
 
 registerServiceWorker();
