@@ -1,29 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import App from './components/App';
+import { loadCalendar } from './actions/HolidayCalendarsActions'
 import registerServiceWorker from './registerServiceWorker';
-import calendariosDeFeriado from './reducers';
+import reducers from './reducers';
 
-const store = createStore(calendariosDeFeriado, applyMiddleware(thunk));
+const store = createStore(reducers, applyMiddleware(thunk));
 let rootElement = document.getElementById('root');
+
+// store.dispatch(loadCalendar());
 
 const render = () => ReactDOM.render(
     <App
-        value = {store.getState()}
-        calendar={() => store.dispatch((dispatch) =>
-            fetch('http://localhost:3000/calendarios/1')
-                .then((response) => response.json())
-                .then((calendar) => dispatch({
-                    type: 'GET_CALENDAR',
-                    calendar: calendar
-                }))
-        )}
+        calendar = {store.getState()}
+        loadCalendar = {() => store.dispatch(loadCalendar())}
     />,
     rootElement);
 
-render()
-store.subscribe(render)
+render();
+store.subscribe(render);
 
 registerServiceWorker();
