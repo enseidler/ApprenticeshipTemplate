@@ -8,11 +8,30 @@ export function loadCalendarSuccess(calendar) {
     };
 }
 
+export function loadHolidaysSuccess(holidays) {
+    return {
+        type: types.LOAD_HOLIDAYS_SUCCESS,
+        holidays: holidays
+    };
+}
+
 export function loadCalendar() {
     return function(dispatch) {
         return holidayCalendarsAPI.loadCalendar()
             .then((calendar) => dispatch(
                 loadCalendarSuccess(calendar)
+            )
+        ).catch(error => {
+            throw(error);
+        });
+    };
+}
+
+export function loadHolidays() {
+    return function(dispatch) {
+        return holidayCalendarsAPI.loadHolidays()
+            .then((holidays) => dispatch(
+                loadHolidaysSuccess(holidays)
             )
         ).catch(error => {
             throw(error);
