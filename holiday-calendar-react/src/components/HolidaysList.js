@@ -11,11 +11,6 @@ export class HolidaysList extends  Component{
         const { holidays } = this.props;
         return (
             <table>
-                <thead>
-                <tr>
-                    <th>Feriados</th>
-                </tr>
-                </thead>
                 <tbody>
                 {holidays.map(date =>
                     <tr>

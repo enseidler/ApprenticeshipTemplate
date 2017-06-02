@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import YearSelector from './YearSelector';
 import HolidaysList from './HolidaysList';
-import ScrollArea from "react-scrollbar/src/js/ScrollArea";
+import './App.css'
+
 
 class App extends Component {
 
@@ -22,8 +23,9 @@ class App extends Component {
           <div>
               <h2>Calendarios de Feriados</h2>
               <YearSelector year={year} incrementYear={incrementYear} decrementYear={decrementYear} />
-              <ScrollArea/>
-              <HolidaysList holidays={holidays}/>
+              <div className="scrollable">
+                    <HolidaysList holidays={holidays}/>
+              </div>
           </div>
         );
     }
