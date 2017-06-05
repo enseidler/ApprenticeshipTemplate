@@ -10,46 +10,44 @@ class HolidayCalendarsAPI {
         return fetch('http://192.168.1.92:3000/calendarios/1/feriados')
             .then((response) => response.json());
     }
+
     static createNewHolidayRule(rule){
         fetch('http://192.168.1.92:3000/calendarios/1/reglas_de_feriado',
             {
-        method:"post",
+            method:"post",
             body:JSON.stringify(rule)})
 
     }
+
     static createNewHolidayDate(state) {
         return {
-                date_holiday:state.day
-            }
+            type: 'HolidayRuleDate',
+            date_holiday:state.day
         }
+    }
 
     static createNewHolidayDayOfWeek(state) {
         return {
-                day_of_week_holiday:state.dayOfWeek
-            }
-
+            type: 'HolidayRuleDayOfWeek',
+            day_of_week_holiday:state.dayOfWeek
+        }
     }
-    static createNewHolidayDate(state) {
+
+    static createNewHolidayDayOfMonth(state) {
         return {
-                day_of_month_holiday:state.dayOfMonth,
-                month:state.month
-            }
-
+            type: 'HolidayRuleDayOfMonth',
+            day_of_month_holiday:state.dayOfMonth,
+            month:state.month
+        }
     }
-      static createNewHolidayDayOfMonth(state) {
-        return     {
-                day_of_month_holiday:state.dayOfMonth,
-                month:state.month
-            }
 
-    }
-     static createNewHolidayWithInterval(state,holidayRule) {
-        return     {
+    static createNewHolidayWithInterval(state,holidayRule) {
+        return {
+            type: 'HolidayRuleWithInterval',
             holiday_rule:holidayRule,
             begins:state.since,
             ends:state.until
         }
-
     }
 }
 

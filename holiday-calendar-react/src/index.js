@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { calendarStore, holidaysStore, yearStore } from './stores'
+import { calendarStore, holidaysStore, yearStore, newHolidayRuleStore } from './stores'
 import { loadCalendar, loadHolidays } from './actions/calendarActions'
 import registerServiceWorker from './registerServiceWorker';
 import * as types from './actions/actionTypes'
@@ -15,6 +15,7 @@ const render = () => ReactDOM.render(
     <App
         calendar = {calendarStore.getState()}
         holidays = {holidaysStore.getState()}
+        newHolidayRule={newHolidayRuleStore.getState()}
         loadCalendar = {() => calendarStore.dispatch(loadCalendar())}
         year={yearStore.getState()}
         incrementYear={() => yearStore.dispatch({

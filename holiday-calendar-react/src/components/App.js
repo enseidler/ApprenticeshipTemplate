@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import YearSelector from './YearSelector';
 import HolidaysList from './HolidaysList';
+import CreateHolidayRule from "./CreateHolidayRule";
 
 class App extends Component {
 
@@ -11,12 +12,13 @@ class App extends Component {
         year: PropTypes.number.isRequired,
         incrementYear: PropTypes.func.isRequired,
         decrementYear: PropTypes.func.isRequired,
-        holidays: PropTypes.array.isRequired
+        holidays: PropTypes.array.isRequired,
+        newHolidayRule: PropTypes.object.isRequired
     };
 
 
     render() {
-        const { calendar, year, incrementYear, decrementYear, holidays } = this.props;
+        const { calendar, year, incrementYear, decrementYear, holidays,newHolidayRule } = this.props;
         return (
           <div className="container">
 
@@ -34,6 +36,11 @@ class App extends Component {
               <div class="row">
                   <div className="offset-md-4 col-md-4 scrollable">
                       <HolidaysList holidays={ holidays }/>
+                  </div>
+              </div>
+              <div class="row">
+                  <div className="col-md-4">
+                      <CreateHolidayRule newHolidayRule={newHolidayRule}/>
                   </div>
               </div>
 
