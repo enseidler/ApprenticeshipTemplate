@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import YearSelector from './YearSelector';
 import HolidaysList from './HolidaysList';
-import './App.css'
-
 
 class App extends Component {
 
@@ -20,12 +18,25 @@ class App extends Component {
     render() {
         const { calendar, year, incrementYear, decrementYear, holidays } = this.props;
         return (
-          <div>
+          <div className="container">
+
               <h2>Calendarios de Feriados</h2>
-              <YearSelector year={year} incrementYear={incrementYear} decrementYear={decrementYear} />
-              <div className="scrollable">
-                    <HolidaysList holidays={holidays}/>
+
+              <div class="row">
+                  <div className="offset-md-4 col-md-4">
+                      <YearSelector
+                          year={ year }
+                          incrementYear={ incrementYear }
+                          decrementYear={ decrementYear } />
+                  </div>
               </div>
+
+              <div class="row">
+                  <div className="offset-md-4 col-md-4 scrollable">
+                      <HolidaysList holidays={ holidays }/>
+                  </div>
+              </div>
+
           </div>
         );
     }

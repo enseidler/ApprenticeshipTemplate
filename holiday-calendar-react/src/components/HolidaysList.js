@@ -10,15 +10,11 @@ export class HolidaysList extends  Component{
     render() {
         const { holidays } = this.props;
         return (
-            <table>
-                <tbody>
-                {holidays.map(date =>
-                    <tr>
-                        <td>{date}</td>
-                    </tr>
-                )}
-                </tbody>
-            </table>
+            <ul className="list-group">
+            {holidays.map(date =>
+                <li className="list-group-item">{date}</li>
+            )}
+            </ul>
         );
     }
 

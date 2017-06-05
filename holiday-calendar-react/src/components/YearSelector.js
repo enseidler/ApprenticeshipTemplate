@@ -10,16 +10,14 @@ export class YearSelector extends  Component{
     render() {
         const {year, incrementYear, decrementYear } = this.props;
         return (
-            <div>
-                  <button onClick={decrementYear} >
+            <div className="year-selector">
+                <button className="btn btn-secondary" onClick={decrementYear} >
                     {"<"}
                 </button>
                 {" "}
-                <input size="10"
-                       value={year} >
-                </input>
+                {year}
                 {" "}
-                <button onClick={incrementYear} >
+                <button className="btn btn-secondary" onClick={incrementYear} >
                     {">"}
                 </button>
             </div>
