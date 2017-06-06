@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { yearStore } from '../stores'
+import * as types from "../actions/actionTypes";
+
 
 export class YearSelector extends  Component{
-    static propTypes = {
-        year: PropTypes.number.isRequired,
-        incrementYear: PropTypes.func.isRequired,
-        decrementYear: PropTypes.func.isRequired
-    };
+
+    decrementYear() {
+        return (() => yearStore.dispatch({type: types.DECREMENT_YEAR}))
+    }
+
+    incrementYear() {
+        return (() => yearStore.dispatch({type: types.INCREMENT_YEAR}))
+    }
+
     render() {
-        const {year, incrementYear, decrementYear } = this.props;
         return (
             <div className="year-selector">
-                <button className="btn btn-secondary" onClick={decrementYear} >
+                <button className="btn btn-secondary" onClick={this.decrementYear()} >
                     {"<"}
                 </button>
                 {" "}
-                {year}
+                {yearStore.getState()}
                 {" "}
-                <button className="btn btn-secondary" onClick={incrementYear} >
+                <button className="btn btn-secondary" onClick={this.incrementYear()} >
                     {">"}
                 </button>
             </div>
         );
     }
 }
+
 export default YearSelector;

@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { holidaysStore } from '../stores';
 
-export class HolidaysList extends  Component{
-
-    static propTypes = {
-        holidays: PropTypes.array.isRequired
-    };
+export class HolidaysList extends Component {
 
     render() {
-        const { holidays } = this.props;
         return (
             <ul className="list-group">
-            {holidays.map(date =>
-                <li className="list-group-item">{date}</li>
+            {holidaysStore.getState().map(date =>
+                <li className="list-group-item">{ date }</li>
             )}
             </ul>
         );

@@ -1,34 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { calendarStore, holidaysStore, yearStore } from './stores'
-import { loadCalendar, loadHolidays } from './actions/calendarActions'
+import { holidaysStore, holidayFormStore, yearStore} from './stores'
+import { loadHolidays } from './actions/calendarActions'
 import registerServiceWorker from './registerServiceWorker';
-import * as types from './actions/actionTypes'
 
 
 let rootElement = document.getElementById('root');
 
+const render = () => ReactDOM.render(
+    <App />,
+    rootElement
+);
+
 holidaysStore.dispatch(loadHolidays());
 
-const render = () => ReactDOM.render(
-    <App
-        calendar = {calendarStore.getState()}
-        holidays = {holidaysStore.getState()}
-        loadCalendar = {() => calendarStore.dispatch(loadCalendar())}
-        year={yearStore.getState()}
-        incrementYear={() => yearStore.dispatch({
-            type: types.INCREMENT_YEAR}
-        )}
-        decrementYear={() => yearStore.dispatch({
-            type: types.DECREMENT_YEAR}
-        )}
-    />,
-    rootElement);
-
 render();
-calendarStore.subscribe(render);
+
 holidaysStore.subscribe(render);
+holidayFormStore.subscribe(render);
 yearStore.subscribe(render);
 
 registerServiceWorker();
