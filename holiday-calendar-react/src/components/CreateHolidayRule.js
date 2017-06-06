@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import * as types from '../actions/actionTypes'
 import 'react-date-picker/index.css';
 import HolidayRuleDateForm from "./HolidayRuleDateForm";
+import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
+import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
+import DateSelector from "./DateSelector";
 import { holidayFormStore } from '../stores';
 
 export class CreateHolidayRule extends  Component{
@@ -11,12 +14,12 @@ export class CreateHolidayRule extends  Component{
             <div>
 
                 <h3>Nuevo Feriado</h3>
-
+                {holidayFormStore.getState().ruleType}
                 <HolidayRuleDateForm />
 
                 {/*<HolidayRuleDayOfWeekForm />*/}
 
-                {/*<HolidayRuleDayOfMonthForm />*/}
+                <HolidayRuleDayOfMonthForm />
 
                 {/*<h5>Vigencia</h5>*/}
                 {/*<div className="row">*/}
@@ -29,11 +32,15 @@ export class CreateHolidayRule extends  Component{
                         {/*<DateSelector />*/}
                     {/*</div>*/}
                 {/*</div>*/}
-                <div className="btn-group float-right">
-                    <button className="btn btn-secondary" >
-                        {"Crear Regla"}
-                    </button>
-                </div>
+                {/*<div className="btn-group float-right">*/}
+                    {/*<button*/}
+                        {/*className="btn btn-secondary"*/}
+                        {/*onClick={() => holidayFormStore.dispatch({*/}
+                            {/*type: types.CREATE_NEW_HOLIDAY*/}
+                        {/*})}>*/}
+                        {/*{"Crear Regla"}*/}
+                    {/*</button>*/}
+                {/*</div>*/}
             </div>
         );
     }

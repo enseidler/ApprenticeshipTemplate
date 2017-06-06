@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
+import HolidayTypeRadio from "./HolidayTypeRadio";
 
 export class HolidayRuleDayOfMonthForm extends Component {
 
     render() {
+
+        var months = ['Enero', 'Febrero', 'Marzo', 'Abril',
+            'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre',
+            'Octubre', 'Noviembre', 'Diciembre'];
+
         return (
             <div className="row">
                 <div className="col-md-6">
-                    <label>
-                        <input type="radio" name="ruleType"/>
-                        {' Día del mes'}
-                    </label>
+                    <HolidayTypeRadio
+                        type= 'HolidayRuleDayOfMonth'
+                        label= 'Día del mes'
+                    />
                 </div>
                 <div className="col-md-3">
                     <select>
-                        {Array.apply(null,Array(12)).map((_,i)=>{return i+1;}).map(day =>
+                        {months.map(day =>
                             <option>{day}</option>
                         )}
                     </select>

@@ -6,12 +6,15 @@ class HolidayCalendarsAPI {
             .then((response) => response.json());
     }
 
-    static createNewHolidayRule(rule){
+    static createRule(rule){
         fetch('http://192.168.1.92:3000/calendarios/1/reglas_de_feriado',
             {
             method:"post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             body:JSON.stringify(rule)})
-
     }
 
     static createNewHolidayDate(state) {

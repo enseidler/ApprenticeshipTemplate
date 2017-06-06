@@ -7,7 +7,7 @@ import { holidayFormStore } from '../stores';
 export class DateSelector extends Component {
 
     static propTypes = {
-        value: PropTypes.object.isRequired,
+        date: PropTypes.object.isRequired,
         onChangeAction: PropTypes.string.isRequired
     }
 
@@ -26,7 +26,7 @@ export class DateSelector extends Component {
                     forceValidDate={true}
                     updateOnDateClick={true}
                     collapseOnDateClick={true}
-                    defaultValue={this.props.value.valueOf()}
+                    defaultValue={this.props.date.valueOf()}
                     showClock={false}
                     onChange={this.onChange()}>
                     <DatePicker

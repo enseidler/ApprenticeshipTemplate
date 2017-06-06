@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 export class HolidayRuleDayOfWeekForm extends  Component{
 
     render() {
+
         var days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
+
         return (
             <div className="row">
                 <div className="col-md-6">
