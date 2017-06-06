@@ -14,10 +14,9 @@ export class CreateHolidayRule extends  Component{
             <div>
 
                 <h3>Nuevo Feriado</h3>
-                {holidayFormStore.getState().ruleType}
                 <HolidayRuleDateForm />
 
-                {/*<HolidayRuleDayOfWeekForm />*/}
+                <HolidayRuleDayOfWeekForm />
 
                 <HolidayRuleDayOfMonthForm />
 

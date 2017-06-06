@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {holidayFormStore} from '../stores/index'
+import * as types from '../actions/actionTypes'
+import HolidayTypeRadio from "./HolidayTypeRadio";
 
 export class HolidayRuleDayOfWeekForm extends  Component{
 
@@ -9,13 +12,18 @@ export class HolidayRuleDayOfWeekForm extends  Component{
         return (
             <div className="row">
                 <div className="col-md-6">
-                    <label>
-                        <input type="radio" name="ruleType"/>
-                        {' Día de la semana'}
-                    </label>
+                    <HolidayTypeRadio
+                        type= 'HolidayRuleDayOfWeek'
+                        label= 'Día de la semana'
+                    />
                 </div>
                 <div className="col-md-6">
-                    <select>
+                    <select value={days[holidayFormStore.getState().day_of_week_holiday-1]} onChange={(event)=>
+                    holidayFormStore.dispatch(
+                        {
+                            type:types.CHANGE_DAY_OF_WEEK,
+                            day_of_week_holiday:days.indexOf(event.target.value)+1
+                        })}>
                         {days.map(day =>
                             <option>{day}</option>
                         )}

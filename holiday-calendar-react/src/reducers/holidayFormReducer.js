@@ -5,7 +5,8 @@ const defaultState = {
     date_holiday: new Date(),
     ruleType: 'HolidayRuleDate',
     month:12,
-    day_of_month_holiday:22
+    day_of_month_holiday:22,
+    day_of_week_holiday:7
 }
 
 export const holidayFormReducer = (state = defaultState, action) => {
@@ -24,6 +25,9 @@ export const holidayFormReducer = (state = defaultState, action) => {
             return state;
         case types.CHANGE_DAY_OF_MONTH:
             state.day_of_month_holiday=action.day_of_month_holiday
+            return state;
+        case types.CHANGE_DAY_OF_WEEK:
+            state.day_of_week_holiday=action.day_of_week_holiday
             return state;
         default:
             return state;
