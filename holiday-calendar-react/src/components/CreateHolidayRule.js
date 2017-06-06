@@ -32,15 +32,15 @@ export class CreateHolidayRule extends  Component{
                         {/*<DateSelector />*/}
                     {/*</div>*/}
                 {/*</div>*/}
-                {/*<div className="btn-group float-right">*/}
-                    {/*<button*/}
-                        {/*className="btn btn-secondary"*/}
-                        {/*onClick={() => holidayFormStore.dispatch({*/}
-                            {/*type: types.CREATE_NEW_HOLIDAY*/}
-                        {/*})}>*/}
-                        {/*{"Crear Regla"}*/}
-                    {/*</button>*/}
-                {/*</div>*/}
+                <div className="btn-group float-right">
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => holidayFormStore.dispatch({
+                            type: types.CREATE_NEW_HOLIDAY
+                        })}>
+                        {"Crear Regla"}
+                    </button>
+                </div>
             </div>
         );
     }

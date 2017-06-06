@@ -6,7 +6,8 @@ class HolidayCalendarsAPI {
             .then((response) => response.json());
     }
 
-    static createRule(rule){
+    static createRule(state){
+        var rule = this.saraza(state);
         fetch('http://192.168.1.92:3000/calendarios/1/reglas_de_feriado',
             {
             method:"post",
@@ -17,10 +18,19 @@ class HolidayCalendarsAPI {
             body:JSON.stringify(rule)})
     }
 
+    static saraza(state) {
+        switch (state.ruleType) {
+            case 'HolidayRuleDate':
+                return this.createNewHolidayDate(state);
+            case 'HolidayRuleDayOfMonth':
+                return this.createNewHolidayDayOfMonth(state);;
+        }
+    }
+
     static createNewHolidayDate(state) {
         return {
             type: 'HolidayRuleDate',
-            date_holiday:state.day
+            date_holiday: state.date_holiday
         }
     }
 
@@ -34,8 +44,8 @@ class HolidayCalendarsAPI {
     static createNewHolidayDayOfMonth(state) {
         return {
             type: 'HolidayRuleDayOfMonth',
-            day_of_month_holiday:state.dayOfMonth,
-            month:state.month
+            day_of_month_holiday: state.day_of_month_holiday,
+            month: state.month
         }
     }
 
