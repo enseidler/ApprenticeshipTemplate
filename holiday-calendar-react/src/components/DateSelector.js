@@ -19,14 +19,22 @@ export class DateSelector extends Component {
     }
 
     render() {
+        var date;
+        if(this.props.date==null){
+            date=null;
+        }else{
+            date=this.props.date.valueOf()
+        }
         return (
+
             <div>
                 <DateField
+
                     dateFormat="YYYY-MM-DD"
-                    forceValidDate={true}
+                    forceValidDate={false}
                     updateOnDateClick={true}
                     collapseOnDateClick={true}
-                    defaultValue={this.props.date.valueOf()}
+                    defaultValue={date}
                     showClock={false}
                     onChange={this.onChange()}>
                     <DatePicker

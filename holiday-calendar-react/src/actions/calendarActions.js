@@ -23,11 +23,10 @@ export function loadHolidays() {
 }
 
 export function createRule() {
-    return function(dispatch) {
+    return function() {
         return holidayCalendarsAPI.createRule()
-            .then(() => dispatch(
-               loadHolidays()
-            )
+            .then(() =>
+               holidaysStore.dispatch(loadHolidays())
         ).catch(error => {
             throw(error);
         });

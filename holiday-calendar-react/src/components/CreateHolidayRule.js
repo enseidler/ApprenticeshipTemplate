@@ -11,6 +11,9 @@ import {createRule, loadHolidays} from "../actions/calendarActions";
 export class CreateHolidayRule extends  Component{
 
     render() {
+        const begins=holidayFormStore.getState().begins
+        const ends=holidayFormStore.getState().ends
+
         return (
             <div>
 
@@ -22,17 +25,21 @@ export class CreateHolidayRule extends  Component{
 
                 <HolidayRuleDayOfMonthForm />
 
-                {/*<h5>Vigencia</h5>*/}
-                {/*<div className="row">*/}
-                    {/*<div className="col-md-6">*/}
-                        {/*Desde*/}
-                        {/*<DateSelector />*/}
-                    {/*</div>*/}
-                    {/*<div className="col-md-6">*/}
-                        {/*Hasta*/}
-                        {/*<DateSelector />*/}
-                    {/*</div>*/}
-                {/*</div>*/}
+                <h5>Vigencia</h5>
+                <div className="row">
+                    <div className="col-md-6">
+                        Desde
+                        <DateSelector
+                            date={begins}
+                            onChangeAction={types.CHANGE_BEGINS}/>
+                     </div>
+                    <div className="col-md-6">
+                        Hasta
+                        <DateSelector
+                            date={ends}
+                            onChangeAction={types.CHANGE_ENDS} />
+                      </div>
+                </div>
                 <div className="btn-group float-right">
                     <button
                         className="btn btn-secondary"

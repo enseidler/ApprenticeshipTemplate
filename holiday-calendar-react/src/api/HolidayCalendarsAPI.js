@@ -23,13 +23,23 @@ class HolidayCalendarsAPI {
     }
 
     static newRule(state) {
+        var seudoRule;
         switch (state.ruleType) {
             case 'HolidayRuleDate':
-                return this.createNewHolidayDate(state);
+                seudoRule= this.createNewHolidayDate(state);
+                break;
             case 'HolidayRuleDayOfMonth':
-                return this.createNewHolidayDayOfMonth(state);
+                seudoRule= this.createNewHolidayDayOfMonth(state);
+                break;
             case 'HolidayRuleDayOfWeek':
-                return this.createNewHolidayDayOfWeek(state);
+                seudoRule=this.createNewHolidayDayOfWeek(state);
+                break;
+        }
+        if(state.begins!=null & state.ends!=null){
+            return this.createNewHolidayWithInterval(state,seudoRule);
+        }
+        else{
+            return seudoRule;
         }
     }
 
@@ -57,10 +67,10 @@ class HolidayCalendarsAPI {
 
     static createNewHolidayWithInterval(state,holidayRule) {
         return {
-            type: 'HolidayRuleWithInterval',
+            type: 'HolidayRuleWithPeriod',
             holiday_rule:holidayRule,
-            begins:state.since,
-            ends:state.until
+            begins:state.begins,
+            ends:state.ends
         }
     }
 }
