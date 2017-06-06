@@ -5,7 +5,8 @@ import HolidayRuleDateForm from "./HolidayRuleDateForm";
 import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
 import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
 import DateSelector from "./DateSelector";
-import { holidayFormStore } from '../stores';
+import { holidayFormStore, holidaysStore } from '../stores';
+import {createRule, loadHolidays} from "../actions/calendarActions";
 
 export class CreateHolidayRule extends  Component{
 
@@ -14,6 +15,7 @@ export class CreateHolidayRule extends  Component{
             <div>
 
                 <h3>Nuevo Feriado</h3>
+
                 <HolidayRuleDateForm />
 
                 <HolidayRuleDayOfWeekForm />
@@ -34,9 +36,9 @@ export class CreateHolidayRule extends  Component{
                 <div className="btn-group float-right">
                     <button
                         className="btn btn-secondary"
-                        onClick={() => holidayFormStore.dispatch({
-                            type: types.CREATE_NEW_HOLIDAY
-                        })}>
+                        onClick={function() {
+                            holidayFormStore.dispatch(createRule());
+                        }}>
                         {"Crear Regla"}
                     </button>
                 </div>

@@ -5,5 +5,5 @@ import { holidaysReducer } from '../reducers/holidaysReducer'
 import { holidayFormReducer } from '../reducers/holidayFormReducer'
 
 export const holidaysStore = createStore(holidaysReducer, applyMiddleware(thunk));
-export const holidayFormStore = createStore(holidayFormReducer);
+export const holidayFormStore = createStore(holidayFormReducer,applyMiddleware(thunk));
 export const yearStore = createStore(yearReducer);

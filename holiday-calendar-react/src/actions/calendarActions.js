@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import holidayCalendarsAPI from '../api/HolidayCalendarsAPI';
+import { holidaysStore } from "../stores";
 
 
 export function loadHolidaysSuccess(holidays) {
@@ -14,6 +15,18 @@ export function loadHolidays() {
         return holidayCalendarsAPI.loadHolidays()
             .then((holidays) => dispatch(
                 loadHolidaysSuccess(holidays)
+            )
+        ).catch(error => {
+            throw(error);
+        });
+    };
+}
+
+export function createRule() {
+    return function(dispatch) {
+        return holidayCalendarsAPI.createRule()
+            .then(() => dispatch(
+               loadHolidays()
             )
         ).catch(error => {
             throw(error);

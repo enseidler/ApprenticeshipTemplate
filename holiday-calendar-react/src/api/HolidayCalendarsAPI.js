@@ -1,21 +1,25 @@
+import { holidayFormStore, yearStore } from "../stores";
 
 class HolidayCalendarsAPI {
 
     static loadHolidays() {
-        return fetch('http://192.168.1.92:3000/calendarios/1/feriados')
+        var year = yearStore.getState();
+        var begins = year + '-01' +'-01';
+        var ends = year + '-12' +'-31';
+        return fetch('http://192.168.1.92:3000/calendarios/1/feriados?desde=' + begins + '&hasta=' + ends)
             .then((response) => response.json());
     }
 
-    static createRule(state){
-        var rule = this.newRule(state);
-        fetch('http://192.168.1.92:3000/calendarios/1/reglas_de_feriado',
+    static createRule(){
+        var rule = this.newRule(holidayFormStore.getState());
+        return fetch('http://192.168.1.92:3000/calendarios/1/reglas_de_feriado',
             {
             method:"post",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify(rule)})
+            body:JSON.stringify(rule)});
     }
 
     static newRule(state) {
