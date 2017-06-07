@@ -22,15 +22,15 @@ export class YearSelector extends  Component{
 
     render() {
         return (
-            <div className="year-selector">
-                <button className="btn btn-secondary" onClick={this.decrementYear()} >
+            <div className="form-group year-selector">
+                <button className="btn btn-primary" onClick={this.decrementYear()} >
                     {"<"}
                 </button>
                 {" "}
-                {yearStore.getState()}
+                <span className="badge badge-default badge-pill">{yearStore.getState()}</span>
                 {" "}
                 <button
-                    className="btn btn-secondary"
+                    className="btn btn-primary"
                     onClick={this.incrementYear()} >
                     {">"}
                 </button>

@@ -8,9 +8,6 @@ class App extends Component {
     render() {
         return (
           <div className="container">
-
-              <h2>Calendarios de Feriados</h2>
-
               <div className="row">
                   <div className="offset-md-4 col-md-4">
                       <YearSelector />

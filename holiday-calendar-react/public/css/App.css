@@ -1,10 +1,14 @@
 
+body {
+  background-image: url("../back.jpg");
+  background-repeat: repeat;
+}
+
 .scrollable {
   height: 300px;
   overflow-y: scroll;
 }
 
 .year-selector {
-  padding-bottom: 10px;
   text-align: center;
 }
