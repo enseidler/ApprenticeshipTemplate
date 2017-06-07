@@ -13,35 +13,37 @@ export class DateSelector extends Component {
     }
 
     onChange() {
-        return (dateString) => holidayFormStore.dispatch({
-            type: this.props.onChangeAction,
-            date: new Date(dateString.replace(/-/g , "/"))
-        });
+        const props=this.props.onChangeAction; //Esto es para poder acceder a las props (dentro de la funcion cambia this)
+        return function (dateString){
+            var date= new Date(dateString.replace(/-/g , "/"))
+            if ( isNaN(date.getTime()) )  {
+                   date=null
+            }
+
+            holidayFormStore.dispatch({
+            type: props,
+            date:date
+        })
+        };
     }
 
     onClear() {
         return () => holidayFormStore.dispatch({
-            type: this.props.onChangeAction
+            type: this.props.onClearAction
         });
     }
 
     render() {
-        var date;
-        if(this.props.date==null){
-            date=null;
-        }else{
-            date=this.props.date.valueOf()
-        }
+
         return (
 
             <div>
                 <DateField
-
                     dateFormat="YYYY-MM-DD"
                     forceValidDate={false}
                     updateOnDateClick={true}
                     collapseOnDateClick={true}
-                    defaultValue={date}
+                    defaultPrevented={null}
                     showClock={false}
                     onChange={this.onChange()}
                     onClear={this.onClear()}>

@@ -41,7 +41,8 @@ class HolidayCalendarsAPI {
                 seudoRule=this.createNewHolidayDayOfWeek(state);
                 break;
         }
-        if(state.begins!=null & state.ends!=null){
+        debugger;
+        if((state.begins!=null) && (state.ends!=null)){
             return this.createNewHolidayWithInterval(state,seudoRule);
         }
         else{
