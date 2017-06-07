@@ -35,13 +35,15 @@ export class CreateHolidayRule extends  Component{
                         Desde
                         <DateSelector
                             date={begins}
-                            onChangeAction={types.CHANGE_BEGINS}/>
+                            onChangeAction={types.CHANGE_BEGINS}
+                            onClear={types.CLEAR_BEGINS}/>
                      </div>
                     <div className="col-md-6">
                         Hasta
                         <DateSelector
                             date={ends}
-                            onChangeAction={types.CHANGE_ENDS} />
+                            onChangeAction={types.CHANGE_ENDS}
+                            onClearAction={types.CLEAR_ENDS}/>
                       </div>
                 </div>
                 <div className="btn-group float-right">

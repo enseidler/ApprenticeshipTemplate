@@ -34,6 +34,12 @@ export const holidayFormReducer = (state = defaultState, action) => {
         case types.CHANGE_ENDS:
             state.ends=action.date
             return state;
+        case types.CLEAR_BEGINS:
+            state.begins=null;
+            return state;
+        case types.CLEAR_ENDS:
+            state.ends=null;
+            return state;
         default:
             return state;
     }

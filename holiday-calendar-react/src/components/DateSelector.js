@@ -8,13 +8,20 @@ export class DateSelector extends Component {
 
     static propTypes = {
         date: PropTypes.object.isRequired,
-        onChangeAction: PropTypes.string.isRequired
+        onChangeAction: PropTypes.string.isRequired,
+        onClearAction: PropTypes.string
     }
 
     onChange() {
         return (dateString) => holidayFormStore.dispatch({
             type: this.props.onChangeAction,
             date: new Date(dateString.replace(/-/g , "/"))
+        });
+    }
+
+    onClear() {
+        return () => holidayFormStore.dispatch({
+            type: this.props.onChangeAction
         });
     }
 
@@ -36,7 +43,8 @@ export class DateSelector extends Component {
                     collapseOnDateClick={true}
                     defaultValue={date}
                     showClock={false}
-                    onChange={this.onChange()}>
+                    onChange={this.onChange()}
+                    onClear={this.onClear()}>
                     <DatePicker
                         navigation={true}
                         clearButton={false}

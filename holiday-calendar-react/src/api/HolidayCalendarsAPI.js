@@ -6,7 +6,13 @@ class HolidayCalendarsAPI {
         var year = yearStore.getState();
         var begins = year + '-01' +'-01';
         var ends = year + '-12' +'-31';
-        return fetch('http://192.168.1.92:3000/calendarios/1/feriados?desde=' + begins + '&hasta=' + ends)
+        return fetch('http://192.168.1.92:3000/calendarios/1/feriados?desde=' + begins + '&hasta=' + ends,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
             .then((response) => response.json());
     }
 
