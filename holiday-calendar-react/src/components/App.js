@@ -11,17 +11,24 @@ class App extends Component {
 
               <h2>Calendarios de Feriados</h2>
 
-              <div class="row">
+              <div className="row">
                   <div className="offset-md-4 col-md-4">
                       <YearSelector />
                   </div>
               </div>
 
-              <div class="row">
+              <div className="form-group row">
                   <div className="offset-md-4 col-md-4 scrollable">
                       <HolidaysList />
                   </div>
               </div>
+
+              <div className="form-group row">
+                  <div className="offset-md-4 col-md-4">
+                      <a href="#myModal" role="button" className="btn btn-primary form-control" data-toggle="modal">Agregar Feriado</a>
+                  </div>
+              </div>
+
 
               <div className="row">
                   <CreateHolidayRule />
