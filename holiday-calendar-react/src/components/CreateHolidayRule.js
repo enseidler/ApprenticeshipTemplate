@@ -19,14 +19,18 @@ export class CreateHolidayRule extends  Component{
 
                 <h3>Nuevo Feriado</h3>
 
+                <hr/>
+
                 <HolidayRuleDateForm />
 
                 <HolidayRuleDayOfWeekForm />
 
                 <HolidayRuleDayOfMonthForm />
 
+                <hr/>
+
                 <h5>Vigencia</h5>
-                <div className="row">
+                <div className="form-group row">
                     <div className="col-md-6">
                         Desde
                         <DateSelector

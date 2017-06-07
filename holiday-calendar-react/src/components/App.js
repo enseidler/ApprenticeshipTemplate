@@ -24,7 +24,7 @@ class App extends Component {
               </div>
 
               <div className="row">
-                <CreateHolidayRule />
+                  <CreateHolidayRule />
               </div>
 
           </div>

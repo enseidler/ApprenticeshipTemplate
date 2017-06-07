@@ -17,10 +17,11 @@ export class HolidayRuleDayOfWeekForm extends  Component{
                         label= 'Día de la semana'
                     />
                 </div>
-                <div className="col-md-6">
-                    <select value={days[holidayFormStore.getState().day_of_week_holiday-1]} onChange={(event)=>
-                    holidayFormStore.dispatch(
-                        {
+                <div className="form-group col-md-6">
+                    <select
+                        className="custom-select form-control"
+                        value={days[holidayFormStore.getState().day_of_week_holiday-1]}
+                        onChange={(event) => holidayFormStore.dispatch({
                             type:types.CHANGE_DAY_OF_WEEK,
                             day_of_week_holiday:days.indexOf(event.target.value)+1
                         })}>

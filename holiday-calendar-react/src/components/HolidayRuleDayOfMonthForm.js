@@ -18,9 +18,10 @@ export class HolidayRuleDayOfMonthForm extends Component {
                         label= 'Día del mes'
                     />
                 </div>
-                <div className="col-md-3">
-                    {/*TODO*/}
-                    <select value={months[holidayFormStore.getState().month-1]} onChange={(event)=>
+                <div className="col-md-4">
+                    <select
+                        className="custom-select form-control"
+                        value={months[holidayFormStore.getState().month-1]} onChange={(event)=>
                         holidayFormStore.dispatch(
                             {
                                 type:types.CHANGE_MONTH,
@@ -31,8 +32,8 @@ export class HolidayRuleDayOfMonthForm extends Component {
                         )}
                     </select>
                 </div>
-                <div className="col-md-3">
-                    <input type="text" size={"1"}
+                <div className="col-md-2">
+                    <input type="text" className="form-control" size={"1"}
                            placeholder="Dia"
                            value={holidayFormStore.getState().day_of_month_holiday}
                             onChange={(event)=>

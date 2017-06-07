@@ -17,10 +17,11 @@ export class HolidayRuleDateForm extends Component {
                         label= 'Día específico'
                     />
                 </div>
-                <div className="col-md-6">
+
+                <div className="form-group col-md-6">
                     <DateSelector
                         date={date_holiday}
-                        onChangeAction={types.CHANGE_DATE_HOLIDAY}/>
+                        onChangeAction={types.CHANGE_DATE_HOLIDAY} />
                 </div>
             </div>
         );
