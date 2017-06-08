@@ -6,7 +6,8 @@ import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
 import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
 import DateSelector from "./DateSelector";
 import { holidayFormStore } from '../stores';
-import {createRule } from "../actions/calendarActions";
+import { createRule } from "../actions/calendarActions";
+import { dayExists } from "./helpers/HolidayCalendarHelper";
 
 export class CreateHolidayRule extends  Component{
 
@@ -17,7 +18,7 @@ export class CreateHolidayRule extends  Component{
 
     validateHolidayRuleDayOfMonth() {
         var dayOfMonth = holidayFormStore.getState().day_of_month_holiday;
-        return !dayOfMonth;
+        return !dayOfMonth || !dayExists(dayOfMonth);
     }
 
     validateForm() {
@@ -25,7 +26,6 @@ export class CreateHolidayRule extends  Component{
             case 'HolidayRuleDate':
                 return this.validateHolidayRuleDate();
             case 'HolidayRuleDayOfMonth':
-                debugger;
                 return this.validateHolidayRuleDayOfMonth();
             default:
                 return false;
@@ -35,7 +35,6 @@ export class CreateHolidayRule extends  Component{
     render() {
         const begins=holidayFormStore.getState().begins
         const ends=holidayFormStore.getState().ends
-
 
         return (
             <div>

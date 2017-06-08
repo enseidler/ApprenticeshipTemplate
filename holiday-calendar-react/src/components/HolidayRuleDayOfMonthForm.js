@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import HolidayTypeRadio from "./HolidayTypeRadio";
 import {holidayFormStore} from "../stores/index"
 import * as types from "../actions/actionTypes"
+import {daysOfSelectedMonth} from "./helpers/HolidayCalendarHelper";
+
+
 export class HolidayRuleDayOfMonthForm extends Component {
 
     months = ['Enero', 'Febrero', 'Marzo', 'Abril',
     'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre',
     'Octubre', 'Noviembre', 'Diciembre'];
-
-
-    daysOfMonth() {
-        var selectedMonth = holidayFormStore.getState().month;
-        return new Date(new Date().getFullYear(), selectedMonth, 0).getDate();
-    }
 
     render() {
         return (
@@ -43,8 +40,9 @@ export class HolidayRuleDayOfMonthForm extends Component {
                         className="form-control"
                         placeholder="Dia"
                         value={holidayFormStore.getState().day_of_month_holiday}
+                        required
                         min={1}
-                        max={this.daysOfMonth()}
+                        max={daysOfSelectedMonth()}
                         onChange={(event)=>
                             holidayFormStore.dispatch(
                                 {
