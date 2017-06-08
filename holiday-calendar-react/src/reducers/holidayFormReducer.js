@@ -1,5 +1,4 @@
 import * as types from '../actions/actionTypes'
-import holidayCalendarsAPI from '../api/HolidayCalendarsAPI';
 
 const defaultState = {
     date_holiday: new Date(),
@@ -12,6 +11,7 @@ const defaultState = {
 }
 
 export const holidayFormReducer = (state = defaultState, action) => {
+
     switch (action.type) {
         case types.CHANGE_DATE_HOLIDAY:
             state.date_holiday = action.date;
@@ -43,4 +43,5 @@ export const holidayFormReducer = (state = defaultState, action) => {
         default:
             return state;
     }
+
 }

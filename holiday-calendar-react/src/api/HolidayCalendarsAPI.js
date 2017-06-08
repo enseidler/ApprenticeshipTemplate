@@ -1,5 +1,5 @@
-import { holidayFormStore, yearStore } from "../stores";
-
+import { holidayFormStore, yearStore, errorStore } from "../stores";
+import * as types from "../actions/actionTypes";
 class HolidayCalendarsAPI {
 
     static loadHolidays() {
@@ -18,6 +18,10 @@ class HolidayCalendarsAPI {
 
     static createRule(){
         var rule = this.newRule(holidayFormStore.getState());
+        if(Object.values(rule).includes(null)){
+
+            throw new Error('fecha invalida')
+        }
         return fetch('http://192.168.1.92:3000/calendarios/1/reglas_de_feriado',
             {
             method:"post",

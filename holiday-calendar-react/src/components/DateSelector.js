@@ -12,7 +12,7 @@ export class DateSelector extends Component {
     }
 
     onChange() {
-        const props=this.props.onChangeAction; //Esto es para poder acceder a las props (dentro de la funcion cambia this)
+        const props=this.props.onChangeAction;
         return function (dateString){
             var date= new Date(dateString.replace(/-/g , "/"))
             if ( isNaN(date.getTime()) )  {
