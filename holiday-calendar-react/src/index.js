@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { holidaysStore, holidayFormStore, yearStore, errorStore} from './stores'
+import { holidaysStore, holidayFormStore, yearStore, messageStore} from './stores'
 import { loadHolidays } from './actions/calendarActions'
 import registerServiceWorker from './registerServiceWorker';
 
@@ -20,6 +20,6 @@ render();
 holidaysStore.subscribe(render);
 holidayFormStore.subscribe(render);
 yearStore.subscribe(render);
-errorStore.subscribe(render);
+messageStore.subscribe(render);
 registerServiceWorker();
 

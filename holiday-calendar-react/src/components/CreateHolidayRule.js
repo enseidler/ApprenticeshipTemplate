@@ -4,11 +4,10 @@ import 'react-date-picker/index.css';
 import HolidayRuleDateForm from "./HolidayRuleDateForm";
 import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
 import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
-import ErrorPanel from "./ErrorPanel"
 import DateSelector from "./DateSelector";
-import { holidayFormStore, errorStore  } from '../stores';
+import { holidayFormStore  } from '../stores';
 import {createRule } from "../actions/calendarActions";
-import { dayExists } from "./helpers/HolidayCalendarHelper";
+import { dayExists } from "../helpers/HolidayCalendarHelper";
 
 
 export class CreateHolidayRule extends  Component{
@@ -48,7 +47,6 @@ export class CreateHolidayRule extends  Component{
                                 <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
 
-                            <ErrorPanel errorStore={errorStore}/>
                             <div className="modal-body">
                                 <div className="offset-md-1 col-md-10">
                                     <HolidayRuleDateForm />
@@ -74,11 +72,10 @@ export class CreateHolidayRule extends  Component{
                             </div>
                             <div className="modal-footer">
                                 <button className="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                                {errorStore.getState().dismiss}
                                 <button
                                     disabled={this.validateForm()}
                                     className="btn btn-danger"
-                                    data-dismiss={errorStore.getState().dismiss}
+                                    data-dismiss={"modal"}
                                     onClick={function() {
                                         holidayFormStore.dispatch(createRule());
                                     }}>

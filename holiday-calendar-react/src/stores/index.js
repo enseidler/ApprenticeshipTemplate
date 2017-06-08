@@ -3,37 +3,33 @@ import thunk from 'redux-thunk';
 import { yearReducer } from '../reducers/yearReducer'
 import { holidaysReducer } from '../reducers/holidaysReducer'
 import { holidayFormReducer } from '../reducers/holidayFormReducer'
-import { errorReducer } from '../reducers/errorReducer'
+import { messageReducer } from '../reducers/errorReducer'
 import * as types from "../actions/actionTypes";
 import reduxCatch from 'redux-catch'
 
-function errorHandler(error, getState, lastAction, dispatch) {
-
-    errorStore.dispatch(
+function messageHandler(error, getState, lastAction, dispatch) {
+    debugger;
+    messageStore.dispatch(
         {
-            type:types.CHANGE_ERROR,
-            error:{
-                strong: 'ERROR',
-                msg:error.message,
-                dismiss:null
-                 }
+            type:types.CHANGE_MESSAGE,
+            error:error
         })
     setTimeout(function () {
-        errorStore.dispatch(
+        messageStore.dispatch(
             {
-                type:types.CHANGE_ERROR,
+                type:types.CHANGE_MESSAGE,
                 error:{
+                    type: null,
                     strong: null,
-                    msg:null,
-                    dismiss:"modal"
+                    msg:null
                     }
             })
     }, 3000);
 }
 
 export const holidaysStore = createStore(holidaysReducer, applyMiddleware(thunk), applyMiddleware(
-    reduxCatch(errorHandler)));
+    reduxCatch(messageHandler)));
 export const holidayFormStore = createStore(holidayFormReducer,applyMiddleware(thunk), applyMiddleware(
-    reduxCatch(errorHandler)));
+    reduxCatch(messageHandler)));
 export const yearStore = createStore(yearReducer);
-export const errorStore = createStore(errorReducer);
+export const messageStore = createStore(messageReducer);

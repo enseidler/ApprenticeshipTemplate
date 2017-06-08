@@ -15,6 +15,6 @@ export const CLEAR_BEGINS='CLEAR_BEGINS';
 export const CLEAR_ENDS='CLEAR_ENDS';
 
 
-export const CHANGE_ERROR='CHANGE_ERROR';
+export const CHANGE_MESSAGE='CHANGE_MESSAGE';
 
 
