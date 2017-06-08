@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import YearSelector from './YearSelector';
 import HolidaysList from './HolidaysList';
 import CreateHolidayRule from "./CreateHolidayRule";
-import {messageStore} from "../stores/index";
+import {messageStore, holidaysStore,calendarsStore} from "../stores/index";
 import MessagePanel from "./MessagePanel";
-
+import * as types from "../actions/actionTypes"
+import {loadHolidays} from "../actions/calendarActions"
 
 
 class App extends Component {
@@ -18,9 +19,25 @@ class App extends Component {
                         <img src="../images/brand.png" width="30" height="30" alt=""/>
                         {" Feriados!"}
                     </a>
-                    <select className="custom-select">
-                        <option> Argentina </option>
-                        <option> Brasil </option>
+                    <a className="navbar-brand" href="#">
+                    {holidaysStore.getState().name}
+                    </a>
+                    <select className="custom-select" onChange={(event)=>{
+                        var calendar=calendarsStore.getState().find(calendar=>calendar.name===event.target.value)
+                        debugger
+                        holidaysStore.dispatch(
+                            {
+                                type:types.CHANGE_CALENDAR,
+                                calendar:{
+                                    id:calendar.id,
+                                    name:calendar.name
+                                }
+                            })
+                        holidaysStore.dispatch(loadHolidays())}}>
+
+                        {calendarsStore.getState().map(calendar =>
+                            <option>{calendar.name}</option>
+                        )}}
                     </select>
                 </nav>
 

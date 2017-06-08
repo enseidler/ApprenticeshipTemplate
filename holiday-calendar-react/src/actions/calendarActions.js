@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import holidayCalendarsAPI from '../api/HolidayCalendarsAPI';
 import { holidaysStore } from "../stores";
+import * as messages from "../helpers/Messages";
 
 
 export function loadHolidaysSuccess(holidays) {
@@ -22,11 +23,32 @@ export function loadHolidays() {
     };
 }
 
+export function loadCalendarsSuccess(calendars) {
+    return {
+        type: types.LOAD_CALENDARS_SUCCESS,
+        calendars: calendars
+    };
+}
+
+export function loadCalendars() {
+    return function(dispatch) {
+        return holidayCalendarsAPI.loadCalendars()
+            .then((calendars) => dispatch(
+                loadCalendarsSuccess(calendars)
+                )
+            ).catch(error => {
+                throw(error);
+            });
+    };
+}
+
 export function createRule() {
     return function() {
         return holidayCalendarsAPI.createRule()
-            .then(() =>
+            .then(() =>{
                holidaysStore.dispatch(loadHolidays())
+
+        }
         ).catch(error => {
             throw(error);
         });

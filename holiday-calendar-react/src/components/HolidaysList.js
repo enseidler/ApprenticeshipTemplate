@@ -6,7 +6,7 @@ export class HolidaysList extends Component {
     render() {
         return (
             <ul className="list-group">
-            {holidaysStore.getState().map(date =>
+            {holidaysStore.getState().holidays.map(date =>
                 <li className="list-group-item ">{ date }</li>
             )}
             </ul>

@@ -4,11 +4,11 @@ import { yearReducer } from '../reducers/yearReducer'
 import { holidaysReducer } from '../reducers/holidaysReducer'
 import { holidayFormReducer } from '../reducers/holidayFormReducer'
 import { messageReducer } from '../reducers/errorReducer'
+import { calendarsReducer } from '../reducers/calendarsReducer'
 import * as types from "../actions/actionTypes";
 import reduxCatch from 'redux-catch'
 
 function messageHandler(error, getState, lastAction, dispatch) {
-    debugger;
     messageStore.dispatch(
         {
             type:types.CHANGE_MESSAGE,
@@ -28,6 +28,8 @@ function messageHandler(error, getState, lastAction, dispatch) {
 }
 
 export const holidaysStore = createStore(holidaysReducer, applyMiddleware(thunk), applyMiddleware(
+    reduxCatch(messageHandler)));
+export const calendarsStore = createStore(calendarsReducer, applyMiddleware(thunk), applyMiddleware(
     reduxCatch(messageHandler)));
 export const holidayFormStore = createStore(holidayFormReducer,applyMiddleware(thunk), applyMiddleware(
     reduxCatch(messageHandler)));

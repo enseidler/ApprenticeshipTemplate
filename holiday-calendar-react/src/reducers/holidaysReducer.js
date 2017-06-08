@@ -1,9 +1,21 @@
 import * as types from '../actions/actionTypes'
-
-export const holidaysReducer = (state = [], action) => {
+import {holidaysStore} from '../stores'
+import {loadHolidays} from '../actions/calendarActions'
+const calendarDefault={
+    id:1,
+    name:'Argentina',
+    holidays:[]
+}
+export const holidaysReducer = (state = calendarDefault, action) => {
     switch (action.type) {
         case types.LOAD_HOLIDAYS_SUCCESS:
-            return action.holidays;
+            state.holidays=action.holidays;
+            return state;
+        case types.CHANGE_CALENDAR:
+            state.id=action.calendar.id;
+            state.name=action.calendar.name;
+            state.holidays=[]
+            return state;
         default:
             return state;
     }

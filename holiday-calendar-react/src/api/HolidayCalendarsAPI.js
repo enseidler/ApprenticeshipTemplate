@@ -1,19 +1,34 @@
-import { holidayFormStore, yearStore} from "../stores";
+import { holidayFormStore, yearStore,holidaysStore} from "../stores";
 import * as messages from "../helpers/Messages";
+
 class HolidayCalendarsAPI {
 
     static loadHolidays() {
+
+
         var year = yearStore.getState();
         var begins = year + '-01' +'-01';
         var ends = year + '-12' +'-31';
-        return fetch('http://192.168.1.92:3000/calendarios/1/feriados?desde=' + begins + '&hasta=' + ends,
+        debugger
+        return  fetch('http://192.168.1.92:3000/calendarios/'+holidaysStore.getState().id+'/feriados?desde=' + begins + '&hasta=' + ends,
             {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             })
-            .then((response) => response.json());
+            .then(response =>response.json());
+        }
+
+    static loadCalendars(){
+        return  fetch('http://192.168.1.92:3000/calendarios',
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response =>response.json());
     }
 
     static createRule(){
@@ -22,8 +37,9 @@ class HolidayCalendarsAPI {
 
             throw messages.errorMessage('datos incorrectos')
         }
-        throw messages.successMessage('datos validos')
-        return fetch('http://192.168.1.92:3000/calendarios/1/reglas_de_feriado',
+        //TODO
+    // throw messages.successMessage('datos validos') lo tuve que sacar xq cortaba el flujo y nunca hacia el fetch :(
+         return fetch('http://192.168.1.92:3000/calendarios/'+holidaysStore.getState().id+'/reglas_de_feriado',
             {
             method:"post",
             headers: {
@@ -31,6 +47,7 @@ class HolidayCalendarsAPI {
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify(rule)})
+
     }
 
     static newRule(state) {
@@ -44,6 +61,9 @@ class HolidayCalendarsAPI {
                 break;
             case 'HolidayRuleDayOfWeek':
                 seudoRule=this.createNewHolidayDayOfWeek(state);
+                break;
+            default:
+                seudoRule=null;
                 break;
         }
         if((state.begins!=null) && (state.ends!=null)){
