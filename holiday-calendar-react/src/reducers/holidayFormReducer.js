@@ -1,10 +1,10 @@
 import * as types from '../actions/actionTypes'
 
 const defaultState = {
-    date_holiday: new Date(),
+    date_holiday: null,
     ruleType: 'HolidayRuleDate',
     month:12,
-    day_of_month_holiday:22,
+    day_of_month_holiday:null,
     day_of_week_holiday:7,
     begins:null,
     ends:null

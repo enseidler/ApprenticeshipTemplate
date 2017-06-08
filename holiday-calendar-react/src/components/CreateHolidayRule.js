@@ -8,8 +8,31 @@ import ErrorPanel from "./ErrorPanel"
 import DateSelector from "./DateSelector";
 import { holidayFormStore, errorStore  } from '../stores';
 import {createRule } from "../actions/calendarActions";
+import { dayExists } from "./helpers/HolidayCalendarHelper";
+
 
 export class CreateHolidayRule extends  Component{
+
+    validateHolidayRuleDate() {
+        var dateHoliday = holidayFormStore.getState().date_holiday;
+        return !dateHoliday;
+    }
+
+    validateHolidayRuleDayOfMonth() {
+        var dayOfMonth = holidayFormStore.getState().day_of_month_holiday;
+        return !dayOfMonth || !dayExists(dayOfMonth);
+    }
+
+    validateForm() {
+        switch (holidayFormStore.getState().ruleType) {
+            case 'HolidayRuleDate':
+                return this.validateHolidayRuleDate();
+            case 'HolidayRuleDayOfMonth':
+                return this.validateHolidayRuleDayOfMonth();
+            default:
+                return false;
+        }
+    }
 
     render() {
         const begins=holidayFormStore.getState().begins
@@ -53,6 +76,7 @@ export class CreateHolidayRule extends  Component{
                                 <button className="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                                 {errorStore.getState().dismiss}
                                 <button
+                                    disabled={this.validateForm()}
                                     className="btn btn-danger"
                                     data-dismiss={errorStore.getState().dismiss}
                                     onClick={function() {
