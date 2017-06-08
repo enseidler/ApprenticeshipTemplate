@@ -5,14 +5,37 @@ import HolidayRuleDateForm from "./HolidayRuleDateForm";
 import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
 import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
 import DateSelector from "./DateSelector";
-import { holidayFormStore, holidaysStore } from '../stores';
-import {createRule, loadHolidays} from "../actions/calendarActions";
+import { holidayFormStore } from '../stores';
+import {createRule } from "../actions/calendarActions";
 
 export class CreateHolidayRule extends  Component{
+
+    validateHolidayRuleDate() {
+        var dateHoliday = holidayFormStore.getState().date_holiday;
+        return !dateHoliday;
+    }
+
+    validateHolidayRuleDayOfMonth() {
+        var dayOfMonth = holidayFormStore.getState().day_of_month_holiday;
+        return !dayOfMonth;
+    }
+
+    validateForm() {
+        switch (holidayFormStore.getState().ruleType) {
+            case 'HolidayRuleDate':
+                return this.validateHolidayRuleDate();
+            case 'HolidayRuleDayOfMonth':
+                debugger;
+                return this.validateHolidayRuleDayOfMonth();
+            default:
+                return false;
+        }
+    }
 
     render() {
         const begins=holidayFormStore.getState().begins
         const ends=holidayFormStore.getState().ends
+
 
         return (
             <div>
@@ -51,6 +74,7 @@ export class CreateHolidayRule extends  Component{
                             <div className="modal-footer">
                                 <button className="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                                 <button
+                                    disabled={this.validateForm()}
                                     className="btn btn-danger"
                                     data-dismiss="modal"
                                     onClick={function() {
