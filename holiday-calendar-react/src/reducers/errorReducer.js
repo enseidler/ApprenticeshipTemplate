@@ -3,14 +3,14 @@
  */
 
 import * as types from '../actions/actionTypes';
-const defaultError={
+const defaultMessage={
     strong:null,
     msg:null,
-    dismiss:"modal"
+    type:null
 }
-export const errorReducer = (state = defaultError, action) => {
+export const messageReducer = (state = defaultMessage, action) => {
     switch (action.type) {
-        case types.CHANGE_ERROR:
+        case types.CHANGE_MESSAGE:
             return action.error;
         default:
             return state;

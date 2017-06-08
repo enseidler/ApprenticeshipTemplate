@@ -1,4 +1,4 @@
-import { holidayFormStore } from "../../stores";
+import { holidayFormStore } from "../stores/index";
 
 export function selectedMonth() {
     return holidayFormStore.getState().month;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HolidayTypeRadio from "./HolidayTypeRadio";
 import {holidayFormStore} from "../stores/index"
 import * as types from "../actions/actionTypes"
-import {daysOfSelectedMonth} from "./helpers/HolidayCalendarHelper";
+import {daysOfSelectedMonth} from "../helpers/HolidayCalendarHelper";
 
 
 export class HolidayRuleDayOfMonthForm extends Component {
