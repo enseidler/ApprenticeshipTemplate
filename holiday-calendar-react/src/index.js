@@ -13,7 +13,7 @@ const render = () => ReactDOM.render(
     rootElement
 );
 calendarsStore.dispatch(loadCalendars())
-//holidaysStore.dispatch(loadHolidays());
+holidaysStore.dispatch(loadHolidays());
 
 render();
 
