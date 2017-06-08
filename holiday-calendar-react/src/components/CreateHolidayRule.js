@@ -74,11 +74,10 @@ export class CreateHolidayRule extends  Component{
                             </div>
                             <div className="modal-footer">
                                 <button className="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                                {errorStore.getState().dismiss}
                                 <button
                                     disabled={this.validateForm()}
                                     className="btn btn-danger"
-                                    data-dismiss={errorStore.getState().dismiss}
+                                    data-dismiss="modal"
                                     onClick={function() {
                                         holidayFormStore.dispatch(createRule());
                                     }}>
