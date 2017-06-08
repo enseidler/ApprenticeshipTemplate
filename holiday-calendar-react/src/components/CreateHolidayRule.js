@@ -51,7 +51,7 @@ export class CreateHolidayRule extends  Component{
                             <div className="modal-footer">
                                 <button className="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                                 <button
-                                    className="btn btn-primary"
+                                    className="btn btn-danger"
                                     data-dismiss="modal"
                                     onClick={function() {
                                         holidayFormStore.dispatch(createRule());

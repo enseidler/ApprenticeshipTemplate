@@ -8,6 +8,7 @@ class App extends Component {
     render() {
         return (
           <div className="container">
+
               <div className="row">
                   <div className="offset-md-4 col-md-4">
                       <YearSelector />
@@ -22,10 +23,9 @@ class App extends Component {
 
               <div className="form-group row">
                   <div className="offset-md-4 col-md-4">
-                      <a href="#myModal" role="button" className="btn btn-primary form-control" data-toggle="modal">Agregar Feriado</a>
+                      <a href="#myModal" role="button" className="btn btn-danger form-control" data-toggle="modal">Agregar Feriado</a>
                   </div>
               </div>
-
 
               <div className="row">
                   <CreateHolidayRule />
