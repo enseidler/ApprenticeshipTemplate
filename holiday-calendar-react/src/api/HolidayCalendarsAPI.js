@@ -1,4 +1,4 @@
-import { holidayFormStore, yearStore, holidaysStore } from "../stores";
+import { holidayFormStore, yearStore, holidaysStore, calendarsStore } from "../stores";
 import {showSuccessMessage} from "../helpers/Messages";
 
 class HolidayCalendarsAPI {
@@ -27,6 +27,23 @@ class HolidayCalendarsAPI {
                 }
             })
             .then(response =>response.json());
+    }
+
+    static createCalendar(){
+        var calendar = {
+            name: calendarsStore.getState().name,
+            holiday_rules: []
+        };
+
+        showSuccessMessage("Nuevo calendario [" + calendar.name + "] creado!");
+
+        return fetch('http://192.168.1.92:3000/calendarios', {
+            method:"post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(calendar)})
     }
 
     static createRule(){

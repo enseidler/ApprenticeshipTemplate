@@ -3,10 +3,19 @@
  */
 import * as types from '../actions/actionTypes';
 
-export const calendarsReducer = (state = [], action) => {
+const defaultState = {
+    name: null,
+    calendars: []
+};
+
+export const calendarsReducer = (state = defaultState, action) => {
     switch (action.type) {
         case types.LOAD_CALENDARS_SUCCESS:
-            return action.calendars;
+            state.calendars = action.calendars;
+            return state;
+        case types.CHANGE_NEW_CALENDAR_NAME:
+            state.name = action.name;
+            return state;
         default:
             return state;
     }

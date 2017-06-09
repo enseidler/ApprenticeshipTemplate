@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import holidayCalendarsAPI from '../api/HolidayCalendarsAPI';
-import { holidaysStore } from "../stores";
+import { holidaysStore, calendarsStore } from "../stores";
 import * as messages from "../helpers/Messages";
 
 
@@ -47,7 +47,6 @@ export function createRule() {
         return holidayCalendarsAPI.createRule()
             .then(() =>{
                holidaysStore.dispatch(loadHolidays())
-
         }
         ).catch(error => {
             throw(error);
@@ -55,7 +54,18 @@ export function createRule() {
     };
 }
 
+export function createCalendar() {
+    return function() {
+        return holidayCalendarsAPI.createCalendar()
+            .then(() =>{
+                    calendarsStore.dispatch(loadCalendars())
 
+                }
+            ).catch(error => {
+                throw(error);
+            });
+    };
+}
 
 
 
