@@ -11,7 +11,7 @@ const defaultMessage={
 export const messageReducer = (state = defaultMessage, action) => {
     switch (action.type) {
         case types.CHANGE_MESSAGE:
-            return action.error;
+            return action.message;
         default:
             return state;
     }

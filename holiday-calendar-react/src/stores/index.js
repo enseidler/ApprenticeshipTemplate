@@ -7,24 +7,10 @@ import { messageReducer } from '../reducers/errorReducer'
 import { calendarsReducer } from '../reducers/calendarsReducer'
 import * as types from "../actions/actionTypes";
 import reduxCatch from 'redux-catch'
+import {showSuccessMessage} from "../helpers/Messages";
 
-function messageHandler(error, getState, lastAction, dispatch) {
-    messageStore.dispatch(
-        {
-            type:types.CHANGE_MESSAGE,
-            error:error
-        })
-    setTimeout(function () {
-        messageStore.dispatch(
-            {
-                type:types.CHANGE_MESSAGE,
-                error:{
-                    type: null,
-                    strong: null,
-                    msg:null
-                    }
-            })
-    }, 3000);
+function messageHandler(message, getState, lastAction, dispatch) {
+    return showSuccessMessage(message);
 }
 
 export const holidaysStore = createStore(holidaysReducer, applyMiddleware(thunk), applyMiddleware(

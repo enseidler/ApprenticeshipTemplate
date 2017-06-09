@@ -15,7 +15,6 @@ class MessagePanel extends Component {
     render() {
         const {messageStore}=this.props
         return (
-
             <div className={"alert alert-"+messageStore.getState().type} role="alert" hidden={!messageStore.getState().strong}>
                 <strong>{messageStore.getState().strong}</strong> {messageStore.getState().msg}
             </div>

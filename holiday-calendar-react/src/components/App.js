@@ -34,7 +34,7 @@ class App extends Component {
                             holidaysStore.dispatch(loadHolidays());
                         }}
                     >
-                        <option value="" selected disabled>Elegí un calendario...</option>
+                        <option selected disabled>Elegí un calendario...</option>
                         {calendarsStore.getState().map(calendar =>
                             <option>{calendar.name}</option>
                         )}}
@@ -53,6 +53,19 @@ class App extends Component {
                     <div className="form-group row">
                         <div className="offset-md-4 col-md-4 scrollable">
                             <HolidaysList />
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <div className="offset-md-4 col-md-4">
+                            <button
+                                href="#myModal"
+                                role="button"
+                                className="btn btn-danger form-control"
+                                disabled={!holidaysStore.getState().id}
+                                data-toggle="modal">
+                                Agregar Feriado
+                            </button>
                         </div>
                     </div>
 

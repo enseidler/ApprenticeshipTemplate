@@ -1,15 +1,13 @@
-import { holidayFormStore, yearStore,holidaysStore} from "../stores";
-import * as messages from "../helpers/Messages";
+import { holidayFormStore, yearStore, holidaysStore } from "../stores";
+import {showSuccessMessage} from "../helpers/Messages";
 
 class HolidayCalendarsAPI {
 
     static loadHolidays() {
-
-
         var year = yearStore.getState();
         var begins = year + '-01' +'-01';
         var ends = year + '-12' +'-31';
-        debugger
+
         return  fetch('http://192.168.1.92:3000/calendarios/'+holidaysStore.getState().id+'/feriados?desde=' + begins + '&hasta=' + ends,
             {
                 headers: {
@@ -33,6 +31,9 @@ class HolidayCalendarsAPI {
 
     static createRule(){
         var rule = this.newRule(holidayFormStore.getState());
+
+        showSuccessMessage("Nuevo feriado creado!");
+
         return fetch('http://192.168.1.92:3000/calendarios/'+holidaysStore.getState().id+'/reglas_de_feriado', {
             method:"post",
             headers: {
