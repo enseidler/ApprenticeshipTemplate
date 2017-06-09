@@ -11,7 +11,6 @@ import {loadHolidays} from "../actions/calendarActions"
 class App extends Component {
 
     render() {
-
         return (
             <div>
                 <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-md justify-content-md-between">
@@ -53,19 +52,6 @@ class App extends Component {
                     <div className="form-group row">
                         <div className="offset-md-4 col-md-4 scrollable">
                             <HolidaysList />
-                        </div>
-                    </div>
-
-                    <div className="form-group row">
-                        <div className="offset-md-4 col-md-4">
-                            <button
-                                href="#myModal"
-                                role="button"
-                                className="btn btn-danger form-control"
-                                disabled={!holidaysStore.getState().id}
-                                data-toggle="modal">
-                                Agregar Feriado
-                            </button>
                         </div>
                     </div>
 
