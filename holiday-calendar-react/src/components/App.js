@@ -58,8 +58,14 @@ class App extends Component {
 
                     <div className="form-group row">
                         <div className="offset-md-4 col-md-4">
-                            <a href="#myModal" role="button" className="btn btn-danger form-control" data-toggle="modal">Agregar
-                                Feriado</a>
+                            <button
+                                href="#myModal"
+                                role="button"
+                                className="btn btn-danger form-control"
+                                disabled={!holidaysStore.getState().id}
+                                data-toggle="modal">
+                                Agregar Feriado
+                            </button>
                         </div>
                     </div>
 
