@@ -29,7 +29,7 @@ class App extends Component {
                             onClick={function() {
                                 calendarsStore.dispatch(createCalendar());
                             }}>
-                            {"Crear Calendario"}
+                            {"+"}
                         </button>
                         <input
                             type="text"
