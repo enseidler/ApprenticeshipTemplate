@@ -12,3 +12,7 @@ body {
 .year-selector {
   text-align: center;
 }
+
+.calendar-selector {
+  min-width: 200px;
+}

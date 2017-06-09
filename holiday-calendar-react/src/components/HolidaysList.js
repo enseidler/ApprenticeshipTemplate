@@ -7,7 +7,7 @@ export class HolidaysList extends Component {
         return (
             <ul className="list-group">
             {holidaysStore.getState().holidays.map(date =>
-                <li className="list-group-item ">{ date }</li>
+                <li className="list-group-item">{ date }</li>
             )}
             </ul>
         );

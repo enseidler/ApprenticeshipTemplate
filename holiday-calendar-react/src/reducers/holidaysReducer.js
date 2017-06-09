@@ -1,9 +1,7 @@
 import * as types from '../actions/actionTypes'
-import {holidaysStore} from '../stores'
-import {loadHolidays} from '../actions/calendarActions'
+
 const calendarDefault={
-    id:1,
-    name:'Argentina',
+    name: "Elegí un calendario!",
     holidays:[]
 }
 export const holidaysReducer = (state = calendarDefault, action) => {

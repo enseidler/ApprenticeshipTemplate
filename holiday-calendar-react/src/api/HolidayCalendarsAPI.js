@@ -33,21 +33,13 @@ class HolidayCalendarsAPI {
 
     static createRule(){
         var rule = this.newRule(holidayFormStore.getState());
-        if(Object.values(rule).includes(null)){
-
-            throw messages.errorMessage('datos incorrectos')
-        }
-        //TODO
-    // throw messages.successMessage('datos validos') lo tuve que sacar xq cortaba el flujo y nunca hacia el fetch :(
-         return fetch('http://192.168.1.92:3000/calendarios/'+holidaysStore.getState().id+'/reglas_de_feriado',
-            {
+        return fetch('http://192.168.1.92:3000/calendarios/'+holidaysStore.getState().id+'/reglas_de_feriado', {
             method:"post",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body:JSON.stringify(rule)})
-
     }
 
     static newRule(state) {

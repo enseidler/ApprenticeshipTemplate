@@ -20,21 +20,21 @@ class App extends Component {
                         {" Feriados!"}
                     </a>
                     <a className="navbar-brand" href="#">
-                    {holidaysStore.getState().name}
+                        <h2>{ holidaysStore.getState().name }</h2>
                     </a>
-                    <select className="custom-select" onChange={(event)=>{
-                        var calendar=calendarsStore.getState().find(calendar=>calendar.name===event.target.value)
-                        debugger
-                        holidaysStore.dispatch(
-                            {
+                    <select className="custom-select" onChange={(event) => {
+                            var calendar=calendarsStore.getState().find( calendar => calendar.name===event.target.value)
+                            holidaysStore.dispatch({
                                 type:types.CHANGE_CALENDAR,
                                 calendar:{
                                     id:calendar.id,
                                     name:calendar.name
                                 }
                             })
-                        holidaysStore.dispatch(loadHolidays())}}>
-
+                            holidaysStore.dispatch(loadHolidays());
+                        }}
+                    >
+                        <option value="" selected disabled>Elegí un calendario...</option>
                         {calendarsStore.getState().map(calendar =>
                             <option>{calendar.name}</option>
                         )}}
