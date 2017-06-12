@@ -2,6 +2,7 @@ import * as types from './actionTypes';
 import holidayCalendarsAPI from '../api/HolidayCalendarsAPI';
 import { holidaysStore, calendarsStore } from "../stores";
 import * as messages from "../helpers/Messages";
+import {showSuccessMessage} from "../helpers/Messages";
 
 
 export function loadHolidaysSuccess(holidays) {
@@ -46,7 +47,8 @@ export function createRule() {
     return function() {
         return holidayCalendarsAPI.createRule()
             .then(() =>{
-               holidaysStore.dispatch(loadHolidays())
+                    showSuccessMessage("Nuevo feriado creado!");
+                    holidaysStore.dispatch(loadHolidays())
         }
         ).catch(error => {
             throw(error);
@@ -58,6 +60,8 @@ export function createCalendar() {
     return function() {
         return holidayCalendarsAPI.createCalendar()
             .then(() =>{
+
+                showSuccessMessage("Nuevo calendario creado!");
                     calendarsStore.dispatch(loadCalendars())
 
                 }

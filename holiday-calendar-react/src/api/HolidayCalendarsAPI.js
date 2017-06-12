@@ -20,10 +20,11 @@ class HolidayCalendarsAPI {
 
     static loadCalendars(){
         return  fetch('http://192.168.1.92:3000/calendarios',
-            {
+            {   method:'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
+
                 }
             })
             .then(response =>response.json());
@@ -35,7 +36,6 @@ class HolidayCalendarsAPI {
             holiday_rules: []
         };
 
-        showSuccessMessage("Nuevo calendario [" + calendar.name + "] creado!");
 
         return fetch('http://192.168.1.92:3000/calendarios', {
             method:"post",
@@ -49,13 +49,13 @@ class HolidayCalendarsAPI {
     static createRule(){
         var rule = this.newRule(holidayFormStore.getState());
 
-        showSuccessMessage("Nuevo feriado creado!");
 
         return fetch('http://192.168.1.92:3000/calendarios/'+holidaysStore.getState().id+'/reglas_de_feriado', {
             method:"post",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
+
             },
             body:JSON.stringify(rule)})
     }

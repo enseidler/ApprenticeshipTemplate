@@ -5,25 +5,33 @@ import HolidayRuleDateForm from "./HolidayRuleDateForm";
 import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
 import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
 import DateSelector from "./DateSelector";
-import { holidayFormStore  } from '../stores';
 import {createRule } from "../actions/calendarActions";
 import { dayExists } from "../helpers/HolidayCalendarHelper";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 
 export class CreateHolidayRule extends  Component{
-
+    componentDidMount(){
+        const {store}=this.context;
+        this.unsubscribe=store.subscribe(()=>this.forceUpdate())
+    }
+    componentWillUnmount(){
+        this.unsubscribe();
+    }
     validateHolidayRuleDate() {
-        var dateHoliday = holidayFormStore.getState().date_holiday;
+        var dateHoliday = this.context.store.getState().date_holiday;
         return !dateHoliday;
     }
 
     validateHolidayRuleDayOfMonth() {
-        var dayOfMonth = holidayFormStore.getState().day_of_month_holiday;
+
+        var dayOfMonth = this.context.store.getState().day_of_month_holiday;
         return !dayOfMonth || !dayExists(dayOfMonth);
     }
 
     validateForm() {
-        switch (holidayFormStore.getState().ruleType) {
+        switch (this.context.store.getState().ruleType) {
             case 'HolidayRuleDate':
                 return this.validateHolidayRuleDate();
             case 'HolidayRuleDayOfMonth':
@@ -34,8 +42,11 @@ export class CreateHolidayRule extends  Component{
     }
 
     render() {
-        const begins=holidayFormStore.getState().begins
-        const ends=holidayFormStore.getState().ends
+        debugger
+        const store=this.context.store
+        const state=store.getState()
+        const begins=state.begins
+        const ends=state.ends
 
         return (
             <div>
@@ -77,7 +88,7 @@ export class CreateHolidayRule extends  Component{
                                     className="btn btn-danger"
                                     data-dismiss={"modal"}
                                     onClick={function() {
-                                        holidayFormStore.dispatch(createRule());
+                                        store.dispatch(createRule());
                                     }}>
                                     {"Crear Regla"}
                                 </button>
@@ -89,5 +100,7 @@ export class CreateHolidayRule extends  Component{
         );
     }
 }
-
-export default CreateHolidayRule;
+CreateHolidayRule.contextTypes={
+    store:PropTypes.object
+}
+export default connect()(CreateHolidayRule);
