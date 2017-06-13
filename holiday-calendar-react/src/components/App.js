@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import YearSelector from './YearSelector';
 import HolidaysList from './HolidaysList';
 import CreateHolidayRule from "./CreateHolidayRule";
-import {messageStore, holidaysStore,calendarsStore} from "../stores/index";
+import {messageStore, holidaysStore,calendarsStore,holidayFormStore} from "../stores/index";
 import MessagePanel from "./MessagePanel";
 import * as types from "../actions/actionTypes"
 import {loadHolidays, createCalendar } from "../actions/calendarActions"
+import Provider from "react-redux/es/components/Provider";
 
 
 class App extends Component {
@@ -99,7 +100,9 @@ class App extends Component {
                     </div>
 
                     <div className="row">
+                        <Provider store={holidayFormStore}>
                         <CreateHolidayRule />
+                        </Provider>>
                     </div>
 
                 </div>
