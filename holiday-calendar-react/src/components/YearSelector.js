@@ -9,14 +9,14 @@ export class YearSelector extends  Component{
     decrementYear() {
         return function() {
             yearStore.dispatch({type: types.DECREMENT_YEAR});
-            holidaysStore.dispatch(loadHolidays());
+            holidaysStore.dispatch(loadHolidays(holidaysStore.getState().id));
         };
     }
 
     incrementYear() {
         return function() {
             yearStore.dispatch({type: types.INCREMENT_YEAR});
-            holidaysStore.dispatch(loadHolidays());
+            holidaysStore.dispatch(loadHolidays(holidaysStore.getState().id));
         };
     }
 

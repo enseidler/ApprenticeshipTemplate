@@ -5,9 +5,10 @@ import HolidayRuleDateForm from "./HolidayRuleDateForm";
 import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
 import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
 import DateSelector from "./DateSelector";
-import {createRule } from "../actions/calendarActions";
+import { createRule } from "../actions/calendarActions";
+import { holidaysStore } from "../stores";
 import { dayExists } from "../helpers/HolidayCalendarHelper";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 
@@ -87,7 +88,7 @@ export class CreateHolidayRule extends  Component{
                                     className="btn btn-danger"
                                     data-dismiss={"modal"}
                                     onClick={function() {
-                                        store.dispatch(createRule());
+                                        store.dispatch(createRule(holidaysStore.getState().id));
                                     }}>
                                     {"Crear Regla"}
                                 </button>

@@ -54,8 +54,8 @@ class App extends Component {
                                     id:calendar.id,
                                     name:calendar.name
                                 }
-                            })
-                            holidaysStore.dispatch(loadHolidays());
+                            });
+                            holidaysStore.dispatch(loadHolidays(holidaysStore.getState().id));
                         }}
                     >
                         <option selected disabled>Elegí un calendario...</option>

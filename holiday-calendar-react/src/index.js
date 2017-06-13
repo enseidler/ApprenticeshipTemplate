@@ -12,8 +12,7 @@ const render = () => ReactDOM.render(
     <App />,
     rootElement
 );
-calendarsStore.dispatch(loadCalendars())
-holidaysStore.dispatch(loadHolidays());
+calendarsStore.dispatch(loadCalendars());
 
 render();
 
