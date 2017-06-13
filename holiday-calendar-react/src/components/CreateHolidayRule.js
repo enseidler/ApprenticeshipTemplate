@@ -42,7 +42,6 @@ export class CreateHolidayRule extends  Component{
     }
 
     render() {
-        debugger
         const store=this.context.store
         const state=store.getState()
         const begins=state.begins
