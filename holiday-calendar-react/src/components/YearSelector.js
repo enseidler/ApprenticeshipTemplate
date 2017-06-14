@@ -20,10 +20,17 @@ export class YearSelector extends  Component{
         });
     }
 
+    disabled() {
+        return !holidaysStore.getState().id;
+    }
+
     render() {
         return (
             <div className="form-group year-selector">
-                <button className="btn btn-danger" onClick={this.decrementYear()} >
+                <button
+                    className="btn btn-danger"
+                    disabled={this.disabled()}
+                    onClick={this.decrementYear()} >
                     {"<"}
                 </button>
                 {" "}
@@ -31,6 +38,7 @@ export class YearSelector extends  Component{
                 {" "}
                 <button
                     className="btn btn-danger"
+                    disabled={this.disabled()}
                     onClick={this.incrementYear()} >
                     {">"}
                 </button>
