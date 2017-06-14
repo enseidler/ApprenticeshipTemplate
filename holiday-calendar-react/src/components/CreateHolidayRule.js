@@ -5,7 +5,7 @@ import HolidayRuleDateForm from "./HolidayRuleDateForm";
 import HolidayRuleDayOfWeekForm from "./HolidayRuleDayOfWeekForm";
 import HolidayRuleDayOfMonthForm from "./HolidayRuleDayOfMonthForm";
 import DateSelector from "./DateSelector";
-import { holidayFormStore  } from '../stores';
+import { holidayFormStore, holidaysStore  } from '../stores';
 import {createRule } from "../actions/calendarActions";
 import { dayExists } from "../helpers/HolidayCalendarHelper";
 
